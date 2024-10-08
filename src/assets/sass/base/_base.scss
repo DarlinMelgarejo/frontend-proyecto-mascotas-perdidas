@@ -1,0 +1,54 @@
+// Fuentes personalizadas
+/*
+@font-face {
+    font-family: "The Blast";
+    src: url(/assets/fonts/The\ Blast.otf) format("opentype");
+    // font-weight: 300;
+}
+
+@font-face {
+    font-family: "Monteros";
+    src: url(/assets/fonts/Monteros.ttf) format("trutype");
+    // font-weight: 300;
+}
+*/
+
+//Reseteo general
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+//Estilos generales
+body {
+    margin: 0;
+    font-size: var(--body-font-size);
+    background-color: $white-color;
+    color: $text-color;
+    font-family: "Verdana";
+    // font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    // font-family: "The Blast";
+    // font-weight: 600;
+}
+
+h1 {
+    font-size: var(--h1-font-size);
+}
+
+h2 {
+    font-size: var(--h2-font-size);
+}

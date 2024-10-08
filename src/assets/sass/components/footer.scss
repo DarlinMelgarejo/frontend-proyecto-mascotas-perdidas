@@ -1,0 +1,46 @@
+@import "../config/mixins";
+@import "../config/variables";
+@import "../base/base";
+
+.main-footer {
+    background-color: $secondary-color;
+    padding: 1.25em;
+
+    &__content {
+        padding: 1.5em;
+        @include from(m) {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1em;
+        }
+        
+        @include from(l) {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 2em;
+        }
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+    }
+
+    &__social {
+        display: flex;
+        justify-content: center;
+        padding: .5em;
+    }
+
+    &__link {
+        color: $text-color;
+    }
+
+    &__copyright {
+        display: flex;
+        justify-content: center;
+        padding: 1.5em;
+        border-top: 1px solid $border-color;
+    }
+}

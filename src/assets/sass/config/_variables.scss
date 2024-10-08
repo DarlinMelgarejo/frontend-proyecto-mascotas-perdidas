@@ -1,0 +1,43 @@
+$max-width: 1200px;
+$header-height: 4rem;
+
+$white-color: #FFFFFF;
+$black-color: #333333;
+$border-color: #CCCCCC;
+$text-color: #e5f3ee;
+$primary-color: #0D9488;
+$secondary-color: #0F766E;
+$tertiary-color: #EAB308;
+$transition-time: 0.3s;
+
+$breakpoints: (
+    s: 600px,
+    m: 768px,
+    l: 960px,
+    xl: 1200px,
+    xxl: 1400px
+);
+
+:root {
+    /* Variables de apilamiento (z-index) */
+    --z-back : -10;
+    --z-normal: 0;
+    --z-tooltip: 10;
+    --z-fixed: 100;
+    --z-modal: 1000;
+
+    /* Variables de tipografia */
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --body-font-size: .75rem;
+    --small-font-size: .5rem;
+
+    @include from(l) {
+        --h1-font-size: 1.75rem;
+        --h2-font-size: 1.5rem;
+        --h3-font-size: 1.25rem;
+        --body-font-size: 1rem;
+        --small-font-size: .75rem;
+    }
+}
