@@ -1,0 +1,113 @@
+.formMascota {
+    width: 300px;
+    border: 1px solid $border-color;
+    border-radius: 7.5px;
+    padding: 1.5em;
+
+    @include from(s) {
+        width: 550px;
+    }
+
+    @include from(m) {
+        width: 600px;
+    }
+
+    @include from(l) {
+        width: 800px;
+    }
+
+    @include from(xl) {
+        width: 1000px;
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1em;
+
+        &-double {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            gap: 2em;
+            margin-bottom: 1em;
+
+            @include from(s) {
+                flex-direction: row;
+            }
+        }
+    }
+
+    &__part {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        @include from(s) {
+            width: 50%;
+        }
+    }
+
+    &__options {
+        display: flex;
+        justify-content: space-around;
+
+        label {
+            color: $black-color;
+            display: flex;
+            gap: .5em;
+        }
+    }
+
+    &__label {
+        color: $black-color;
+        font-weight: bold;
+        margin-bottom: .75em;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+        width: 100%;
+        outline: none;
+        border: 1.75px solid $border-color;
+        border-radius: 7.5px;
+        padding: .75em;
+    }
+
+    input[type="file"] {
+        outline: none;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        display: none;
+    }
+
+    &__file {
+        font-size: .75rem;
+        display: flex;
+        align-items: center;
+        gap: 2em;
+        outline: none;
+        border: 1.75px solid $border-color;
+        border-radius: 7.5px;
+        padding: .5em;
+        appearance: none;
+    }
+
+    button {
+        width: 100%;
+        border: none;
+        background-color: $black-color;
+        color: $white-color;
+        padding: 1em;
+        border-radius: 7.5px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 1em;
+    }
+}

@@ -1,0 +1,30 @@
+.cta-section {
+    background-color: $primary-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 4rem 1rem;
+
+    &__title {
+        margin: 0;
+        color: $white-color;
+    }
+    
+    &__description {
+        color: $white-color;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    &__button {
+        width: fit-content;
+        background-color: $tertiary-color;
+        color: $secondary-color;
+        border: none;
+        border-radius: 5px;
+        padding: .75rem 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}

@@ -1,5 +1,5 @@
-import Header from './templates/Header';
-import Footer from './templates/Footer';
+import Login from './pages/Login';
+import Registro from './pages/Registro';
 import Home from './pages/Home';
 import Buscar from './pages/Buscar';
 import Reportar from './pages/Reportar';
@@ -10,16 +10,15 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 const App = () => (
     <Router>
-        <Header />
         <Routes>
+            <Route path='/login' element={<Login/>} />
+            <Route path='/registro' element={<Registro/>} />
             <Route path="/" element={<Home />} />
-            <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/buscar" element={<Buscar />} />
-            <Route path="/reportar" element={<Reportar />} />
             <Route path="/adoptar" element={<Adoptar />} />
+            <Route path="/reportar" element={<Reportar />} />
             <Route path="/nosotros" element={<Nosotros />} />
         </Routes>
-        <Footer />
     </Router>
 );
 

@@ -1,4 +1,8 @@
-import "../assets/sass/components/footer.scss";
+import facebook from "../assets/images/logo-facebook.png";
+import twitter from "../assets/images/logo-twitter.png";
+import instagram from "../assets/images/logo-instagram.png";
+import correo from "../assets/images/icono-correo.png";
+import telefono from "../assets/images/icono-telefono.png";
 
 import { Link } from "react-router-dom";
 
@@ -10,13 +14,13 @@ const Footer = () => (
                 <p>Ayudando a reunir mascotas con sus dueños desde 2024</p>
                 <div className="main-footer__social">
                     <a className="main-footer__link" href="">
-                        <img src="" alt="Logo de Facebook" />
+                        <img src={facebook} alt="Logo de Facebook" />
                     </a>
                     <a className="main-footer__link" href="">
-                        <img src="" alt="Logo de Twitter" />
+                        <img src={twitter} alt="Logo de Twitter" />
                     </a>
                     <a className="main-footer__link" href="">
-                        <img src="" alt="Logo de Instagram" />
+                        <img src={instagram} alt="Logo de Instagram" />
                     </a>
                 </div>
             </div>
@@ -30,11 +34,11 @@ const Footer = () => (
             <div className="main-footer__section">
                 <h4>Contacto</h4>
                 <div className="main-footer__contact">
-                    <img src="" alt="Logo correo" />
+                    <img src={correo} alt="Logo correo" />
                     <span>info@sosmascotas.com</span>
                 </div>
                 <div className="main-footer__contact">
-                    <img src="" alt="Logo telefono" />
+                    <img src={telefono} alt="Logo telefono" />
                     <span>+01(234)567-89</span>
                 </div>
             </div>

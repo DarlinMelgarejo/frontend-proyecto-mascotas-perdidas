@@ -1,19 +1,22 @@
-@import "../config/mixins";
-@import "../config/variables";
-@import "../base/base";
-
 .main-footer {
     background-color: $secondary-color;
     padding: 1.25em;
+    font-size: .75rem;
+
+    h4 {
+        font-size: 1rem;
+        margin-bottom: .5rem;
+    }
 
     &__content {
         padding: 1.5em;
+
         @include from(m) {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             grid-gap: 1em;
         }
-        
+
         @include from(l) {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -25,16 +28,28 @@
         display: flex;
         flex-direction: column;
         gap: .5em;
+        margin-bottom: 1rem;
+
+        @include from(m) {
+            margin-bottom: 0;
+        }
     }
 
     &__social {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
+        gap: 2em;
         padding: .5em;
     }
 
     &__link {
         color: $text-color;
+    }
+
+    &__contact {
+        display: flex;
+        align-items: center;
+        gap: 1em;
     }
 
     &__copyright {

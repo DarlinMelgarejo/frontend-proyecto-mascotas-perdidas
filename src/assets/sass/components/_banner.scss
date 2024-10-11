@@ -1,0 +1,89 @@
+.main-banner {
+    position: relative; // Asegura que los elementos hijos se posicionen en relación a este contenedor
+    background-color: $quaternary-color;
+    color: $white-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    padding: 2em 0;
+
+    @include from(l) {
+        gap: 2em;
+        padding: 4em 0;
+    }
+
+    &__image {
+        position: absolute; // Asegura que la imagen ocupe el fondo
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; // Asegura que la imagen cubra el contenedor
+        z-index: 0; // Mantiene la imagen detrás de la superposición
+    }
+
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #1FADA3; // Cambia el color y la opacidad aquí
+        opacity: 0.5;
+        z-index: 1; // Superposición por encima de la imagen
+    }
+
+    &__content {
+        position: relative; // Asegura que el contenido esté por encima de la superposición
+        z-index: 2; // Mayor que la superposición
+        display: flex;
+        flex-direction: column;
+        align-items: center; // Centra el contenido
+        gap: 1em; // Espacio entre los elementos
+
+        @include from(l) {
+            gap: 2em; // Aumenta el espacio en pantallas más grandes
+        }
+    }
+
+    &__title {
+        font-size: 1.25rem;
+        width: 80%;
+        text-align: center;
+
+        @include from(s) {
+            font-size: 1.5rem;
+        }
+
+        @include from(m) {
+            font-size: 1.75rem;
+        }
+
+        @include from(l) {
+            font-size: 2rem;
+            width: 60%;
+        }
+
+        @include from(xl) {
+            font-size: 2.25rem;
+            width: 60%;
+        }
+    }
+
+    &__description {
+        font-size: 1rem;
+        padding: 0 1em;
+        text-align: center;
+    }
+
+    &__button {
+        background-color: $tertiary-color;
+        color: $secondary-color;
+        border: none;
+        border-radius: 5px;
+        padding: .75em 1.5em;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}

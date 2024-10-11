@@ -1,0 +1,103 @@
+@import "./config/mixins";
+@import "./config/variables";
+@import "./base/base";
+@import "./layout/layout";
+@import "./theme/theme";
+
+.login {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+    &__content {
+        width: 300px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        border: 1px solid $primary-color;
+        border-radius: 10px;
+
+        @include from(s) {
+            width: 500px;
+            height: 400px;
+        }
+        
+        @include from(m) {
+            width: 500px;
+            height: 450px;
+        }
+        
+        @include from(l) {
+            width: 500px;
+            height: 500px;
+        }
+    }
+
+    &__header {
+        background-color: $primary-color;
+        color: $white-color;
+        padding: 1.5em 2em;
+        border-radius: 10px 10px 0 0;
+    }
+
+    &__form {
+        padding: 2em;
+        margin-bottom: 1em;
+        
+        @include from(m) {
+            margin-bottom: 3.5em;
+        }
+
+        @include from(l) {
+            margin-bottom: 1.5em;
+        }
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.5em;
+    }
+
+    &__label {
+        color: $primary-color;
+        font-weight: bold;
+        margin-bottom: .5em;
+    }
+
+    input {
+        outline: none;
+        border: 1.75px solid #5EEAD4;
+        border-radius: 7.5px;
+        padding: .5em;
+
+        @include from(s) {
+            padding: .75em;
+        }
+
+        @include from(m) {
+            padding: 1em;
+        }
+    }
+
+    button {
+        width: 100%;
+        border: none;
+        background-color: $tertiary-color;
+        color: $primary-color;
+        padding: 1em;
+        border-radius: 7.5px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 2em;
+    }
+
+    &__footer {
+        width: 100%;
+        color: $secondary-color;
+        text-align: center;
+        padding: 0 2em 2em 2em;
+    }
+}
