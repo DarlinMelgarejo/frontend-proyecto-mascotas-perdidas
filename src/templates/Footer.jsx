@@ -10,7 +10,7 @@ const Footer = () => (
     <footer className="main-footer">
         <div className="main-footer__content">
             <div className="main-footer__section">
-                <h4>SOS Mascotas</h4>
+                <h4>Huellas Perdidas</h4>
                 <p>Ayudando a reunir mascotas con sus dueños desde 2024</p>
                 <div className="main-footer__social">
                     <a className="main-footer__link" href="">
@@ -35,7 +35,7 @@ const Footer = () => (
                 <h4>Contacto</h4>
                 <div className="main-footer__contact">
                     <img src={correo} alt="Logo correo" />
-                    <span>info@sosmascotas.com</span>
+                    <span>info@huellasperdidas.com</span>
                 </div>
                 <div className="main-footer__contact">
                     <img src={telefono} alt="Logo telefono" />

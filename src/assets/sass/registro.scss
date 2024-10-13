@@ -7,7 +7,7 @@
 @import "./components/forms";
 
 
-.login {
+.registro {
     background-color: #F3F4F6;
     width: 100vw;
     height: 100vh;
@@ -17,32 +17,12 @@
     
     &__content {
         background-color: $white-color;
-        width: 300px;
+        width: 800px;
         display: flex;
         flex-direction: column;
         border: 1px solid $primary-color;
-        box-shadow: 5.5px 5.5px 3px #cecece;
+        box-shadow: 7.5px 7.5px 5px #cecece;
         border-radius: 10px;
-
-        @include from(s) {
-            width: 400px;
-            box-shadow: 6.5px 6.5px 4px #cecece;
-        }
-
-        @include from(m) {
-            width: 500px;
-            box-shadow: 6.5px 6.5px 4px #cecece;
-        }
-
-        @include from(l) {
-            width: 500px;
-            box-shadow: 7.5px 7.5px 5px #cecece;
-        }
-        
-        @include from(xl) {
-            width: 500px;
-            box-shadow: 8.5px 8.5px 6px #cecece;
-        }
     }
 
     &__header {
@@ -62,6 +42,5 @@
         color: $primary-color;
         font-size: .9rem;
         font-weight: 600;
-        margin-bottom: .5rem;
     }
 }

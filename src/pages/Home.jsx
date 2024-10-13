@@ -29,7 +29,7 @@ const Home = () => {
                 <Card icono={info} cantidad="456" contenido="Necesitan ayuda"></Card>
             </div>
 
-            <div className="bg-light py-12 px-4">
+            <div className="bg-soft py-12 px-4">
                 <h2 className="center-content black-color">Cómo funciona</h2>
                 <div className="grid grid-cols-1 grid-cols-s-3 gap-8">
                     <Section numero="1" titulo="Reporta" contenido="Reporta un animal perdido o encontrado con todos los detalles posibles"></Section>

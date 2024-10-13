@@ -1,7 +1,7 @@
 import "../assets/sass/login.scss"; 
 
 import { useState } from "react"; 
-import { useNavigate } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom"; 
 import axios from "axios"; 
 import { useSesion } from "../context/SesionContext ";
 
@@ -45,14 +45,15 @@ const Login = () => {
     return (
         <div className="login">
             <div className="login__content">
-                <div className="login__header">
-                    <h2>Iniciar Sesión</h2>
-                    <p>Ingresa a tu cuenta de SOS Mascotas</p>
+                <div className="login__header py-8 px-6">
+                    <h2 className="login__title">Iniciar Sesión</h2>
+                    <p className="login__description">Ingresa a tu cuenta de Huellas Perdidas</p>
                 </div>
-                <form className="login__form" onSubmit={handleSubmit}>
-                    <div className="login__section">
+                <form className="py-8 px-6" onSubmit={handleSubmit}>
+                    <div className="flex flex-column mb-4">
                         <label htmlFor="dni" className="login__label">DNI</label>
                         <input
+                            className="form-control"
                             type="text"
                             name="dni"
                             id="dni"
@@ -60,9 +61,10 @@ const Login = () => {
                             onChange={(e) => setDNI(e.target.value)}
                         />
                     </div>
-                    <div className="login__section">
+                    <div className="flex flex-column mb-4">
                         <label htmlFor="contraseña" className="login__label">Contraseña</label>
                         <input
+                            className="form-control"
                             type="password"
                             name="contraseña"
                             id="contraseña"
@@ -70,12 +72,23 @@ const Login = () => {
                             onChange={(e) => setContraseña(e.target.value)}
                         />
                     </div>
-                    {error && <p className="error">{error}</p>}
-                    <div className="login__footer">
-                        <button type="submit">Iniciar Sesión</button>
-                        <p>¿No tienes una cuenta? Regístrate aquí</p>
+                    <div className="flex flex-row mb-4">
+                        <div className="flex flex-row items-center gap-2 w-1-4">
+                            <input
+                                type="checkbox" 
+                                name="recordarme" 
+                                id="recordarme" 
+                            />
+                            <label className="flex items-center gap-2 w-1-2 secondary-color mb-1" htmlFor="recordarme">Recordarme</label>
+                        </div>
+                        <Link className="secondary-color flex justify-end w-3-4" to="/olvidaste-contraseña">¿Olvidaste tu contraseña?</Link>
                     </div>
                 </form>
+                <div className="flex flex-column center-content pb-8 px-6">
+                    {error && <p className="error">{error}</p>}
+                    <button className="btn btn-tertiary w-full mb-4" type="submit">Iniciar Sesión</button>
+                    <Link className="secondary-color" to="/registro">¿No tienes una cuenta? Regístrate aquí</Link>
+                </div>
             </div>
         </div>
     );
