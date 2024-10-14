@@ -10,8 +10,8 @@ const Registro = () => {
                     <p className="registro__description">Crea una cuenta para poder reportar animales</p>
                 </div>
                 <form className="py-6 px-6">
-                    <div className="flex flex row gap-4 mb-4">
-                        <div className="flex flex-column w-1-2">
+                    <div className="flex flex-column flex-row-m gap-4 mb-4">
+                        <div className="flex flex-column w-1-2-m">
                             <label htmlFor="nombres" className="registro__label">Nombres</label>
                             <input
                                 className="form-control"
@@ -20,7 +20,7 @@ const Registro = () => {
                                 id="nombres"
                             />
                         </div>
-                        <div className="flex flex-column w-1-2">
+                        <div className="flex flex-column w-1-2-m">
                             <label htmlFor="apellidos" className="registro__label">Apellidos</label>
                             <input
                                 className="form-control"
@@ -30,8 +30,8 @@ const Registro = () => {
                             />
                         </div>
                     </div>
-                    <div className="flex flex-row gap-4 mb-4">
-                        <div className="flex flex-column w-1-2">
+                    <div className="flex flex-column flex-row-m gap-4 mb-4">
+                        <div className="flex flex-column w-1-2-m">
                             <label htmlFor="dni" className="registro__label">DNI</label>
                             <input
                                 className="form-control"
@@ -40,7 +40,7 @@ const Registro = () => {
                                 id="dni"
                             />
                         </div>
-                        <div className="flex flex-column w-1-2">
+                        <div className="flex flex-column w-1-2-m">
                             <label htmlFor="correo" className="registro__label">Correo</label>
                             <input
                                 className="form-control"
@@ -50,8 +50,8 @@ const Registro = () => {
                             />
                         </div>
                     </div>
-                    <div className="flex flex-row gap-4 mb-4">
-                        <div className="flex flex-column w-1-2">
+                    <div className="flex flex-column flex-row-m gap-4 mb-4">
+                        <div className="flex flex-column w-1-2-m">
                             <label htmlFor="contraseña" className="registro__label">Contraseña</label>
                             <input
                                 className="form-control"
@@ -60,7 +60,7 @@ const Registro = () => {
                                 id="contraseña"
                             />
                         </div>
-                        <div className="flex flex-column w-1-2">
+                        <div className="flex flex-column w-1-2-m">
                             <label htmlFor="confirmarContraseña" className="registro__label">Confirmar Contraseña</label>
                             <input
                                 className="form-control"

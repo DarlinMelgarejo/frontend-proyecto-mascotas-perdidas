@@ -16,7 +16,7 @@ const Banner = () => {
             <div className="main-banner__content">
                 <h2 className="main-banner__title">Ayuda a reunir mascotas con sus familias</h2>
                 <p className="main-banner__description">Reporta animales perdidos o abandonados y ayuda a que encuentren un hogar</p>
-                <button className="main-banner__button">Reportar un animal</button>
+                <button className="btn btn-tertiary">Reportar un animal</button>
             </div>
         </div>
     );

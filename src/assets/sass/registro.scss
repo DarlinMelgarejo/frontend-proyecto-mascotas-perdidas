@@ -9,11 +9,14 @@
 
 .registro {
     background-color: #F3F4F6;
-    width: 100vw;
-    height: 100vh;
+    padding: 3rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @include from(m) {
+        padding: 2rem;
+    }
     
     &__content {
         background-color: $white-color;

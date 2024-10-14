@@ -38,39 +38,39 @@ const Header = () => {
                     <h1 className="main-header__title">Huellas Perdidas</h1>
                 </Link>
                 <nav className="main-header__menu">
-                    <Link className="main-header__link" to="/buscar">Buscar</Link>
-                    <Link className="main-header__link" to="/adoptar">Adoptar</Link>
+                    <Link className="white-color" to="/buscar">Buscar</Link>
+                    <Link className="white-color" to="/adoptar">Adoptar</Link>
                     {sesion ? (
-                        <Link className="main-header__link" to="/reportar">Reportar</Link>
+                        <Link className="white-color" to="/reportar">Reportar</Link>
                     ) : (
-                        <Link className="main-header__link" to="/nosotros">Sobre Nosotros</Link>
+                        <Link className="white-color" to="/nosotros">Sobre Nosotros</Link>
                     )}
                 </nav>
-                <div className="main-header__buttons">
+                <div className="flex gap-4">
                     {sesion ? (
-                        <button className="main-header__button" onClick={cerrarSesion}>Cerrar Sesión</button>
+                        <button className="btn btn-tertiary" onClick={cerrarSesion}>Cerrar Sesión</button>
                     ) : (
                         <>
-                            <button className="main-header__button" onClick={registrarse}>Registrarse</button>
-                            <button className="main-header__button" onClick={iniciarSesion}>Iniciar Sesión</button>
+                            <button className="btn btn-tertiary" onClick={registrarse}>Registrarse</button>
+                            <button className="btn btn-tertiary" onClick={iniciarSesion}>Iniciar Sesión</button>
                         </>
                     )}
                 </div>
             </div>
             <nav className="main-header__menu hidden">
-                <Link className="main-header__link" to="/buscar">
+                <Link className="flex flex-column items-center white-color" to="/buscar">
                     <img src={buscar} alt="Icono Buscar" />
                     <span>Buscar</span>
                 </Link>
-                <Link className="main-header__link" to="/reportar">
+                <Link className="flex flex-column items-center white-color" to="/reportar">
                     <img src={reportar} alt="Icono Reportar" />
                     <span>Reportar</span>
                 </Link>
-                <Link className="main-header__link" to="/adoptar">
+                <Link className="flex flex-column items-center white-color" to="/adoptar">
                     <img src={adoptar} alt="Icono Adoptar" />
                     <span>Adoptar</span>
                 </Link>
-                <Link className="main-header__link" to="/nosotros">
+                <Link className="flex flex-column items-center white-color" to="/nosotros">
                     <img src={info} alt="Icono Nosotros" />
                     <span>Nosotros</span>
                 </Link>
