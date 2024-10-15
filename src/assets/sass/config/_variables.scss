@@ -12,6 +12,7 @@ $quaternary-color: #1FADA3;
 $light-color: #A7FBF1;
 $soft-color: #F0FDFA;
 $pale-tertiary: #FAC937;
+$red-color: #F85555;
 $transition-time: 0.3s;
 
 $breakpoints: (
@@ -31,17 +32,45 @@ $breakpoints: (
     --z-modal: 1000;
 
     /* Variables de tipografia */
-    --h1-font-size: 1.5rem;
-    --h2-font-size: 1.25rem;
-    --h3-font-size: 1rem;
-    --body-font-size: .75rem;
+    --h1-font-size: 1.25rem;
+    --h2-font-size: 1.15rem;
+    --h3-font-size: 1.05rem;
+    --h4-font-size: 1rem;
+    --h5-font-size: .9rem;
+    --h6-font-size: .8rem;
+    --body-font-size: .7rem;
     --small-font-size: .5rem;
 
+    @include from(m) {
+        --h1-font-size: 1.45rem;
+        --h2-font-size: 1.25rem;
+        --h3-font-size: 1.15rem;
+        --h4-font-size: 1.1rem;
+        --h5-font-size: 1rem;
+        --h6-font-size: .9rem;
+        --body-font-size: .8rem;
+        --small-font-size: .6rem;
+    }
+
     @include from(l) {
-        --h1-font-size: 1.75rem;
-        --h2-font-size: 1.5rem;
+        --h1-font-size: 1.65rem;
+        --h2-font-size: 1.35rem;
         --h3-font-size: 1.25rem;
+        --h4-font-size: 1.2rem;
+        --h5-font-size: 1.1rem;
+        --h6-font-size: 1rem;
+        --body-font-size: .9rem;
+        --small-font-size: .7rem;
+    }
+
+    @include from(xl) {
+        --h1-font-size: 1.85rem;
+        --h2-font-size: 1.45rem;
+        --h3-font-size: 1.35rem;
+        --h4-font-size: 1.3rem;
+        --h5-font-size: 1.2rem;
+        --h6-font-size: 1.1rem;
         --body-font-size: 1rem;
-        --small-font-size: .75rem;
+        --small-font-size: .8rem;
     }
 }

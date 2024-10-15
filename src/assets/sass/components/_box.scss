@@ -1,0 +1,9 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    border: 1px solid #F3F4F6;
+    border-radius: 7.5px;
+    color: $black-color;
+    padding: 1.5rem;
+}

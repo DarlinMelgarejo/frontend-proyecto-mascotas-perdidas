@@ -1,8 +1,8 @@
 import facebook from "../assets/images/logo-facebook.png";
 import twitter from "../assets/images/logo-twitter.png";
 import instagram from "../assets/images/logo-instagram.png";
-import correo from "../assets/images/icono-correo.png";
-import telefono from "../assets/images/icono-telefono.png";
+import correo from "../assets/images/icono-correo-24.png";
+import telefono from "../assets/images/icono-telefono-24.png";
 
 import { Link } from "react-router-dom";
 

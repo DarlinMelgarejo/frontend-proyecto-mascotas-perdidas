@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useFetch = (endpoint, filter) => {
+const useFetch = (endpoint) => {
     const [data, setData] = useState();
     const [error, setError] = useState();
 
@@ -9,7 +9,7 @@ const useFetch = (endpoint, filter) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/${endpoint}`)
+                const response = await axios.get(`http://localhost:5000/api/${endpoint}`, { withCredentials: true})
                 if(response.status === 200) {
                     setData(response.data)
                 }

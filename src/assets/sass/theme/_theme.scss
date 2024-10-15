@@ -10,7 +10,7 @@
     text-align: center;
 }
 
-.text-bold{
+.text-bold {
     font-weight: bold;
 }
 
@@ -20,6 +20,14 @@
 
 .bg-white {
     background-color: $white-color;
+}
+
+.border-color {
+    color: $border-color;
+}
+
+.bg-border {
+    background-color: $border-color;
 }
 
 .black-color {

@@ -1,6 +1,6 @@
 import Login from './pages/Login';
 import Registro from './pages/Registro';
-import Home from './pages/Home';
+import Inicio from './pages/Inicio';
 import Buscar from './pages/Buscar';
 import Reportar from './pages/Reportar';
 import Adoptar from './pages/Adoptar';
@@ -13,7 +13,7 @@ const App = () => (
         <Routes>
             <Route path='/login' element={<Login/>} />
             <Route path='/registro' element={<Registro/>} />
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Inicio />} />
             <Route path="/buscar" element={<Buscar />} />
             <Route path="/adoptar" element={<Adoptar />} />
             <Route path="/reportar" element={<Reportar />} />

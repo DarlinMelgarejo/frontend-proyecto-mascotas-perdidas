@@ -1,6 +1,54 @@
-import "../assets/sass/registro.scss"
+import "../assets/sass/registro.scss";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { registrarUsuario } from "../services/usuarios"; // Asegúrate de que esta importación sea correcta
 
 const Registro = () => {
+    const [data, setData] = useState({
+        nombres: "",
+        apellidos: "",
+        dni: "",
+        correo: "",
+        contraseña: "",
+        confirmarContraseña: "",
+        telefono: "",
+        direccion: "",
+    });
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
+
+    const changeData = (e) => {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Verifica que las contraseñas coincidan
+        if (data.contraseña !== data.confirmarContraseña) {
+            setError("Las contraseñas no coinciden.");
+            return;
+        }
+
+        try {
+            // Llamar a la función de registrar usuario del servicio
+            const response = await registrarUsuario(data);
+            if (response.status === 201) {
+                // Redirigir al usuario a la página de login después de un registro exitoso
+                navigate('/login');
+            }
+        } catch (err) {
+            console.error(err);
+            if (err.response) {
+                setError(err.response.data.mensaje || "Error al registrarse.");
+            } else {
+                setError("Error de conexión.");
+            }
+        }
+    };
 
     return (
         <div className="registro">
@@ -9,7 +57,7 @@ const Registro = () => {
                     <h2 className="registro__title">Registro de Usuario</h2>
                     <p className="registro__description">Crea una cuenta para poder reportar animales</p>
                 </div>
-                <form className="py-6 px-6">
+                <form className="py-6 px-6" onSubmit={handleSubmit}>
                     <div className="flex flex-column flex-row-m gap-4 mb-4">
                         <div className="flex flex-column w-1-2-m">
                             <label htmlFor="nombres" className="registro__label">Nombres</label>
@@ -18,6 +66,9 @@ const Registro = () => {
                                 type="text"
                                 name="nombres"
                                 id="nombres"
+                                value={data.nombres}
+                                onChange={changeData}
+                                required // Campo requerido
                             />
                         </div>
                         <div className="flex flex-column w-1-2-m">
@@ -27,6 +78,9 @@ const Registro = () => {
                                 type="text"
                                 name="apellidos"
                                 id="apellidos"
+                                value={data.apellidos}
+                                onChange={changeData}
+                                required // Campo requerido
                             />
                         </div>
                     </div>
@@ -38,6 +92,9 @@ const Registro = () => {
                                 type="text"
                                 name="dni"
                                 id="dni"
+                                value={data.dni}
+                                onChange={changeData}
+                                required // Campo requerido
                             />
                         </div>
                         <div className="flex flex-column w-1-2-m">
@@ -47,6 +104,9 @@ const Registro = () => {
                                 type="email"
                                 name="correo"
                                 id="correo"
+                                value={data.correo}
+                                onChange={changeData}
+                                required // Campo requerido
                             />
                         </div>
                     </div>
@@ -58,6 +118,9 @@ const Registro = () => {
                                 type="password"
                                 name="contraseña"
                                 id="contraseña"
+                                value={data.contraseña}
+                                onChange={changeData}
+                                required // Campo requerido
                             />
                         </div>
                         <div className="flex flex-column w-1-2-m">
@@ -67,6 +130,9 @@ const Registro = () => {
                                 type="password"
                                 name="confirmarContraseña"
                                 id="confirmarContraseña"
+                                value={data.confirmarContraseña}
+                                onChange={changeData}
+                                required // Campo requerido
                             />
                         </div>
                     </div>
@@ -77,6 +143,9 @@ const Registro = () => {
                             type="tel"
                             name="telefono"
                             id="telefono"
+                            value={data.telefono}
+                            onChange={changeData}
+                            required // Campo requerido
                         />
                     </div>
                     <div className="flex flex-column">
@@ -86,23 +155,28 @@ const Registro = () => {
                             type="text"
                             name="direccion"
                             id="direccion"
+                            value={data.direccion}
+                            onChange={changeData}
+                            required // Campo requerido
                         />
                     </div>
                     <div className="flex flex-row items-center gap-2 mb-6 py-2">
                         <input
                             type="checkbox" 
-                            name="recordarme" 
-                            id="recordarme" 
+                            name="acepto" 
+                            id="acepto" 
+                            required // Campo requerido para términos y condiciones
                         />
-                        <label className="registro__label flex gap-2 w-full secondary-color mb-1">Acepto los términos y condiciones y la política de privacidad</label>
+                        <label className="registro__label flex gap-2 w-full secondary-color mb-1" htmlFor="acepto">Acepto los términos y condiciones y la política de privacidad</label>
                     </div>
                     <div className="flex flex-column center-content">
                         <button className="btn btn-tertiary w-full" type="submit">Registrarse</button>
                     </div>
+                    {error && <p className="center-content py-2 tertiary-color text-bold">{error}</p>} {/* Mostrar mensaje de error */}
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Registro
+export default Registro;

@@ -1,33 +1,34 @@
+// src/components/Login.js
 import "../assets/sass/login.scss"; 
 
 import { useState } from "react"; 
 import { Link, useNavigate } from "react-router-dom"; 
-import axios from "axios"; 
-import { useSesion } from "../context/SesionContext ";
+import { logearUsuario, obtenerPerfil } from "../services/usuarios"; // Importar las funciones del servicio
 
 const Login = () => {
-    const [dni, setDNI] = useState(""); 
-    const [contraseña, setContraseña] = useState(""); 
+    const [data, setData] = useState({ dni: "", contraseña: "" });
     const [error, setError] = useState(""); 
     const navigate = useNavigate(); 
 
-    const { setSesion } = useSesion()
+    const changeData = e => {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value
+        });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault(); 
     
         try {
-            // Llamar a la ruta de logueo
-            const response = await axios.post('http://localhost:5000/api/usuarios/logear', {
-                dni,
-                contraseña,
-            }, { withCredentials: true }); // Asegúrate de incluir esto
-    
-            if(response.status === 200) {
+            const { dni, contraseña } = data;
+
+            // Llamar a la función del servicio para logear al usuario
+            const response = await logearUsuario({ dni, contraseña });
+
+            if (response.status === 200) {
                 // Aquí, después de iniciar sesión, obtén la información del usuario
-                const userResponse = await axios.get('http://localhost:5000/api/usuarios/yo', { withCredentials: true });
-                
-                // Guarda la información del usuario en el contexto
-                setSesion(userResponse.data); // Asegúrate de tener el setSesion disponible
+                const userResponse = await obtenerPerfil(); // Llamar al servicio para obtener el perfil del usuario
         
                 // Redirige al usuario a la página principal
                 navigate('/'); 
@@ -57,8 +58,8 @@ const Login = () => {
                             type="text"
                             name="dni"
                             id="dni"
-                            value={dni}
-                            onChange={(e) => setDNI(e.target.value)}
+                            value={data.dni}
+                            onChange={changeData}
                         />
                     </div>
                     <div className="flex flex-column mb-4">
@@ -68,8 +69,8 @@ const Login = () => {
                             type="password"
                             name="contraseña"
                             id="contraseña"
-                            value={contraseña}
-                            onChange={(e) => setContraseña(e.target.value)}
+                            value={data.contraseña}
+                            onChange={changeData}
                         />
                     </div>
                     <div className="flex flex-row mb-4">
@@ -83,10 +84,12 @@ const Login = () => {
                         </div>
                         <Link className="secondary-color flex justify-end w-3-4" to="/olvidaste-contraseña">¿Olvidaste tu contraseña?</Link>
                     </div>
+                    <div className="flex flex-row">
+                        <button className="btn btn-tertiary w-full" type="submit">Iniciar Sesión</button>
+                    </div>
                 </form>
                 <div className="flex flex-column center-content pb-8 px-6">
-                    {error && <p className="error">{error}</p>}
-                    <button className="btn btn-tertiary w-full mb-4" type="submit">Iniciar Sesión</button>
+                    {error && <p className="black-color">{error}</p>}
                     <Link className="secondary-color" to="/registro">¿No tienes una cuenta? Regístrate aquí</Link>
                 </div>
             </div>
