@@ -77,19 +77,19 @@ const InicioUsuario = ({nombres, apellidos}) => {
                     <div className="grid grid-cols-1 grid-cols-m-3 gap-8 py-2 mb-8">
                         <Box>
                             <div className="flex flex-column justify-center items-center">
-                                <h4 className="tertiary-color m-0">1234</h4>
+                                <h4 className="tertiary-color m-0 fs-8">1234</h4>
                                 <span className="border-color text-bold">Animales Reportados</span>
                             </div>
                         </Box>
                         <Box>
                             <div className="flex flex-column justify-center items-center">
-                                <h4 className="tertiary-color m-0">567</h4>
+                                <h4 className="tertiary-color m-0 fs-8">567</h4>
                                 <span className="border-color text-bold">Animales Adoptados</span>
                             </div>
                         </Box>
                         <Box>
                             <div className="flex flex-column justify-center items-center">
-                                <h4 className="tertiary-color m-0">890</h4>
+                                <h4 className="tertiary-color m-0 fs-8">890</h4>
                                 <span className="border-color text-bold">Usuarios Activos</span>
                             </div>
                         </Box>
