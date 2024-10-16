@@ -11,13 +11,34 @@ import Header from "../templates/Header";
 import Footer from "../templates/Footer";
 import Section from "../components/Section";
 import CTASection from "../sections/CTASection";
-import useFetch from "../hooks/useFetch";
 import InicioUsuario from "../sections/InicioUsuario";
 
+import { obtenerPerfil } from "../services/usuarios";
+import { useEffect, useState } from "react";
+
 const Inicio = () => {
+    const [usuario, setUsuario] = useState()
+    const [error, setError] = useState()
+
+    useEffect(() => {
+      getPerfil()
+    }, [])
+    
+    const getPerfil = async () => {
+        try {
+
+            // Llamar a la función del servicio para obtener al usuario
+            const response = await obtenerPerfil();
+
+            if (response.status === 200) {
+                setUsuario(response.data)
+            }
+        } catch (err) {
+            setError(err);
+        }
+    };    
 
     // Obtener el perfil del usuario desde el backend
-    const [usuario, error] = useFetch("usuarios/perfil")
     
     return (
         <>

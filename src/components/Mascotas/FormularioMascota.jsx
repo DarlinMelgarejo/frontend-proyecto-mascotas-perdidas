@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useSesion } from '../../context/SesionContext ';
 import { useNavigate } from "react-router-dom";
 
 const FormularioMascota = () => {
     const navigate = useNavigate();
-    const { sesion } = useSesion(); // Obtener el usuario autenticado
     const [mascota, setMascota] = useState({
         nombre: 'Sin nombre', // Valor por defecto según la base de datos
         especie: 'Perro',
@@ -17,8 +15,7 @@ const FormularioMascota = () => {
         estado: 'Perdido',
         estado_adopcion: 'No aplica',
         procedencia: 'Pacasmayo',
-        ubicacion: '',
-        usuario_id: sesion?.id,  // Verificar si sesion existe
+        ubicacion: '',  // Verificar si sesion existe
     });
 
     const [imagen, setImagen] = useState(null);  // Para manejar la imagen
@@ -39,10 +36,7 @@ const FormularioMascota = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!sesion || !sesion.id) {
-            setError('Debes iniciar sesión para reportar una mascota.');
-            return;
-        }
+        
 
         // Crear un objeto FormData para enviar los datos y la imagen
         const formData = new FormData();
@@ -77,8 +71,7 @@ const FormularioMascota = () => {
                     estado: 'Perdido',
                     estado_adopcion: 'No aplica',
                     procedencia: 'Pacasmayo',
-                    ubicacion: '',
-                    usuario_id: sesion?.id,
+                    ubicacion: ''
                 });
                 setImagen(null);
                 navigate('/buscar')
