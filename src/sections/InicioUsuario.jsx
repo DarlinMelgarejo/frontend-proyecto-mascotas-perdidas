@@ -5,16 +5,20 @@ import info from "../assets/images/icono-info-16.png";
 import corazon from "../assets/images/icono-adoptar-16-rojo.png";
 import notificacion from "../assets/images/icono-notificacion-16.png";
 import Box from "../components/Box";
-import Section from "../components/Section";
+import { Link } from "react-router-dom";
 
 
-
-const InicioUsuario = ({nombres, apellidos}) => {
+const InicioUsuario = ({nombres, apellidos, url_foto}) => {
 
 
     return (
         <>
-            <h2 className="secondary-color px-4 pt-6">Bienvenido, {nombres + " " + apellidos}</h2>
+            <div className="flex justify-between items-center px-4 pt-6">
+                <h2 className="secondary-color m-0">Bienvenido, {nombres + " " + apellidos}</h2>
+                <Link className="perfil__miniatura" to="/perfil">
+                    <img src={`http://localhost:5000/uploads/usuarios/${url_foto}`} alt="Imagen perfil" title="Ver Perfil"/>
+                </Link>
+            </div>
 
             <div className="grid grid-cols-1 grid-cols-m-3 gap-8 py-4 px-4">
                 <Box titulo="Acciones Rápidas" borde>
@@ -36,14 +40,14 @@ const InicioUsuario = ({nombres, apellidos}) => {
                         <img className="pt-1" src={info} alt="Icono de Notificación" />
                         <div className="flex flex-column">
                             <p>Reportaste un perro perdido por el Parque Central</p>
-                            <span className="border-color">2023-05-20</span>
+                            <span className="gray-color">2023-05-20</span>
                         </div>
                     </div>
                     <div className="flex justify-center items-start gap-2">
                         <img className="pt-1" src={corazon} alt="Icono de Notificación" />
                         <div className="flex flex-column">
                             <p>Tu solicitud de adopación para Luna fue aprobada</p>
-                            <span className="border-color">2023-05-18</span>
+                            <span className="gray-color">2023-05-18</span>
                         </div>
                     </div>
                 </Box>
@@ -78,19 +82,19 @@ const InicioUsuario = ({nombres, apellidos}) => {
                         <Box>
                             <div className="flex flex-column justify-center items-center">
                                 <h4 className="tertiary-color m-0 fs-8">1234</h4>
-                                <span className="border-color text-bold">Animales Reportados</span>
+                                <span className="gray-color">Animales Reportados</span>
                             </div>
                         </Box>
                         <Box>
                             <div className="flex flex-column justify-center items-center">
                                 <h4 className="tertiary-color m-0 fs-8">567</h4>
-                                <span className="border-color text-bold">Animales Adoptados</span>
+                                <span className="gray-color">Animales Adoptados</span>
                             </div>
                         </Box>
                         <Box>
                             <div className="flex flex-column justify-center items-center">
                                 <h4 className="tertiary-color m-0 fs-8">890</h4>
-                                <span className="border-color text-bold">Usuarios Activos</span>
+                                <span className="gray-color">Usuarios Activos</span>
                             </div>
                         </Box>
                     </div>

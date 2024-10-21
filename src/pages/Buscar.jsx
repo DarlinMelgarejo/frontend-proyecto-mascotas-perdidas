@@ -1,5 +1,3 @@
-import "../assets/sass/buscar.scss";
-
 import { useState, useEffect } from "react";
 import Mascota from "../components/Mascotas/Mascota";
 import axios from "axios";

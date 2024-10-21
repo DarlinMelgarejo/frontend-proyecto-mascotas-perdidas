@@ -1,5 +1,5 @@
 const Box = ({titulo, children, borde}) => {
-    const claseBox = borde ? "box border" : "border"
+    const claseBox = borde ? "box border w-full" : "border w-full"
     return (
         <div className={claseBox}>
             {

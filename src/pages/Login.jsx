@@ -1,6 +1,3 @@
-// src/components/Login.js
-import "../assets/sass/login.scss"; 
-
 import { useState } from "react"; 
 import { Link, useNavigate } from "react-router-dom"; 
 import { logearUsuario, obtenerPerfil } from "../services/usuarios"; // Importar las funciones del servicio

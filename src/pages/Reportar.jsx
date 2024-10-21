@@ -1,5 +1,3 @@
-import "../assets/sass/reportar.scss"
-
 import FormularioMascota from "../components/Mascotas/FormularioMascota"
 import Footer from "../templates/Footer"
 import Header from "../templates/Header"

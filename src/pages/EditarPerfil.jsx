@@ -1,17 +1,16 @@
+import EditarUsuario from "../components/Usuarios/EditarUsuario"
 import Footer from "../templates/Footer"
 import Header from "../templates/Header"
 
-const Nosotros = () => {
+const EditarPerfil = () => {
 
     return (
         <>
             <Header></Header>
-            <div className="l-container">
-                <h2 className="black-color">SOBRE NOSOTROS</h2>
-            </div>
+            <EditarUsuario></EditarUsuario>
             <Footer></Footer>
         </>
     )
 }
 
-export default Nosotros
+export default EditarPerfil

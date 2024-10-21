@@ -1,0 +1,14 @@
+.editar-usuario {
+
+    &__foto {   
+        margin-bottom: 1rem;
+
+        img {
+            border-radius: 200px;
+            border: 1px solid $border-color;
+            overflow: hidden;
+            width: 200px;
+            height: 200px;
+        }
+    }
+}

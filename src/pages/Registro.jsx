@@ -1,4 +1,3 @@
-import "../assets/sass/registro.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registrarUsuario } from "../services/usuarios"; // Asegúrate de que esta importación sea correcta
@@ -12,6 +11,7 @@ const Registro = () => {
         contraseña: "",
         confirmarContraseña: "",
         telefono: "",
+        procedencia: "",
         direccion: "",
     });
     const [error, setError] = useState("");
@@ -147,6 +147,14 @@ const Registro = () => {
                             onChange={changeData}
                             required // Campo requerido
                         />
+                    </div>
+                    <div className="flex flex-column mb-4">
+                        <label className="registro__label" htmlFor="procedencia">Procedencia</label>
+                        <select className="form-control" id="procedencia" name="procedencia" value={data.procedencia} onChange={changeData} required>
+                            <option value="">Seleccione</option>
+                            <option value="Pacasmayo">Pacasmayo</option>
+                            <option value="San Pedro de Lloc">San Pedro de Lloc</option>
+                        </select>
                     </div>
                     <div className="flex flex-column">
                         <label htmlFor="direccion" className="registro__label">Dirección</label>

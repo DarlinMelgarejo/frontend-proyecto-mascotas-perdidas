@@ -1,5 +1,3 @@
-import "../assets/sass/home.scss"
-
 import Banner from "../sections/Banner";
 import Search from "../sections/Search";
 import Card from "../components/Card";
@@ -18,7 +16,6 @@ import { useEffect, useState } from "react";
 
 const Inicio = () => {
     const [usuario, setUsuario] = useState()
-    const [error, setError] = useState()
 
     useEffect(() => {
       getPerfil()
@@ -33,10 +30,10 @@ const Inicio = () => {
             if (response.status === 200) {
                 setUsuario(response.data)
             } else {
-                setError(response.message)
+                console.warn(response.message)
             }
         } catch (err) {
-            setError(err);
+            console.error(err)
         }
     };    
 
@@ -46,7 +43,7 @@ const Inicio = () => {
         <>
             <Header></Header>
 
-            {usuario ? <InicioUsuario nombres={usuario.nombres} apellidos={usuario.apellidos}></InicioUsuario> :
+            {usuario ? <InicioUsuario nombres={usuario.nombres} apellidos={usuario.apellidos} url_foto={usuario.url_foto}></InicioUsuario> :
                 <>
                     <Banner></Banner>
                     <Search></Search>

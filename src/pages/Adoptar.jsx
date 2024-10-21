@@ -1,5 +1,3 @@
-import "../assets/sass/adoptar.scss"
-
 import Header from "../templates/Header"
 import Footer from "../templates/Footer"
 
