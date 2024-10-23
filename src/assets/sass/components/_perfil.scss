@@ -6,10 +6,9 @@
 
     &__miniatura {
         width: 50px;
-        border-radius: 10px;
-        border: 2px solid $border-color;
+        height: 50px;
+        border-radius: 50px;
         overflow: hidden;
-        padding: .25rem;
 
         img {
             width: 100%;
@@ -29,7 +28,7 @@
             border-radius: 150px;
             overflow: hidden;
             width: 150px;
-            height: auto;
+            height: 150px;
             margin-bottom: 1rem;
         }
     }

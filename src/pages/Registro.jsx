@@ -156,7 +156,7 @@ const Registro = () => {
                             <option value="San Pedro de Lloc">San Pedro de Lloc</option>
                         </select>
                     </div>
-                    <div className="flex flex-column">
+                    <div className="flex flex-column mb-4">
                         <label htmlFor="direccion" className="registro__label">Dirección</label>
                         <input
                             className="form-control"
@@ -175,7 +175,7 @@ const Registro = () => {
                             id="acepto" 
                             required // Campo requerido para términos y condiciones
                         />
-                        <label className="registro__label flex gap-2 w-full secondary-color mb-1" htmlFor="acepto">Acepto los términos y condiciones y la política de privacidad</label>
+                        <label className="flex gap-2 w-full secondary-color mb-1" htmlFor="acepto">Acepto los términos y condiciones y la política de privacidad</label>
                     </div>
                     <div className="flex flex-column center-content">
                         <button className="btn btn-tertiary w-full" type="submit">Registrarse</button>
