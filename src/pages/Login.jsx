@@ -79,7 +79,7 @@ const Login = () => {
                             />
                             <label className="flex items-center gap-2 w-1-2 secondary-color mb-1" htmlFor="recordarme">Recordarme</label>
                         </div>
-                        <Link className="secondary-color flex justify-end w-3-4" to="/olvidaste-contraseña">¿Olvidaste tu contraseña?</Link>
+                        <Link className="secondary-color flex justify-end w-3-4" to="/restablecer-contraseña">¿Olvidaste tu contraseña?</Link>
                     </div>
                     <div className="flex flex-row">
                         <button className="btn btn-tertiary w-full" type="submit">Iniciar Sesión</button>

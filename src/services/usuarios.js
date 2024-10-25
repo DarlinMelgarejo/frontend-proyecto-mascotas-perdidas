@@ -15,6 +15,15 @@ export const logearUsuario = (data) => api.post('/logear', data);
 // Función para cerrar la sesión del usuario autenticado
 export const cerrarSesion = () => api.post('/cerrar-sesion');
 
+// Función para solicitar el código de verificación (envío al correo)
+export const solicitarCodigoVerificacion = (correo) => api.post('/solicitar-codigo', { correo });
+
+// Función para validar el código de verificación
+export const validarCodigoVerificacion = (correo, codigoVerificacion) => api.post('/validar-codigo', { correo, codigoVerificacion });
+
+// Función para restablecer la contraseña (validación del código y actualización de la contraseña)
+export const restablecerContraseña = (correo, nuevaContrasena) => api.post('/restablecer-contrasena', { correo, nuevaContrasena });
+
 // Función para obtener todos los usuarios (requeriría autenticación)
 export const obtenerUsuarios = () => api.get('/');
 

@@ -1,6 +1,7 @@
 import "./assets/sass/App.scss"
 
 import Login from './pages/Login';
+import RestablecerContraseña from "./pages/RestablecerContraseña";
 import Registro from './pages/Registro';
 import Inicio from './pages/Inicio';
 import PerfilUsuario from './pages/PerfilUsuario';
@@ -16,6 +17,7 @@ const App = () => (
     <Router>
         <Routes>
             <Route path='/login' element={<Login/>} />
+            <Route path='/restablecer-contraseña' element={<RestablecerContraseña/>} />
             <Route path='/registro' element={<Registro/>} />
             <Route path="/" element={<Inicio />} />
             <Route path="/perfil" element={<PerfilUsuario />} />

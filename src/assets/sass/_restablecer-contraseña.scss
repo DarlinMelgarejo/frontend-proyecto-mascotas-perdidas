@@ -1,0 +1,45 @@
+.restablecer-contraseña {
+    background-color: $white-color;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__content {
+        background-color: $white-color;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+
+        @include from(s) {
+            width: 400px;
+        }
+
+        @include from(m) {
+            width: 500px;
+        }
+
+        @include from(l) {
+            width: 500px;
+        }
+        
+        @include from(xl) {
+            width: 500px;
+        }
+    }
+
+    &__alert {
+        border: 1px solid $red-color;
+        border-radius: 7.5px;
+        padding: 1rem;
+
+        &-title {
+            color: $red-color;
+        }
+        
+        &-content {
+            color: $red-color;
+        }
+    }
+}

@@ -21,7 +21,7 @@ const InicioUsuario = ({nombres, apellidos, url_foto}) => {
             </div>
 
             <div className="grid grid-cols-1 grid-cols-m-3 gap-8 py-4 px-4">
-                <Box titulo="Acciones Rápidas" borde>
+                <Box titulo="Acciones Rápidas" margenTitulo borde>
                     <button className="btn btn-tertiary w-full mb-3 flex justify-center items-center gap-2">
                         <img src={reportar} alt="Icono de Reportar" />
                         <span>Reportar Animal</span>
@@ -35,7 +35,7 @@ const InicioUsuario = ({nombres, apellidos, url_foto}) => {
                         <span>Ver Adopciones</span>
                     </button>
                 </Box>
-                <Box titulo="Actividad Reciente" borde>
+                <Box titulo="Actividad Reciente" margenTitulo borde>
                     <div className="flex justify-center items-start gap-2 mb-3">
                         <img className="pt-1" src={info} alt="Icono de Notificación" />
                         <div className="flex flex-column">
@@ -51,7 +51,7 @@ const InicioUsuario = ({nombres, apellidos, url_foto}) => {
                         </div>
                     </div>
                 </Box>
-                <Box titulo="Noticias y Actualizaciones" borde>
+                <Box titulo="Noticias y Actualizaciones" margenTitulo borde>
                     <div className="flex justify-center items-start gap-2 mb-3">
                         <img className="pt-1" src={notificacion} alt="Icono de Notificación" />
                         <p>Acá se mostraran las nuevas actualizaciones o alguna noticia</p>
@@ -64,7 +64,7 @@ const InicioUsuario = ({nombres, apellidos, url_foto}) => {
             </div>
 
             <div className="py-4 px-4">
-                <Box titulo="Mis Animales Reportados" borde>
+                <Box titulo="Mis Animales Reportados" margenTitulo borde>
                     <div className="grid grid-cols-1 grid-cols-m-3 gap-8 py-2 mb-8">
                         <Box titulo="HOLA1" borde></Box>
                         <Box titulo="HOLA2" borde></Box>
@@ -77,7 +77,7 @@ const InicioUsuario = ({nombres, apellidos, url_foto}) => {
             </div>
 
             <div className="py-4 px-4">
-                <Box titulo="Estadísticas del Sitio" borde>
+                <Box titulo="Estadísticas del Sitio" margenTitulo borde>
                     <div className="grid grid-cols-1 grid-cols-m-3 gap-8 py-2 mb-8">
                         <Box>
                             <div className="flex flex-column justify-center items-center">

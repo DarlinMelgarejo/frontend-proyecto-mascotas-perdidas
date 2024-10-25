@@ -81,7 +81,7 @@ const EditarUsuario = () => {
 
     return (
         <div className="py-6 px-4 black-color w-1-2 mx-auto">
-            <Box titulo="Editar Perfil" borde>
+            <Box titulo="Editar Perfil" margenTitulo borde>
                 <form encType="multipart/form-data" onSubmit={handleSubmit}>
                     <div className="flex flex-column items-center">
                         <div className="editar-usuario__foto">

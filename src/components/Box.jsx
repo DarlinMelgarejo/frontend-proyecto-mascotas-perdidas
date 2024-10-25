@@ -1,9 +1,10 @@
-const Box = ({titulo, children, borde}) => {
+const Box = ({titulo, margenTitulo, borde, children}) => {
     const claseBox = borde ? "box border w-full" : "border w-full"
+    const claseTitulo = margenTitulo ? "secondary-color mb-10" : "secondary-color m-0"
     return (
         <div className={claseBox}>
             {
-                titulo && <h3 className="secondary-color mb-10">{titulo}</h3>
+                titulo && <h3 className={claseTitulo}>{titulo}</h3>
             }
             <div className="box__content">
                 {children}
