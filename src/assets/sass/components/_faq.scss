@@ -1,0 +1,35 @@
+.faq-container {
+    border-radius: 5px;
+    overflow: hidden; /* Oculta el contenido extra */
+    transition: max-height 0.5s ease;
+    color: $black-color;
+}
+
+.faq-item {
+    border-bottom: 1px solid #ccc;
+
+    &__title {
+        cursor: pointer;
+        font-weight: bold;
+        padding: 1rem 0;
+        margin: 0; /* Elimina margen para un diseño uniforme */
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__content {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0;
+        transition: .25s ease;
+    }
+
+    &.open .faq-item__content {
+        max-height: 200px; /* Ajusta según el contenido */
+        padding-bottom: 1rem;
+        transition: .25s ease;
+    }
+}

@@ -1,7 +1,6 @@
 @import "./config/mixins";
 @import "./config/variables";
 @import "./base/base";
-@import "./theme/theme";
 @import "./components/header";
 @import "./components/banner";
 @import "./components/search";
@@ -13,8 +12,10 @@
 @import "./components/editarUsuario";
 @import "./components/forms";
 @import "./components/mascota";
+@import "./components/faq";
 @import "./components/footer";
 @import "./layout/layout";
+@import "./theme/theme";
 
 @import "./login";
 @import "./restablecer-contraseña";
