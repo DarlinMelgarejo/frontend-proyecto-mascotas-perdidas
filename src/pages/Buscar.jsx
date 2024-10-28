@@ -5,15 +5,16 @@ import Header from "../templates/Header";
 import Footer from "../templates/Footer";
 
 const Buscar = () => {
-    const [mascotas, setMascotas] = useState([]);
+    const [reportesMascotas, setReportesMascotas] = useState([]);
     const [filtro, setFiltro] = useState(""); // Para manejar filtros si es necesario
 
     // Obtener las mascotas desde el backend
     useEffect(() => {
         const fetchMascotas = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/mascotas");
-                setMascotas(response.data);
+                const response = await axios.get("http://localhost:5000/api/reportes-mascotas");
+                console.log(response.data)
+                setReportesMascotas(response.data);
             } catch (error) {
                 console.error("Error al obtener las mascotas:", error);
             }
@@ -27,7 +28,7 @@ const Buscar = () => {
         setFiltro(especie);
     };
 
-    const mascotasFiltradas = filtro ? mascotas.filter(m => m.especie === filtro) : mascotas;
+    const reportesMascotasFiltrados = filtro ? reportesMascotas.filter(m => m.especie_mascota === filtro) : reportesMascotas;
 
     return (
         <>
@@ -49,17 +50,17 @@ const Buscar = () => {
                 </div>
                 
                 <div className="cards-grid">
-                    {mascotasFiltradas.length > 0 ? (
-                        mascotasFiltradas.map((mascota) => (
+                    {reportesMascotasFiltrados.length > 0 ? (
+                        reportesMascotasFiltrados.map((mascota) => (
                             <Mascota
                                 key={mascota.id}
-                                url_imagen={`http://localhost:5000/uploads/mascotas/${mascota.url_imagen}`} // Ruta de la imagen
-                                nombre={mascota.nombre}
-                                especie={mascota.especie}
-                                raza={mascota.raza}
-                                color={mascota.color}
-                                procedencia={mascota.procedencia}
-                                fecha_reporte={mascota.fecha_reporte}
+                                url_imagen={`http://localhost:5000/uploads/mascotas/${mascota.url_foto_mascota}`} // Ruta de la imagen
+                                nombre={mascota.nombre_mascota}
+                                especie={mascota.especie_mascota}
+                                raza={mascota.raza_mascota}
+                                color={mascota.color_mascota}
+                                procedencia={mascota.procedencia_mascota}
+                                fecha_reporte={new Date(mascota.fecha_reporte).toISOString().split('T')[0]}
                             />
                         ))
                     ) : (

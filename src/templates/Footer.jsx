@@ -35,7 +35,7 @@ const Footer = () => (
                 <h4>Contacto</h4>
                 <div className="main-footer__contact">
                     <img src={correo} alt="Logo correo" />
-                    <span>info@huellasperdidas.com</span>
+                    <span>huellasperdidasoficial@gmail.com</span>
                 </div>
                 <div className="main-footer__contact">
                     <img src={telefono} alt="Logo telefono" />
