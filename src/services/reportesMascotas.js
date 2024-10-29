@@ -10,3 +10,10 @@ const api = axios.create({
 export const registrarReporteMascota = (data) => api.post('/registrar', data);
 
 export const obtenerResportesMascotasRecientes = () => api.get('/recientes')
+
+// Función para obtener los reportes del usuario
+export const obtenerMisResportesMascotas = () => api.get('/mis-reportes')
+
+
+// Función para eliminar un reporte por ID
+export const eliminarReporte = (id) => api.delete(`/${id}`);

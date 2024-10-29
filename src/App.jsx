@@ -12,6 +12,7 @@ import Adoptar from './pages/Adoptar';
 import Nosotros from './pages/Nosotros';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MisReportes from "./pages/MisReportes";
 
 const App = () => (
     <Router>
@@ -22,6 +23,7 @@ const App = () => (
             <Route path="/" element={<Inicio />} />
             <Route path="/perfil" element={<PerfilUsuario />} />
             <Route path="/editar-perfil" element={<EditarPerfil />} />
+            <Route path="/mis-reportes" element={<MisReportes />} />
             <Route path="/buscar" element={<Buscar />} />
             <Route path="/adoptar" element={<Adoptar />} />
             <Route path="/reportar" element={<Reportar />} />

@@ -5,11 +5,16 @@ import info from "../assets/images/icono-info-16.png";
 import corazon from "../assets/images/icono-adoptar-16-rojo.png";
 import notificacion from "../assets/images/icono-notificacion-16.png";
 import Box from "../components/Box";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const InicioUsuario = ({nombres, apellidos, url_foto}) => {
+    const navigate = useNavigate()
 
+    const reportarNuevaMascota = () => navigate('/reportar')
+    const buscarReportesMascotas = () => navigate('/buscar')
+    const verMascotasEnAdopcion = () => navigate('/adoptar')
+    const misReportes = () => navigate('/mis-reportes')
 
     return (
         <>
@@ -22,15 +27,15 @@ const InicioUsuario = ({nombres, apellidos, url_foto}) => {
 
             <div className="grid grid-cols-1 grid-cols-m-3 gap-8 py-4 px-4">
                 <Box titulo="Acciones Rápidas" margenTitulo borde>
-                    <button className="btn btn-tertiary w-full mb-3 flex justify-center items-center gap-2">
+                    <button className="btn btn-tertiary w-full mb-3 flex justify-center items-center gap-2" onClick={reportarNuevaMascota}>
                         <img src={reportar} alt="Icono de Reportar" />
                         <span>Reportar Animal</span>
                     </button>
-                    <button className="btn btn-secondary w-full mb-3 flex justify-center items-center gap-2">
+                    <button className="btn btn-secondary w-full mb-3 flex justify-center items-center gap-2" onClick={buscarReportesMascotas}>
                         <img src={buscar} alt="Icono de Buscar" />
                         <span>Buscar Animales</span>
                     </button>
-                    <button className="btn btn-secondary w-full flex justify-center items-center gap-2">
+                    <button className="btn btn-secondary w-full flex justify-center items-center gap-2" onClick={verMascotasEnAdopcion}>
                         <img src={adoptar} alt="Icono de Adoptar" />
                         <span>Ver Adopciones</span>
                     </button>
@@ -70,7 +75,7 @@ const InicioUsuario = ({nombres, apellidos, url_foto}) => {
                         <Box titulo="HOLA2" borde></Box>
                         <Box titulo="HOLA3" borde></Box>
                     </div>
-                    <button className="btn btn-tertiary w-full">
+                    <button className="btn btn-tertiary w-full" onClick={misReportes}>
                         <span>Ver Todos Mis Reportes</span>
                     </button>
                 </Box>

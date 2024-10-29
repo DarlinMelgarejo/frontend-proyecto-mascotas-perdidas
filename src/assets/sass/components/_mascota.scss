@@ -32,27 +32,4 @@
         flex-direction: column;
         gap: .5em;
     }
-
-    button {
-        width: fit-content;
-        background-color: $black-color;
-        color: $white-color;
-        border: none;
-        border-radius: 5px;
-        padding: 1em 8em;
-        cursor: pointer;
-        margin: 0 auto;
-
-        @include from(s) {
-            padding: 1em 5em;
-        }
-
-        @include from(m) {
-            padding: 1em 6em;
-        }
-
-        @include from(xl) {
-            padding: 1em 8em;
-        }
-    }
 }
