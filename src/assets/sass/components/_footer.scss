@@ -8,13 +8,13 @@
         @include from(m) {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-gap: 1em;
+            gap: .75rem;
         }
 
         @include from(l) {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-gap: 2em;
+            gap: 1.5rem;
         }
     }
 

@@ -1,4 +1,4 @@
-const Mascota = ({ url_imagen, nombre, especie, raza, color, procedencia, fecha_reporte}) => (
+const CardReporteMascota = ({ url_imagen, nombre, especie, raza, color, procedencia, fecha_reporte}) => (
     <div className="card-mascota">
         <img className="card-mascota__image" src={url_imagen} alt="Imagen de mascota" />
         <div className="card-mascota__info">
@@ -13,4 +13,4 @@ const Mascota = ({ url_imagen, nombre, especie, raza, color, procedencia, fecha_
     </div>
 )
 
-export default Mascota
+export default CardReporteMascota

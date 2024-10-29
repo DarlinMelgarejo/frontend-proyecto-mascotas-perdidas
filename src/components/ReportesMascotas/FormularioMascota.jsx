@@ -63,8 +63,8 @@ const FormularioMascota = () => {
                     const locationName = data.display_name || 'Ubicación desconocida';
                     newMarker.bindPopup(locationName).openPopup();
                     setReporteMascota(prev => {
-                        const updatedMascota = { ...prev, ubicacion: locationName, latitud: lat, longitud: lng };
-                        console.log(`Latitud: ${updatedMascota.latitud}, Longitud: ${updatedMascota.longitud}`);
+                        const updatedMascota = { ...prev, ubicacion_mascota: locationName, latitud_ubicacion: lat, longitud_ubicacion: lng };
+                        console.log(`Latitud: ${updatedMascota.latitud_ubicacion}, Longitud: ${updatedMascota.longitud_ubicacion}`);
                         return updatedMascota;
                     });
                 })
@@ -76,7 +76,7 @@ const FormularioMascota = () => {
         return () => {
             mapInstance.remove(); // Limpiar el mapa al desmontar el componente
         };
-    }, [reporteMascota.procedencia]);
+    }, [reporteMascota.procedencia_mascota]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

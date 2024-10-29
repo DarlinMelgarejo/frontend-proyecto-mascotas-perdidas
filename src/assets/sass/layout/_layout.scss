@@ -197,6 +197,30 @@
             margin-bottom: #{$i * 0.25}rem;
         }
     }
+
+    .ml-#{$i} {
+        margin-left: #{$i * 0.15}rem;
+        
+        @include from(l) {
+            margin-left: #{$i * 0.20}rem;
+        }
+
+        @include from(xl) {
+            margin-left: #{$i * 0.25}rem;
+        }
+    }
+
+    .mr-#{$i} {
+        margin-right: #{$i * 0.15}rem;
+        
+        @include from(l) {
+            margin-right: #{$i * 0.20}rem;
+        }
+
+        @include from(xl) {
+            margin-right: #{$i * 0.25}rem;
+        }
+    }
 }
 
 

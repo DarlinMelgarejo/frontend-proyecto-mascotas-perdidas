@@ -8,3 +8,5 @@ const api = axios.create({
 
 // Función para registrar un nuevo reporte de mascota
 export const registrarReporteMascota = (data) => api.post('/registrar', data);
+
+export const obtenerResportesMascotasRecientes = () => api.get('/recientes')

@@ -32,3 +32,19 @@
         color: #A7FBF1;
     }
 }
+
+.miniatura-reporte-mascota {
+    &__image {
+        width: 60px;
+        height: 60px;
+        border-radius: 60px;
+        overflow: hidden;
+        
+        img {
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

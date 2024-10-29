@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Mascota from "../components/Mascotas/Mascota";
+import CardReporteMascota from "../components/ReportesMascotas/CardReporteMascota";
 import axios from "axios";
 import Header from "../templates/Header";
 import Footer from "../templates/Footer";
@@ -37,22 +37,23 @@ const Buscar = () => {
                 <h2 className="center-content black-color">Buscar Animales Reportados</h2>
                 <div className="search">
                     <input
+                        className="form-control form-control-dark"
                         type="text"
                         placeholder="Buscar por nombre, raza, color o ubicación"
                         onChange={(e) => setFiltro(e.target.value)}
                     />
                     <div className="filters">
-                        <button onClick={() => filtrarMascotas("")}>Todos los animales</button>
-                        <button onClick={() => filtrarMascotas("Perro")}>Perros</button>
-                        <button onClick={() => filtrarMascotas("Gato")}>Gatos</button>
-                        <button onClick={() => filtrarMascotas("Otro")}>Otros</button>
+                        <button className="btn btn-white" onClick={() => filtrarMascotas("")}>Todos los animales</button>
+                        <button className="btn btn-white" onClick={() => filtrarMascotas("Perro")}>Perros</button>
+                        <button className="btn btn-white" onClick={() => filtrarMascotas("Gato")}>Gatos</button>
+                        <button className="btn btn-white" onClick={() => filtrarMascotas("Otro")}>Otros</button>
                     </div>
                 </div>
                 
-                <div className="cards-grid">
+                <div className="grid grid-cols-l-3 gap-6">
                     {reportesMascotasFiltrados.length > 0 ? (
                         reportesMascotasFiltrados.map((mascota) => (
-                            <Mascota
+                            <CardReporteMascota
                                 key={mascota.id}
                                 url_imagen={`http://localhost:5000/uploads/mascotas/${mascota.url_foto_mascota}`} // Ruta de la imagen
                                 nombre={mascota.nombre_mascota}
