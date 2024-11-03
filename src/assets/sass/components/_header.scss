@@ -10,15 +10,36 @@
 
     &__title {
         color: #FFFFFF;
+        font-size: .80rem;
         font-weight: bold;
         text-align: center;
         margin: 0;
-    }
 
+        @include from(m) {
+            font-size: 1.45rem;
+        }
+
+        @include from(l) {
+            font-size: 1.65rem;
+        }
+
+        @include from(xl) {
+            font-size: 1.85rem;
+        }
+    }
+    
     &__logo {
         display: flex;
         align-items: center;
         gap: .75rem;
+        
+        img {
+            display:  none;
+
+            @include from(s) {
+                display: block;
+            }
+        }
     }
 
     &__menu {

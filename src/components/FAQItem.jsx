@@ -12,9 +12,9 @@ const FAQItem = ({titulo, contenido}) => {
     }
 
     return (
-        <div class={`faq-item ${abierto ? 'open' : ''}`}>
+        <div className={`faq-item ${abierto ? 'open' : ''}`}>
             <summary className="faq-item__title" onClick={abrir}>{titulo}</summary>
-            <div class={`faq-item__content ${abierto ? 'open' : ''}`}>
+            <div className={`faq-item__content ${abierto ? 'open' : ''}`}>
                 <p>{contenido}</p>
             </div>
         </div>

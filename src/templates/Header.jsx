@@ -63,7 +63,7 @@ const Header = () => {
                         <Link className="white-color" to="/nosotros">Sobre Nosotros</Link>
                     )}
                 </nav>
-                <div className="flex gap-4">
+                <div className="flex gap-3">
                     {sesion ? (
                         <button className="btn btn-tertiary" onClick={handleCerrarSesion}>Cerrar Sesión</button>
                     ) : (

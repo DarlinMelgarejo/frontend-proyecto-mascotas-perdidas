@@ -78,7 +78,7 @@ const MisReportes = () => {
                             />
                         ))
                     ) : (
-                        <p>No se encontraron mascotas.</p>
+                        <p className="text-bold mb-8">No se encontraron reportes.</p>
                     )}
                 </div>
             </div>

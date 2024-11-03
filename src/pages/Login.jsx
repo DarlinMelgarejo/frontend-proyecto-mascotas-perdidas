@@ -24,9 +24,6 @@ const Login = () => {
             const response = await logearUsuario({ dni, contraseña });
 
             if (response.status === 200) {
-                // Aquí, después de iniciar sesión, obtén la información del usuario
-                const userResponse = await obtenerPerfil(); // Llamar al servicio para obtener el perfil del usuario
-        
                 // Redirige al usuario a la página principal
                 navigate('/'); 
             }

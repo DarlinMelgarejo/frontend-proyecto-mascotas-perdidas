@@ -6,6 +6,7 @@ import corazon from "../assets/images/icono-adoptar-16-rojo.png";
 import notificacion from "../assets/images/icono-notificacion-16.png";
 import Box from "../components/Box";
 import { Link, useNavigate } from "react-router-dom";
+import MisUltimosReportes from "../components/ReportesMascotas/MisUltimosReportes";
 
 
 const InicioUsuario = ({nombres, apellidos, url_foto}) => {
@@ -70,11 +71,7 @@ const InicioUsuario = ({nombres, apellidos, url_foto}) => {
 
             <div className="py-4 px-4">
                 <Box titulo="Mis Animales Reportados" margenTitulo borde>
-                    <div className="grid grid-cols-1 grid-cols-m-3 gap-8 py-2 mb-8">
-                        <Box titulo="HOLA1" borde></Box>
-                        <Box titulo="HOLA2" borde></Box>
-                        <Box titulo="HOLA3" borde></Box>
-                    </div>
+                    <MisUltimosReportes/>
                     <button className="btn btn-tertiary w-full" onClick={misReportes}>
                         <span>Ver Todos Mis Reportes</span>
                     </button>

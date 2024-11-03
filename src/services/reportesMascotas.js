@@ -14,6 +14,9 @@ export const obtenerResportesMascotasRecientes = () => api.get('/recientes')
 // Función para obtener los reportes del usuario
 export const obtenerMisResportesMascotas = () => api.get('/mis-reportes')
 
+// Función para obtener algunos reportes del usuario
+export const obtenerMisUltimosResportesMascotas = (n) => api.get(`/mis-reportes/${n}`)
+
 
 // Función para eliminar un reporte por ID
 export const eliminarReporte = (id) => api.delete(`/${id}`);
