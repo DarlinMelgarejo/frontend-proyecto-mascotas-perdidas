@@ -300,6 +300,18 @@
     &.justify-around { justify-content: space-around; }
     &.justify-evenly { justify-content: space-evenly; }
 
+    // Media queries para diferentes justify-content
+    @each $bp, $value in $breakpoints {
+        @include from($bp) {
+            &.justify-start-#{$bp} { justify-content: flex-start; }
+            &.justify-center-#{$bp} { justify-content: center; }
+            &.justify-end-#{$bp} { justify-content: flex-end; }
+            &.justify-between-#{$bp} { justify-content: space-between; }
+            &.justify-around-#{$bp} { justify-content: space-around; }
+            &.justify-evenly-#{$bp} { justify-content: space-evenly; }
+        }
+    }
+
     // Clases para align-items
     &.items-start { align-items: flex-start; }
     &.items-center { align-items: center; }
@@ -337,7 +349,7 @@
             .w-2-3-#{$bp} { width: 66.66666%; }
             .w-1-4-#{$bp} { width: 25%; }
             .w-3-4-#{$bp} { width: 75%; }
-            .w-full { width: 100%; }
+            .w-full-#{$bp} { width: 100%; }
         }
     }
 }

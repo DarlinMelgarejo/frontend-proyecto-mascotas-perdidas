@@ -6,6 +6,9 @@ const api = axios.create({
   withCredentials: true,
 });
 
+// Función para obtener todos los reportes de mascotas
+export const obtenerTodosLosReportes = () => api.get('/') 
+
 // Función para registrar un nuevo reporte de mascota
 export const registrarReporteMascota = (data) => api.post('/registrar', data);
 

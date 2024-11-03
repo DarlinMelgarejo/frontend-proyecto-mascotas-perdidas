@@ -1,34 +1,54 @@
 import { useState, useEffect } from "react";
 import CardReporteMascota from "../components/ReportesMascotas/CardReporteMascota";
-import axios from "axios";
 import Header from "../templates/Header";
 import Footer from "../templates/Footer";
+import { obtenerTodosLosReportes } from "../services/reportesMascotas";
 
 const Buscar = () => {
     const [reportesMascotas, setReportesMascotas] = useState([]);
-    const [filtro, setFiltro] = useState(""); // Para manejar filtros si es necesario
+    const [reportesMascotasActuales, setReportesMascotasActuales] = useState([]);
+    const [especieSeleccionada, setEspecieSeleccionada] = useState("Todos")
+    const [busqueda, setBusqueda] = useState("")
 
     // Obtener las mascotas desde el backend
-    useEffect(() => {
-        const fetchMascotas = async () => {
-            try {
-                const response = await axios.get("http://localhost:5000/api/reportes-mascotas");
-                console.log(response.data)
+    const fetchMascotas = async () => {
+        try {
+            const response = await obtenerTodosLosReportes()
+            if(response.status === 200) {
                 setReportesMascotas(response.data);
-            } catch (error) {
-                console.error("Error al obtener las mascotas:", error);
+                filtrarAnimales()
             }
-        };
-
-        fetchMascotas();
-    }, []); // Solo se ejecuta al cargar el componente
-
-    // Filtrar mascotas por especie si es necesario
-    const filtrarMascotas = (especie) => {
-        setFiltro(especie);
+        } catch (error) {
+            console.error("Error al obtener las mascotas:", error);
+        }
     };
 
-    const reportesMascotasFiltrados = filtro ? reportesMascotas.filter(m => m.especie_mascota === filtro) : reportesMascotas;
+    fetchMascotas();
+    
+    useEffect(() => {
+        filtrarAnimales()
+    }, [especieSeleccionada, busqueda]); // Solo se ejecuta al cargar el componente
+    
+    const filtrarAnimales = () => {
+        let reportesFiltrados = reportesMascotas
+    
+        if (especieSeleccionada !== "Todos") {
+            reportesFiltrados = reportesFiltrados.filter(animal => animal.especie_mascota === especieSeleccionada)
+        }
+    
+        if (busqueda) {
+            const busquedaLower = busqueda.toLowerCase()
+            reportesFiltrados = reportesFiltrados.filter(animal => 
+                animal.nombre_mascota.toLowerCase().includes(busquedaLower) ||
+                animal.color_mascota.toLowerCase().includes(busquedaLower) ||
+                animal.raza_mascota.toLowerCase().includes(busquedaLower) ||
+                animal.especie_mascota.toLowerCase().includes(busquedaLower) ||
+                animal.procedencia_mascota.toLowerCase().includes(busquedaLower)
+            )
+        }
+
+        setReportesMascotasActuales(reportesFiltrados)
+    }
 
     return (
         <>
@@ -39,20 +59,20 @@ const Buscar = () => {
                     <input
                         className="form-control form-control-dark"
                         type="text"
-                        placeholder="Buscar por nombre, raza, color o ubicación"
-                        onChange={(e) => setFiltro(e.target.value)}
+                        placeholder="Buscar por nombre, color, raza, especie o procedencia"
+                        onChange={(e) => setBusqueda(e.target.value)}
                     />
-                    <div className="filters">
-                        <button className="btn btn-white" onClick={() => filtrarMascotas("")}>Todos los animales</button>
-                        <button className="btn btn-white" onClick={() => filtrarMascotas("Perro")}>Perros</button>
-                        <button className="btn btn-white" onClick={() => filtrarMascotas("Gato")}>Gatos</button>
-                        <button className="btn btn-white" onClick={() => filtrarMascotas("Otro")}>Otros</button>
+                    <div className="w-full w-3-4-s flex justify-around">
+                        <button className="btn btn-white" onClick={() => setEspecieSeleccionada("Todos")}>Todos los animales</button>
+                        <button className="btn btn-white" onClick={() => setEspecieSeleccionada("Perro")}>Perros</button>
+                        <button className="btn btn-white" onClick={() => setEspecieSeleccionada("Gato")}>Gatos</button>
+                        <button className="btn btn-white" onClick={() => setEspecieSeleccionada("Otro")}>Otros</button>
                     </div>
                 </div>
                 
-                <div className="grid grid-cols-l-3 gap-6">
-                    {reportesMascotasFiltrados.length > 0 ? (
-                        reportesMascotasFiltrados.map((mascota) => (
+                <div className="grid grid-cols-s-2 grid-cols-xl-3 gap-6">
+                    {reportesMascotasActuales.length > 0 ? (
+                        reportesMascotasActuales.map((mascota) => (
                             <CardReporteMascota
                                 key={mascota.id}
                                 url_imagen={`http://localhost:5000/uploads/mascotas/${mascota.url_foto_mascota}`} // Ruta de la imagen
@@ -65,7 +85,7 @@ const Buscar = () => {
                             />
                         ))
                     ) : (
-                        <p>No se encontraron mascotas.</p>
+                        <p className="black-color text-bold">No se encontraron mascotas.</p>
                     )}
                 </div>
             </div>
@@ -74,4 +94,4 @@ const Buscar = () => {
     );
 };
 
-export default Buscar;
+export default Buscar

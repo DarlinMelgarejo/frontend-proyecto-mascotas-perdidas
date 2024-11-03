@@ -9,11 +9,15 @@
     margin: 0 auto;
 
     @include from(s) {
-        width: 275px;
+        width: 250px;
     }
 
     @include from(m) {
-        width: 300px;
+        width: 350px;
+    }
+
+    @include from(l) {
+        width: 400px;
     }
 
     @include from(xl) {
@@ -23,7 +27,19 @@
     &__image {
         border: none;
         border-radius: 10px;
-        height: 180px;
+        height: 200px;
+
+        @include from(s) {
+            height: 140px;
+        }
+
+        @include from(m) {
+            height: 180px;
+        }
+
+        @include from(l) {
+            height: 200px;
+        }
     }
 
     &__info {
