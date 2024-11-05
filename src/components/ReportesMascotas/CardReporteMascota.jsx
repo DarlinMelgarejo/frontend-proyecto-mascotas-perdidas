@@ -2,7 +2,11 @@ import icono_visualizar from "../../assets/images/icono-visualizar.svg"
 import icono_editar from "../../assets/images/icono-editar.svg"
 import icono_eliminar from "../../assets/images/icono-eliminar.svg"
 import {eliminarReporte} from "../../services/reportesMascotas"
+import { useNavigate } from "react-router-dom"
 const CardReporteMascota = ({ id_reporte, url_imagen, nombre, especie, raza, color, procedencia, fecha_reporte, opciones }) => {
+    const navigate = useNavigate()
+    const revisar = (id) => navigate(`/reporte/${id}`)
+    
     const eliminar = async (id) => {
         let eliminar = prompt("Esta seguro que desea eliminar el reporte?(si/no)")
 
@@ -28,9 +32,9 @@ const CardReporteMascota = ({ id_reporte, url_imagen, nombre, especie, raza, col
             </div>
             {opciones ? (
                 <div className="flex flex-row justify-between gap-4">
-                    <button className="btn btn-white w-14"><img src={icono_visualizar} alt="Icono de Visualizar" /></button>
-                    <button className="btn btn-white w-14"><img src={icono_editar} alt="Icono de Editar" /></button>
-                    <button className="btn btn-white w-14"><img src={icono_eliminar} alt="Icono de Eliminar" onClick={() => eliminar(id_reporte)}/></button>
+                    <button className="btn btn-white w-p-40 h-p-40"><img src={icono_visualizar} alt="Icono de Visualizar" onClick={() => revisar(id_reporte)}/></button>
+                    <button className="btn btn-white w-p-40 h-p-40"><img src={icono_editar} alt="Icono de Editar" /></button>
+                    <button className="btn btn-white w-p-40 h-p-40"><img src={icono_eliminar} alt="Icono de Eliminar" onClick={() => eliminar(id_reporte)}/></button>
                 </div>
             ) : (
                 <button className="btn btn-dark">Ver Detalles</button>

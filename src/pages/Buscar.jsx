@@ -75,7 +75,7 @@ const Buscar = () => {
                         reportesMascotasActuales.map((mascota) => (
                             <CardReporteMascota
                                 key={mascota.id}
-                                url_imagen={`http://localhost:5000/uploads/mascotas/${mascota.url_foto_mascota}`} // Ruta de la imagen
+                                url_imagen={`${process.env.REACT_APP_URL_API}/uploads/mascotas/${mascota.url_foto_mascota}`} // Ruta de la imagen
                                 nombre={mascota.nombre_mascota}
                                 especie={mascota.especie_mascota}
                                 raza={mascota.raza_mascota}

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Configurar Axios para utilizar la base URL de la API y enviar las cookies
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api/reportes-mascotas',
+  baseURL: `${process.env.REACT_APP_URL_API}/api/reportes-mascotas`,
   withCredentials: true,
 });
 
@@ -20,6 +20,8 @@ export const obtenerMisResportesMascotas = () => api.get('/mis-reportes')
 // Función para obtener algunos reportes del usuario
 export const obtenerMisUltimosResportesMascotas = (n) => api.get(`/mis-reportes/${n}`)
 
+// Función para obtener un reporte por ID
+export const obtenerReporte = (id) => api.get(`/${id}`)
 
 // Función para eliminar un reporte por ID
 export const eliminarReporte = (id) => api.delete(`/${id}`);

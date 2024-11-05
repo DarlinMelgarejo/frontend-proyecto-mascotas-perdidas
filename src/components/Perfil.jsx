@@ -22,8 +22,8 @@ const Perfil = ({ nombres, apellidos, url_foto, fecha_registro, correo, telefono
         <div className="py-6 px-4">
             <div className="perfil">
                 <div className="perfil__foto">
-                    <img src={`http://localhost:5000/uploads/usuarios/${url_foto}`} alt={`Foto de perfil de ${nombres} ${apellidos}`} />
-                    <span className="secondary-color fs-6 text-bold">{`${nombres} ${apellidos}`}</span>
+                    <img src={`${process.env.REACT_APP_URL_API}/uploads/usuarios/${url_foto}`} alt={`Foto de perfil de ${nombres} ${apellidos}`} />
+                    <span className="secondary-color fs-6 text-bold text-center mb-4">{`${nombres} ${apellidos}`}</span>
                     <span className="gray-color">Miembro desde {fecha_registro.slice(0, 10)}</span>
                 </div>
                 <div className="perfil__menu">
@@ -44,7 +44,7 @@ const Perfil = ({ nombres, apellidos, url_foto, fecha_registro, correo, telefono
                             className={activo === 2 ? "activo" : ""} 
                             onClick={() => cambiarActivo(2)}
                         >
-                            Actividad Reciente
+                            Actividad
                         </button>
                     </div>
                 </div>

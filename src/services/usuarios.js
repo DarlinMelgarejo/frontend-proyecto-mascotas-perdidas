@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Configurar Axios para utilizar la base URL de la API y enviar las cookies
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api/usuarios',
+  baseURL: `${process.env.REACT_APP_URL_API}/api/usuarios`,
   withCredentials: true,
 });
 

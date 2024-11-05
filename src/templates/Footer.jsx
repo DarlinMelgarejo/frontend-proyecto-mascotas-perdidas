@@ -48,7 +48,7 @@ const Footer = () => (
             </div>
         </div>
         <div className="main-footer__copyright">
-            &copy; 2024 SOS Mascotas. Todos los derechos reservados
+            &copy; 2024 Huellas Perdidas. Todos los derechos reservados
         </div>
     </footer>
 )

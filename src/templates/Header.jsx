@@ -5,47 +5,19 @@ import adoptar from "../assets/images/icono-adoptar-24.png";
 import info from "../assets/images/icono-info-24.png";
 
 import { Link, useNavigate } from "react-router-dom";
-import { cerrarSesion, verificarAutenticacion } from "../services/usuarios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useUsuario } from "../context/UsuarioContext";
 
 const Header = () => {
-    const [sesion, setSesion] = useState(false); // Para manejar el estado de la sesión
+    const {usuario, cargando, logout} = useUsuario()
     const navigate = useNavigate();
 
     const registrarse = () => navigate('/registro');
     const iniciarSesion = () => navigate('/login');
-
-    // Llamar a la función para verificar si el usuario está autenticado al cargar el componente
-    useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                const response = await verificarAutenticacion(); // Llamar al servicio
-                if (response.data.authenticated) { // Cambia esto a `response.data.authenticated` para acceder correctamente
-                    setSesion(true); // Si está autenticado, guardar el estado de la sesión
-                } else {
-                    setSesion(false); // Si no está autenticado, resetear la sesión
-                }
-            } catch (err) {
-                console.error("Error al verificar la autenticación:", err);
-                setSesion(false); // Si hay algún error, asumir que no está autenticado
-            }
-        };
-
-        checkAuth(); // Ejecutar la verificación al cargar el componente
-    }, []); // Dependencias vacías para que solo se ejecute al cargar
-
-    // Función para cerrar la sesión
-    const handleCerrarSesion = async () => {
-        try {
-            const response = await cerrarSesion();
-            if (response.status === 200) {
-                setSesion(false); // Esto cerraría la sesión
-                navigate('/login');
-            }
-        } catch (err) {
-            console.error("Error al cerrar sesión:", err);
-        }
-    };
+    const cerrarSesion = () => {
+        logout()
+        navigate('/');
+    }
 
     return (
         <header className="main-header">
@@ -57,15 +29,15 @@ const Header = () => {
                 <nav className="main-header__menu">
                     <Link className="white-color" to="/buscar">Buscar</Link>
                     <Link className="white-color" to="/adoptar">Adoptar</Link>
-                    {sesion ? (
+                    {cargando === true || (usuario !== null && usuario !== undefined) ? (
                         <Link className="white-color" to="/reportar">Reportar</Link>
                     ) : (
                         <Link className="white-color" to="/nosotros">Sobre Nosotros</Link>
                     )}
                 </nav>
                 <div className="flex gap-3">
-                    {sesion ? (
-                        <button className="btn btn-tertiary" onClick={handleCerrarSesion}>Cerrar Sesión</button>
+                    {cargando === true || (usuario !== null && usuario !== undefined) ? (
+                        <button className="btn btn-tertiary" onClick={cerrarSesion}>Cerrar Sesión</button>
                     ) : (
                         <>
                             <button className="btn btn-tertiary" onClick={registrarse}>Registrarse</button>

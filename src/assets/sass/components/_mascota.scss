@@ -2,14 +2,14 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-    width: 350px;
+    width: 300px;
     padding: 1.5em;
     border: 1px solid $border-color;
     border-radius: 10px;
     margin: 0 auto;
 
     @include from(s) {
-        width: 250px;
+        width: 350px;
     }
 
     @include from(m) {
@@ -17,7 +17,7 @@
     }
 
     @include from(l) {
-        width: 400px;
+        width: 300px;
     }
 
     @include from(xl) {
@@ -27,18 +27,23 @@
     &__image {
         border: none;
         border-radius: 10px;
-        height: 200px;
+        width: 100%;
+        height: 150px;
 
         @include from(s) {
-            height: 140px;
+            height: 150px;
         }
 
         @include from(m) {
-            height: 180px;
+            height: 175px;
         }
 
         @include from(l) {
-            height: 200px;
+            height: 150px;
+        }
+        
+        @include from(xl) {
+            height: 175px;
         }
     }
 

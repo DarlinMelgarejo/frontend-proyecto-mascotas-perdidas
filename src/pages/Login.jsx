@@ -1,10 +1,12 @@
 import { useState } from "react"; 
 import { Link, useNavigate } from "react-router-dom"; 
 import { logearUsuario, obtenerPerfil } from "../services/usuarios"; // Importar las funciones del servicio
+import { useUsuario } from "../context/UsuarioContext";
 
 const Login = () => {
     const [data, setData] = useState({ dni: "", contraseña: "" });
-    const [error, setError] = useState(""); 
+    const [error, setError] = useState("");
+    const {login} = useUsuario() 
     const navigate = useNavigate(); 
 
     const changeData = e => {
@@ -18,15 +20,8 @@ const Login = () => {
         e.preventDefault(); 
     
         try {
-            const { dni, contraseña } = data;
-
-            // Llamar a la función del servicio para logear al usuario
-            const response = await logearUsuario({ dni, contraseña });
-
-            if (response.status === 200) {
-                // Redirige al usuario a la página principal
-                navigate('/'); 
-            }
+            login(data)
+            navigate("/")
         } catch (err) {
             console.error(err); // Imprime el error en la consola
             if (err.response) {

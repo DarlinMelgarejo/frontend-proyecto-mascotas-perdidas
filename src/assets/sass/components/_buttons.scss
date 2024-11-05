@@ -1,7 +1,7 @@
 .btn {
     display: inline-block;
     padding: .5rem .75rem;
-    font-size: .8rem;
+    font-size: .6rem;
     font-weight: 700;
     line-height: 1.25;
     background-color: $black-color;
@@ -16,6 +16,18 @@
     border: none;
     border-radius: 0.375rem;
     transition: color .15s ease-in-out, background-color .3s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+    @include from(s) {
+        font-size: .7rem;
+    }
+
+    @include from(l) {
+        font-size: .7rem;
+    }
+
+    @include from(xl) {
+        font-size: .8rem;
+    }
 
     &:hover {
         color: $white-color;

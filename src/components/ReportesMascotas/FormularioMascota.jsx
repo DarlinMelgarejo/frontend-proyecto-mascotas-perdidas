@@ -136,7 +136,7 @@ const FormularioMascota = () => {
     };
 
     return (
-        <form encType="multipart/form-data" onSubmit={handleSubmit}>
+        <form className='w-full' encType="multipart/form-data" onSubmit={handleSubmit}>
             {error && <p className="error">{error}</p>}
             <div className="flex flex-column mb-4">
                 <label className="form-label form-label-dark" htmlFor="fecha_reporte">Fecha de Pérdida/Encuentro</label>
@@ -151,7 +151,7 @@ const FormularioMascota = () => {
             </div>
             <div className="flex flex-column mb-4">
                 <label className="form-label form-label-dark">Tipo de Reporte</label>
-                <div className="flex gap-4">
+                <div className="flex flex-column flex-row-s gap-4">
                     <label className="flex gap-2">
                         <input
                             type="radio"
@@ -271,7 +271,7 @@ const FormularioMascota = () => {
             </div>
             <div className="flex flex-column mb-4">
                 <label className="form-label form-label-dark" htmlFor="foto_mascota">Foto de la Mascota</label>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-column flex-row-s items-center-s gap-2">
                     <button
                         className="btn btn-white"
                         type="button"

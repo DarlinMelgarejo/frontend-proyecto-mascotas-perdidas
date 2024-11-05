@@ -1,28 +1,11 @@
-import { useEffect, useState } from "react"
 import Footer from "../templates/Footer"
 import Header from "../templates/Header"
 import Perfil from "../components/Perfil"
 
-import { obtenerPerfil } from "../services/usuarios"
+import { useUsuario } from "../context/UsuarioContext"
 
 const PerfilUsuario = () => {
-    const [usuario, setUsuario] = useState()
-
-    const getUsuario = async () => {
-        try {
-            const response = await obtenerPerfil();
-
-            if(response.status === 200) {
-                setUsuario(response.data)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    
-    useEffect(() => {
-        getUsuario()
-    }, [])
+    const {usuario} = useUsuario()
 
     return (
         <>
@@ -39,7 +22,7 @@ const PerfilUsuario = () => {
                     direccion={usuario.direccion}
                     procedencia={usuario.procedencia}
                 />
-            : <div>error</div>
+            : <div className="l-container black-color">error</div>
             }            
 
             

@@ -6,13 +6,15 @@ import Registro from './pages/Registro';
 import Inicio from './pages/Inicio';
 import PerfilUsuario from './pages/PerfilUsuario';
 import EditarPerfil from './pages/EditarPerfil';
+import MisReportes from "./pages/MisReportes";
+import ReporteMascota from "./pages/ReporteMascota";
 import Buscar from './pages/Buscar';
 import Reportar from './pages/Reportar';
 import Adoptar from './pages/Adoptar';
 import Nosotros from './pages/Nosotros';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MisReportes from "./pages/MisReportes";
+import InicioUsuario from "./pages/InicioUsuario";
 
 const App = () => (
     <Router>
@@ -21,9 +23,11 @@ const App = () => (
             <Route path='/restablecer-contraseña' element={<RestablecerContraseña/>} />
             <Route path='/registro' element={<Registro/>} />
             <Route path="/" element={<Inicio />} />
+            <Route path="/dashboard" element={<InicioUsuario />} />
             <Route path="/perfil" element={<PerfilUsuario />} />
             <Route path="/editar-perfil" element={<EditarPerfil />} />
             <Route path="/mis-reportes" element={<MisReportes />} />
+            <Route path="/reporte/:id" element={<ReporteMascota />} />
             <Route path="/buscar" element={<Buscar />} />
             <Route path="/adoptar" element={<Adoptar />} />
             <Route path="/reportar" element={<Reportar />} />

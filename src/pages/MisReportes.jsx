@@ -46,7 +46,7 @@ const MisReportes = () => {
             <Header></Header>
             <div className="l-container black-color">
                 <div className="flex flex-row justify-between mb-4">
-                    <h2 className="secondary-color m-0">Mis Mascotas Reportadas</h2>
+                    <h2 className="secondary-color m-0">Mis Reportes</h2>
                     <button className="btn btn-tertiary flex justify-center items-center"
                     onClick={reportarNuevaMascota}
                     >
@@ -61,13 +61,13 @@ const MisReportes = () => {
                     <button className="btn btn-white" onClick={() => filtrarMascotas("Encontrado")}>Encontrados</button>
                 </div>
 
-                <div className="grid grid-cols-l-4 gap-4">
+                <div className="grid grid-cols-m-2 grid-cols-l-3 gap-4">
                     {misReportesMascotasFiltradas.length > 0 ? (
                         misReportesMascotasFiltradas.map((mascota) => (
                             <CardReporteMascota
                                 key={mascota.id}
                                 id_reporte={mascota.id}
-                                url_imagen={`http://localhost:5000/uploads/mascotas/${mascota.url_foto_mascota}`} // Ruta de la imagen
+                                url_imagen={`${process.env.REACT_APP_URL_API}/uploads/mascotas/${mascota.url_foto_mascota}`} // Ruta de la imagen
                                 nombre={mascota.nombre_mascota}
                                 especie={mascota.especie_mascota}
                                 raza={mascota.raza_mascota}

@@ -1,5 +1,5 @@
-const Box = ({titulo, margenTitulo, borde, children}) => {
-    const claseBox = borde ? "box border w-full" : "border w-full"
+const Box = ({titulo, margenTitulo, margenAbajo, borde, children}) => {
+    const claseBox = `box w-full ${borde ? "border" : ""} ${margenAbajo ? "mb-8" : ""}`.trim();
     const claseTitulo = margenTitulo ? "secondary-color mb-8" : "secondary-color m-0"
     return (
         <div className={claseBox}>

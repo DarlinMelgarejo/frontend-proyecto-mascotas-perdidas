@@ -31,7 +31,7 @@ const ReportesMascotasRecientes = () => {
                 reportesMascotasRecientes.map((reporte) => (
                     <MiniaturaReporteMascota
                         key={reporte.id}
-                        url_foto_mascota={`http://localhost:5000/uploads/mascotas/${reporte.url_foto_mascota}`}
+                        url_foto_mascota={`${process.env.REACT_APP_URL_API}/uploads/mascotas/${reporte.url_foto_mascota}`}
                         nombre_mascota={reporte.nombre_mascota}
                         especie_mascota={reporte.especie_mascota}
                         estado_mascota={reporte.estado_mascota}
