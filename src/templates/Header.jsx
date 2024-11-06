@@ -1,23 +1,19 @@
-import logo from "../assets/images/logo.png";
-import buscar from "../assets/images/icono-buscar-24.png";
-import reportar from "../assets/images/icono-reportar-24.png";
-import adoptar from "../assets/images/icono-adoptar-24.png";
-import info from "../assets/images/icono-info-24.png";
+import logo from "../assets/images/logo.png"
+import buscar from "../assets/images/icono-buscar-24.png"
+import reportar from "../assets/images/icono-reportar-24.png"
+import adoptar from "../assets/images/icono-adoptar-24.png"
+import info from "../assets/images/icono-info-24.png"
 
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useUsuario } from "../context/UsuarioContext";
+import { Link, useNavigate } from "react-router-dom"
+import { useUsuario } from "../context/UsuarioContext"
 
 const Header = () => {
     const {usuario, cargando, logout} = useUsuario()
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
-    const registrarse = () => navigate('/registro');
-    const iniciarSesion = () => navigate('/login');
-    const cerrarSesion = () => {
-        logout()
-        navigate('/');
-    }
+    const registrarse = () => navigate('/registro')
+    const iniciarSesion = () => navigate('/login')
+    const cerrarSesion = () => logout()
 
     return (
         <header className="main-header">
@@ -65,7 +61,7 @@ const Header = () => {
                 </Link>
             </nav>
         </header>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

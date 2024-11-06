@@ -1,5 +1,8 @@
 import "./assets/sass/App.scss"
 
+import Header from "./templates/Header";
+import Footer from "./templates/Footer";
+
 import Login from './pages/Login';
 import RestablecerContraseña from "./pages/RestablecerContraseña";
 import Registro from './pages/Registro';
@@ -13,27 +16,44 @@ import Reportar from './pages/Reportar';
 import Adoptar from './pages/Adoptar';
 import Nosotros from './pages/Nosotros';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import InicioUsuario from "./pages/InicioUsuario";
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { UserProvider } from "./context/UsuarioContext";
 
-const App = () => (
-    <Router>
-        <Routes>
-            <Route path='/login' element={<Login/>} />
-            <Route path='/restablecer-contraseña' element={<RestablecerContraseña/>} />
-            <Route path='/registro' element={<Registro/>} />
-            <Route path="/" element={<Inicio />} />
-            <Route path="/dashboard" element={<InicioUsuario />} />
-            <Route path="/perfil" element={<PerfilUsuario />} />
-            <Route path="/editar-perfil" element={<EditarPerfil />} />
-            <Route path="/mis-reportes" element={<MisReportes />} />
-            <Route path="/reporte/:id" element={<ReporteMascota />} />
-            <Route path="/buscar" element={<Buscar />} />
-            <Route path="/adoptar" element={<Adoptar />} />
-            <Route path="/reportar" element={<Reportar />} />
-            <Route path="/nosotros" element={<Nosotros />} />
-        </Routes>
-    </Router>
-);
+const Container = () => {
+    const location = useLocation()
+    
+    const noHeaderFooter = ["/login", "/restablecer", "/registro"].includes(location.pathname)
+
+    return (
+        <>
+            {!noHeaderFooter && <Header/>}
+            <Routes>
+                <Route path="/" element={<Inicio />} />
+                <Route path="/login" element={<Login/>} />
+                <Route path="/restablecer" element={<RestablecerContraseña/>} />
+                <Route path="/registro" element={<Registro/>} />
+                <Route path="/perfil" element={<PerfilUsuario />} />
+                <Route path="/editar-perfil" element={<EditarPerfil />} />
+                <Route path="/mis-reportes" element={<MisReportes />} />
+                <Route path="/reporte/:id" element={<ReporteMascota />} />
+                <Route path="/buscar" element={<Buscar />} />
+                <Route path="/adoptar" element={<Adoptar />} />
+                <Route path="/reportar" element={<Reportar />} />
+                <Route path="/nosotros" element={<Nosotros />} />
+            </Routes>
+            {!noHeaderFooter && <Footer/>}
+        </>
+    )
+}
+
+const App = () => {
+    return (
+        <Router>
+            <UserProvider>
+                <Container/>
+            </UserProvider>
+        </Router>
+    );
+}
 
 export default App;

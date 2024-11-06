@@ -1,13 +1,10 @@
 import { useState } from "react"; 
-import { Link, useNavigate } from "react-router-dom"; 
-import { logearUsuario, obtenerPerfil } from "../services/usuarios"; // Importar las funciones del servicio
+import { Link } from "react-router-dom"; 
 import { useUsuario } from "../context/UsuarioContext";
 
 const Login = () => {
     const [data, setData] = useState({ dni: "", contraseña: "" });
-    const [error, setError] = useState("");
     const {login} = useUsuario() 
-    const navigate = useNavigate(); 
 
     const changeData = e => {
         setData({
@@ -19,17 +16,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault(); 
     
-        try {
-            login(data)
-            navigate("/")
-        } catch (err) {
-            console.error(err); // Imprime el error en la consola
-            if (err.response) {
-                setError(err.response.data.mensaje || "Error al iniciar sesión");
-            } else {
-                setError("Error de conexión");
-            }
-        }
+        login(data)
     };    
 
     return (
@@ -71,14 +58,13 @@ const Login = () => {
                             />
                             <label className="flex items-center gap-2 w-1-2 secondary-color mb-1" htmlFor="recordarme">Recordarme</label>
                         </div>
-                        <Link className="secondary-color flex justify-end w-3-4" to="/restablecer-contraseña">¿Olvidaste tu contraseña?</Link>
+                        <Link className="secondary-color flex justify-end w-3-4" to="/restablecer">¿Olvidaste tu contraseña?</Link>
                     </div>
                     <div className="flex flex-row">
                         <button className="btn btn-tertiary w-full" type="submit">Iniciar Sesión</button>
                     </div>
                 </form>
                 <div className="flex flex-column center-content pb-8 px-6">
-                    {error && <p className="black-color">{error}</p>}
                     <Link className="secondary-color" to="/registro">¿No tienes una cuenta? Regístrate aquí</Link>
                 </div>
             </div>

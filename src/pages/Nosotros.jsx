@@ -8,7 +8,6 @@ const Nosotros = () => {
 
     return (
         <>
-            <Header></Header>
 
             <div className="l-container">
                 <h2 className="secondary-color center-block">Sobre Huellas Perdidas</h2>
@@ -59,7 +58,6 @@ const Nosotros = () => {
                     <FAQItem titulo="¿Como puedo ser voluntario?" contenido='Siempre estamos buscando voluntarios apasionados. Puedes registrarte como voluntario en nuestra sección "Voluntariado", donde encontrarás diferentes oportunidades, desde ayudar en eventos de adopción hasta cuidar temporalmente a animales.'></FAQItem>
                 </div>
             </section>
-            <Footer></Footer>
         </>
     )
 }

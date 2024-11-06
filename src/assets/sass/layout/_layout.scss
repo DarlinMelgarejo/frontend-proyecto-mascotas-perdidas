@@ -90,7 +90,7 @@
 }
 
 // Generar clases de padding
-@for $i from 1 through 20 {
+@for $i from 1 through 30 {
     .p-#{$i} {
         padding: #{$i * 0.15}rem;
 

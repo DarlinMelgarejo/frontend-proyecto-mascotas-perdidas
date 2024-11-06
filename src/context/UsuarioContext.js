@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { logearUsuario, obtenerPerfil, actualizarUsuario, actualizarFotoUsuario, cerrarSesion } from '../services/usuarios'; // Aquí importamos las funciones de API
+import { useNavigate } from 'react-router-dom';
 
 // Crear el contexto de usuario
 const UserContext = createContext();
@@ -7,13 +8,15 @@ const UserContext = createContext();
 // Componente Provider para envolver tu aplicación
 export function UserProvider({ children }) {
     const [usuario, setUsuario] = useState(null); // El usuario estará vacío inicialmente (no logueado)
-    const [cargando, setCargando] = useState(false)
+    const [cargando, setCargando] = useState(true)
+    const navigate = useNavigate()
 
     const login = async (data) => {
         try {
             const response = await logearUsuario(data)
             if(response.status === 200) {
                 setUsuario(response.data)
+                navigate("/")
             }
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
@@ -27,10 +30,13 @@ export function UserProvider({ children }) {
             const response = await obtenerPerfil(); // Obtenemos el perfil del usuario
             if(response.status === 200) {
                 setUsuario(response.data); // Guardamos los datos del perfil
-                setCargando(false)
+            } else {
+                setUsuario(null)
             }
         } catch (error) {
-            console.error('Error obteniendo el perfil del usuario:', error);
+            setUsuario(null);
+        } finally {
+            setCargando(false);
         }
     };
 
@@ -60,6 +66,7 @@ export function UserProvider({ children }) {
             const response = await cerrarSesion(); // Hacemos la petición para cerrar sesión
             if(response.status === 200) {
                 setUsuario(null); // Limpiamos el estado de usuario
+                navigate("/")
             }
         } catch (error) {
             console.error('Error cerrando sesión:', error);

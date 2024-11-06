@@ -1,5 +1,3 @@
-import Footer from "../templates/Footer"
-import Header from "../templates/Header"
 import Perfil from "../components/Perfil"
 
 import { useUsuario } from "../context/UsuarioContext"
@@ -9,8 +7,6 @@ const PerfilUsuario = () => {
 
     return (
         <>
-            <Header></Header>
-
             {usuario
             ?   <Perfil 
                     nombres={usuario.nombres} 
@@ -23,10 +19,7 @@ const PerfilUsuario = () => {
                     procedencia={usuario.procedencia}
                 />
             : <div className="l-container black-color">error</div>
-            }            
-
-            
-            <Footer></Footer>
+            }
         </>
     )
 }
