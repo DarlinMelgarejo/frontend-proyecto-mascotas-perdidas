@@ -1,0 +1,22 @@
+.comentario {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid $border-color;
+    border-radius: 7.5px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+
+    &__foto-usuario {
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        overflow: hidden;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+}

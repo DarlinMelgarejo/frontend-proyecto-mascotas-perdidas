@@ -66,7 +66,9 @@ const DetalleReporte = ({ id }) => {
     }, [reporte]); // Solo se ejecuta cuando `reporte` cambia
 
     useEffect(() => {
-        getContacto()
+        if(reporte) {
+            getContacto()
+        }
     }, [reporte])
 
     return (
@@ -77,9 +79,9 @@ const DetalleReporte = ({ id }) => {
                         <Box borde margenAbajo>
                             <h2 className="secondary-color">{reporte.nombre_mascota}</h2>
                             {reporte.estado_mascota === "Perdido" ? (
-                                <p className="bg-red white-color p-1 mb-8">{reporte.estado_mascota}</p>
+                                <p className="bg-red white-color px-4 py-1 mb-8 b-radius-4">{reporte.estado_mascota}</p>
                             ) : (
-                                <p className="bg-tertiary white-color p-1 mb-8">{reporte.estado_mascota}</p>
+                                <p className="bg-tertiary white-color px-4 py-1 mb-8 b-radius-4">{reporte.estado_mascota}</p>
                             )}
                             <div className="grid grid-cols-s-2 gap-8 mb-8">
                                 <div className="flex items-center">
@@ -130,7 +132,7 @@ const DetalleReporte = ({ id }) => {
                                 }
                             </div>
                         </Box>
-                        <Comentarios id_reporte={reporte.id}/>
+                        <Comentarios id_reporte_mascota={reporte.id}/>
                     </>
                 ) : (
                     <div>

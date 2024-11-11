@@ -50,7 +50,7 @@ const EditarUsuario = () => {
                 formData.append('foto', fileInputRef.current.files[0])
                 const responseFoto = await actualizarFotoUsuario(formData)
                 if (responseFoto.status === 200) {
-                    alert('Perfil actualizado con éxito')
+                    alert('Foto de Perfil actualizada con éxito')
                 }
             }
             

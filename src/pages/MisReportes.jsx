@@ -25,7 +25,6 @@ const MisReportes = () => {
             try {
                 const response = await obtenerMisResportesMascotas()
                 if(response.status === 200) {
-                    console.log(response.data)
                     setMisReportesMascotas(response.data);
                     setFiltro("")
                 }

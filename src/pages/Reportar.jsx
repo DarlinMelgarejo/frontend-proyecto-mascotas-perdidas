@@ -1,8 +1,6 @@
 import Box from "../components/Box"
 import FormularioMascota from "../components/ReportesMascotas/FormularioMascota"
 import ReportesMascotasRecientes from "../components/ReportesMascotasRecientes"
-import Footer from "../templates/Footer"
-import Header from "../templates/Header"
 
 const Reportar = () => {
     return (

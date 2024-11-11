@@ -37,7 +37,7 @@ const CardReporteMascota = ({ id_reporte, url_imagen, nombre, especie, raza, col
                     <button className="btn btn-white w-p-40 h-p-40"><img src={icono_eliminar} alt="Icono de Eliminar" onClick={() => eliminar(id_reporte)}/></button>
                 </div>
             ) : (
-                <button className="btn btn-dark">Ver Detalles</button>
+                <button className="btn btn-dark" onClick={() => revisar(id_reporte)}>Ver Detalles</button>
             )}
         </div>
     )

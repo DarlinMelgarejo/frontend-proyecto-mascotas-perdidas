@@ -74,11 +74,16 @@ export function UserProvider({ children }) {
     };
 
     useEffect(() => {
-        fetchUsuario()
-    }, [])
+        if(!usuario) {
+            fetchUsuario()
+            console.log("Obteniendo usuario")
+            return
+        }
+        console.log(usuario.id)
+    }, [usuario])
 
     return (
-        <UserContext.Provider value={{ usuario, cargando, login, logout, fetchUsuario, updateUser, updateUserPhoto }}>
+        <UserContext.Provider value={{ usuario, cargando, setUsuario, login, logout, fetchUsuario, updateUser, updateUserPhoto }}>
             {children}
         </UserContext.Provider>
     );

@@ -3,7 +3,7 @@ import MiniaturaReporteMascota from "./ReportesMascotas/MiniaturaReporteMascota"
 import { obtenerResportesMascotasRecientes } from "../services/reportesMascotas"
 
 const ReportesMascotasRecientes = () => {
-    const [reportesMascotasRecientes, setReportesMascotasRecientes] = useState()
+    const [reportesMascotasRecientes, setReportesMascotasRecientes] = useState([])
 
     const getReportesMascotasRecientes = async () => {
         try {
