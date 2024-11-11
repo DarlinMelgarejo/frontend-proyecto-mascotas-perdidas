@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react"
 import { obtenerUsuarioPorId } from "../../services/usuarios"
 import { useUsuario } from "../../context/UsuarioContext"
+import { eliminarComentario } from "../../services/comentarios"
 
-const Comentario = ({ contenido, usuario_id, creado_en }) => {
+const Comentario = ({ id, contenido, usuario_id, creado_en }) => {
     const {usuario} = useUsuario()
 
     const [usuarioComentario, setUsuarioComentario] = useState(null)
@@ -13,7 +14,6 @@ const Comentario = ({ contenido, usuario_id, creado_en }) => {
         try {
             const response = await obtenerUsuarioPorId(usuario_id)
             if(response.status === 200) {
-                console.log(response.data)
                 setUsuarioComentario(response.data)
             }
         } catch (error) {
@@ -23,6 +23,21 @@ const Comentario = ({ contenido, usuario_id, creado_en }) => {
 
     const reportar = () => {
         alert("Se reporte el comentario")
+    }
+
+    const eliminar = async () => {
+        const eliminar = prompt("¿Esta seguro de eliminar este comentario?(si/no)")
+
+        if (eliminar === "si") {
+            try {
+                const response =  await eliminarComentario(id)
+                if (response.status === 200) {
+                    alert(response.data.mensaje)
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        }
     }
 
     useEffect(() => {
@@ -47,7 +62,7 @@ const Comentario = ({ contenido, usuario_id, creado_en }) => {
                                 usuario.id !== usuarioComentario.id ? (
                                     <button className="btn btn-warning" onClick={reportar}>Reportar</button>
                                 ) : (
-                                    <button className="btn btn-alert">Eliminar</button>
+                                    <button className="btn btn-alert" onClick={eliminar}>Eliminar</button>
                                 )
                             }
                         </div>

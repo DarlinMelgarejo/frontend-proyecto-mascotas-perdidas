@@ -55,7 +55,7 @@ const DetalleReporte = ({ id }) => {
         }).addTo(mapInstance);
 
         // Marcador en la ubicación
-        const marker = L.marker([lat, lng]).addTo(mapInstance)
+        L.marker([lat, lng]).addTo(mapInstance)
             .bindPopup(reporte.ubicacion_mascota)
             .openPopup();
 

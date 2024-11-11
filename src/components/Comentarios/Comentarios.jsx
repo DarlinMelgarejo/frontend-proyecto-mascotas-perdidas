@@ -40,7 +40,6 @@ const Comentarios = ({id_reporte_mascota}) => {
         try {
             const response = await obtenerComentariosDeUnReporte(id_reporte_mascota)
             if(response.status === 200) {
-                console.log(response.data)
                 setComentarios(response.data)
             }
         } catch (error) {
@@ -59,7 +58,7 @@ const Comentarios = ({id_reporte_mascota}) => {
     
     useEffect(() => {
         getComentarios()
-    }, [])
+    }, [comentarios])
 
     return (
         <Box titulo="Comentarios" borde margenTitulo>
@@ -68,6 +67,7 @@ const Comentarios = ({id_reporte_mascota}) => {
                     comentarios.map((comentario) => (
                         <Comentario
                             key={comentario.id}
+                            id={comentario.id}
                             usuario_id={comentario.usuario_id}
                             contenido={comentario.contenido}
                             creado_en={comentario.creado_en}

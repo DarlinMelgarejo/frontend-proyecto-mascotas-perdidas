@@ -76,10 +76,8 @@ export function UserProvider({ children }) {
     useEffect(() => {
         if(!usuario) {
             fetchUsuario()
-            console.log("Obteniendo usuario")
             return
         }
-        console.log(usuario.id)
     }, [usuario])
 
     return (
