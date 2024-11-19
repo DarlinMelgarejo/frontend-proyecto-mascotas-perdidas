@@ -18,7 +18,7 @@ const DetalleReporte = ({ id }) => {
         try {
             const response = await obtenerReporte(reporteID);
             if (response.status === 200) {
-                setReporte(response.data);
+                setReporte(response.data.reporte);
             }
         } catch (error) {
             console.log(error);
@@ -29,7 +29,7 @@ const DetalleReporte = ({ id }) => {
         try {
             const response = await obtenerUsuarioPorId(reporte.usuario_id);
             if (response.status === 200) {
-                setContacto(response.data);
+                setContacto(response.data.usuario);
             }
         } catch (error) {
             console.log(error);

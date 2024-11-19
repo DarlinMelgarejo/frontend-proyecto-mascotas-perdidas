@@ -13,7 +13,7 @@ const Buscar = () => {
         try {
             const response = await obtenerTodosLosReportes()
             if (response.status === 200) {
-                setReportesMascotas(response.data)
+                setReportesMascotas(response.data.reportes)
             }
         } catch (error) {
             console.error("Error al obtener los reportes:", error)

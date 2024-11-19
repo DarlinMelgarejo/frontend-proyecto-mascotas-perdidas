@@ -1,5 +1,5 @@
 import Box from "../components/Box"
-import FormularioMascota from "../components/ReportesMascotas/FormularioMascota"
+import RegistrarReporteMascota from "../components/ReportesMascotas/RegistrarReporteMascota"
 import ReportesMascotasRecientes from "../components/ReportesMascotasRecientes"
 
 const Reportar = () => {
@@ -8,7 +8,7 @@ const Reportar = () => {
             <h2 className="center-content secondary-color">Reportar un Animal Perdido o Encontrado</h2>
             <div className="grid grid-cols-1 grid grid-cols-l-2 gap-8">
                 <Box titulo="Formulario Reporte" borde margenTitulo>
-                    <FormularioMascota/>
+                    <RegistrarReporteMascota/>
                 </Box>
                 <div className="flex flex-column gap-8">
                     <Box titulo="Consejos para Reportar" borde margenTitulo>

@@ -15,7 +15,7 @@ export function UserProvider({ children }) {
         try {
             const response = await logearUsuario(data)
             if(response.status === 200) {
-                setUsuario(response.data)
+                setUsuario(response.data.usuario)
                 navigate("/")
             }
         } catch (error) {
@@ -29,7 +29,7 @@ export function UserProvider({ children }) {
             setCargando(true)
             const response = await obtenerPerfil(); // Obtenemos el perfil del usuario
             if(response.status === 200) {
-                setUsuario(response.data); // Guardamos los datos del perfil
+                setUsuario(response.data.usuario); // Guardamos los datos del perfil
             } else {
                 setUsuario(null)
             }
@@ -44,7 +44,7 @@ export function UserProvider({ children }) {
     const updateUser = async (newData) => {
         try {
             const response = await actualizarUsuario(newData); // Enviamos los datos actualizados al servidor
-            setUsuario(response.data); // Actualizamos el estado con los datos del usuario
+            setUsuario(response.data.usuario); // Actualizamos el estado con los datos del usuario
         } catch (error) {
             console.error('Error actualizando los datos del usuario:', error);
         }
@@ -54,7 +54,7 @@ export function UserProvider({ children }) {
     const updateUserPhoto = async (photoData) => {
         try {
             const response = await actualizarFotoUsuario(photoData); // Enviamos la nueva foto de perfil
-            setUsuario(response.data); // Actualizamos el estado con los nuevos datos del usuario
+            setUsuario(response.data.usuario); // Actualizamos el estado con los nuevos datos del usuario
         } catch (error) {
             console.error('Error actualizando la foto del usuario:', error);
         }

@@ -7,18 +7,21 @@ const PerfilUsuario = () => {
 
     return (
         <>
-            {usuario
-            ?   <Perfil 
-                    nombres={usuario.nombres} 
-                    apellidos={usuario.apellidos} 
-                    url_foto={usuario.url_foto} 
-                    fecha_registro={usuario.creado_en} 
-                    correo={usuario.correo} 
-                    telefono={usuario.telefono}
-                    direccion={usuario.direccion}
-                    procedencia={usuario.procedencia}
-                />
-            : <div className="l-container black-color">error</div>
+            { 
+                usuario ? (
+                    <Perfil 
+                        nombres={usuario.nombres} 
+                        apellidos={usuario.apellidos} 
+                        url_foto={usuario.url_foto} 
+                        fecha_registro={usuario.creado_en} 
+                        correo={usuario.correo} 
+                        telefono={usuario.telefono}
+                        direccion={usuario.direccion}
+                        procedencia={usuario.procedencia}
+                    />
+                ) : (
+                    <div className="l-container black-color">error</div>
+                )
             }
         </>
     )

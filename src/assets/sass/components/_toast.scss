@@ -1,0 +1,32 @@
+.toast {
+    background-color: $white-color;
+    color: $black-color;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 1rem;
+    z-index: var(--z-tooltip);
+    border: 1px solid $border-color;
+    border-radius: 7.5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: aparecer 0.5s ease;
+
+    &__title {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: .25rem;
+    }
+
+    &__content {
+        font-size: .9rem;
+    }
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

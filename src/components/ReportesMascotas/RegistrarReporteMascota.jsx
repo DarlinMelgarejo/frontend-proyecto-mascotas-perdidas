@@ -2,8 +2,11 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import L from "leaflet";
 import { registrarReporteMascota } from '../../services/reportesMascotas';
+import Toast from '../Toast';
 
-const FormularioMascota = () => {
+const RegistrarReporteMascota = () => {
+    const [toast, setToast] = useState()
+
     const navigate = useNavigate();
     const [reporteMascota, setReporteMascota] = useState({
         fecha_reporte: new Date().toISOString().split('T')[0],
@@ -63,8 +66,8 @@ const FormularioMascota = () => {
                     const locationName = data.display_name || 'Ubicación desconocida';
                     newMarker.bindPopup(locationName).openPopup();
                     setReporteMascota(prev => {
-                        const updatedMascota = { ...prev, ubicacion_mascota: locationName, latitud_ubicacion: lat, longitud_ubicacion: lng };
-                        console.log(`Latitud: ${updatedMascota.latitud_ubicacion}, Longitud: ${updatedMascota.longitud_ubicacion}`);
+                        const updatedMascota = { ...prev, ubicacion_mascota: locationName, latitud_ubicacion: Number(lat), longitud_ubicacion: Number(lng) };
+                        // console.log(`Latitud: ${updatedMascota.latitud_ubicacion}, Longitud: ${updatedMascota.longitud_ubicacion}`);
                         return updatedMascota;
                     });
                 })
@@ -83,7 +86,7 @@ const FormularioMascota = () => {
         setReporteMascota({ ...reporteMascota, [name]: value });
     };
 
-    const handleSubmit = async (e) => {
+    const enviarFormulario = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -104,13 +107,17 @@ const FormularioMascota = () => {
             formData.append('latitud_ubicacion', reporteMascota.latitud_ubicacion);
     
             if (fotoMascota) {
-                formData.append('foto', fileInputRef.current.files[0]);
+                formData.append('foto_mascota', fileInputRef.current.files[0]);
             }
 
             const response = await registrarReporteMascota(formData); // Asegúrate de usar 'await' aquí
 
             if (response.status === 201) {
-                alert('Mascota registrada exitosamente');
+                setToast({
+                    titulo: "Registro exitoso",
+                    contenido: "Se registro correctamente el reporte de la mascota."
+                })
+
                 setReporteMascota({
                     fecha_reporte: new Date().toISOString().split('T')[0],
                     nombre_mascota: '',
@@ -126,17 +133,23 @@ const FormularioMascota = () => {
                     longitud_ubicacion: 0,
                     latitud_ubicacion: 0
                 });
+
                 setFotoMascota(null);
-                navigate('/buscar');
+
+                setTimeout(() => {
+                    navigate('/buscar');
+                }, 3000)
             }
         } catch (error) {
-            console.error('Error al registrar el reporte de mascota:', error);
-            setError('Error al registrar el reporte de la mascota. Por favor, inténtalo de nuevo.');
+            setToast({
+                titulo: "Error al registrar",
+                contenido: "Error al registrar el reporte de la mascota. Por favor, inténtalo de nuevo."
+            })
         }
     };
 
     return (
-        <form className='w-full' encType="multipart/form-data" onSubmit={handleSubmit}>
+        <form className='w-full' encType="multipart/form-data" onSubmit={enviarFormulario}>
             {error && <p className="error">{error}</p>}
             <div className="flex flex-column mb-4">
                 <label className="form-label form-label-dark" htmlFor="fecha_reporte">Fecha de Pérdida/Encuentro</label>
@@ -291,8 +304,13 @@ const FormularioMascota = () => {
                 </div>
             </div>
             <button className='btn btn-secondary w-full' type="submit">Enviar Reporte</button>
+            {
+                toast && (
+                    <Toast titulo={toast.titulo} contenido={toast.contenido}></Toast>
+                )
+            }
         </form>
     );
 };
 
-export default FormularioMascota;
+export default RegistrarReporteMascota;

@@ -25,7 +25,7 @@ const MisReportes = () => {
             try {
                 const response = await obtenerMisResportesMascotas()
                 if(response.status === 200) {
-                    setMisReportesMascotas(response.data);
+                    setMisReportesMascotas(response.data.reportes);
                     setFiltro("")
                 }
             } catch (error) {

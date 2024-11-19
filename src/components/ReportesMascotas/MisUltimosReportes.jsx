@@ -10,7 +10,7 @@ const MisUltimosReportes = () => {
             try {
                 const response = await obtenerMisUltimosResportesMascotas(3)
                 if(response.status === 200) {
-                    setReportes(response.data)
+                    setReportes(response.data.reportes)
                 }
             } catch (error) {
                 console.log(error)

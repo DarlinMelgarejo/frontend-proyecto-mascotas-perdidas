@@ -5,18 +5,21 @@ import icono_direccion from "../../assets/images/icono-ubicacion-24-secondary.pn
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Box from "../Box"
-import { actualizarUsuario, actualizarFotoUsuario } from "../../services/usuarios"
+import { actualizarUsuario } from "../../services/usuarios"
 import { useUsuario } from "../../context/UsuarioContext"
+import Toast from '../Toast';
+
 
 const EditarUsuario = () => {
-    const {usuario, setUsuario} = useUsuario()
+    const [toast, setToast] = useState()
+    const {usuario, setUsuario, fetchUsuario} = useUsuario()
     const [datosUsuario, setDatosUsuario] = useState({
         nombres: "",
         apellidos: "",
         correo: "",
         telefono: "",
         direccion: "",
-        url_foto: "default.jpg",
+        url_foto: "",
     })
 
     const [nuevaFoto, setNuevaFoto] = useState(null)
@@ -47,20 +50,34 @@ const EditarUsuario = () => {
         try {
             // Actualizar foto de perfil si se ha seleccionado una nueva
             if (nuevaFoto) {
-                formData.append('foto', fileInputRef.current.files[0])
-                const responseFoto = await actualizarFotoUsuario(formData)
-                if (responseFoto.status === 200) {
-                    alert('Foto de Perfil actualizada con éxito')
-                }
+                formData.append('foto_usuario', fileInputRef.current.files[0])
+                // const responseFoto = await actualizarFotoUsuario(formData)
+                // if (responseFoto.status === 200) {
+                //     alert('Foto de Perfil actualizada con éxito')
+                // }
             }
+            formData.append('nombres', datosUsuario.nombres)
+            formData.append('apellidos', datosUsuario.apellidos)
+            formData.append('correo', datosUsuario.correo)
+            formData.append('telefono', datosUsuario.telefono)
+            formData.append('direccion', datosUsuario.direccion)
+            formData.append('url_foto', datosUsuario.url_foto)
             
             // Actualizar otros datos del usuario
-            const response = await actualizarUsuario(datosUsuario)
+            const response = await actualizarUsuario(formData)
             
             if (response.status === 200) {
-                setUsuario(datosUsuario)
-                alert('Perfil actualizado con éxito')
-                navigate('/perfil')
+                setToast({
+                    titulo: "Datos actualizados",
+                    contenido: "Se actualizaron correctamente sus datos."
+                })
+
+                // setUsuario(datosUsuario)
+                fetchUsuario()
+                setTimeout(() => {
+                    navigate('/perfil');
+                }, 3000)
+                //navigate('/perfil')
             }
         } catch (error) {
             console.error(error)
@@ -175,6 +192,11 @@ const EditarUsuario = () => {
                             <div className="flex justify-end">
                                 <button className="btn btn-secondary" type="submit">Guardar Cambios</button>
                             </div>
+                            {
+                                toast && (
+                                    <Toast titulo={toast.titulo} contenido={toast.contenido}></Toast>
+                                )
+                            }
                         </form>
                     </Box>
                 </div>

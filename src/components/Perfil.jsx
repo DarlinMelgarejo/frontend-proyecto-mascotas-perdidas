@@ -24,7 +24,7 @@ const Perfil = ({ nombres, apellidos, url_foto, fecha_registro, correo, telefono
                 <div className="perfil__foto">
                     <img src={`${process.env.REACT_APP_URL_API}/uploads/usuarios/${url_foto}`} alt={`Foto de perfil de ${nombres} ${apellidos}`} />
                     <span className="secondary-color fs-6 text-bold text-center mb-4">{`${nombres} ${apellidos}`}</span>
-                    <span className="gray-color">Miembro desde {fecha_registro.slice(0, 10)}</span>
+                    <span className="gray-color">Miembro desde {new Date(fecha_registro).toISOString().split('T')[0]}</span>
                 </div>
                 <div className="perfil__menu">
                     <div className="perfil__options">

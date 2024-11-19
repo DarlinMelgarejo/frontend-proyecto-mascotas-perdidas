@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registrarUsuario } from "../../services/usuarios"
+import Toast from "../Toast";
 
 const RegistrarUsuario = () => {
+    const [toast, setToast] = useState()
+
     const [data, setData] = useState({
         nombres: "",
         apellidos: "",
@@ -14,22 +17,26 @@ const RegistrarUsuario = () => {
         procedencia: "",
         direccion: "",
     });
-    const [error, setError] = useState("");
+
     const navigate = useNavigate();
 
-    const changeData = (e) => {
+    const actualizarCampos = (e) => {
         setData({
             ...data,
             [e.target.name]: e.target.value,
         });
     };
 
-    const handleSubmit = async (e) => {
+    const enviarFormulario = async (e) => {
         e.preventDefault();
 
         // Verifica que las contraseñas coincidan
         if (data.contraseña !== data.confirmarContraseña) {
-            setError("Las contraseñas no coinciden.");
+            setToast({
+                titulo: "Hubo un error",
+                contenido: "Las contraseñas no coinciden. Intentelo de nuevo."
+            })
+
             return;
         }
 
@@ -37,21 +44,26 @@ const RegistrarUsuario = () => {
             // Llamar a la función de registrar usuario del servicio
             const response = await registrarUsuario(data);
             if (response.status === 201) {
+                setToast({
+                    titulo: "Registro exitoso",
+                    contenido: "Tu cuenta ha sido creada. Ahora puedes iniciar sesión"
+                })
+
                 // Redirigir al usuario a la página de login después de un registro exitoso
-                navigate('/login');
+                setTimeout(() => {
+                    navigate('/login');
+                }, 3000);
             }
         } catch (err) {
-            console.error(err);
-            if (err.response) {
-                setError(err.response.data.mensaje || "Error al registrarse.");
-            } else {
-                setError("Error de conexión.");
-            }
+            setToast({
+                titulo: "Error al registrarse",
+                contenido: "No se ha podido crear tu cuenta."
+            })
         }
     };
 
     return (
-        <form className="py-6 px-6" onSubmit={handleSubmit}>
+        <form className="py-6 px-6" onSubmit={enviarFormulario}>            
             <div className="flex flex-column flex-row-m gap-4 mb-4">
                 <div className="flex flex-column w-1-2-m">
                     <label htmlFor="nombres" className="form-label form-label-primary">Nombres</label>
@@ -61,7 +73,7 @@ const RegistrarUsuario = () => {
                         name="nombres"
                         id="nombres"
                         value={data.nombres}
-                        onChange={changeData}
+                        onChange={actualizarCampos}
                         required // Campo requerido
                     />
                 </div>
@@ -73,7 +85,7 @@ const RegistrarUsuario = () => {
                         name="apellidos"
                         id="apellidos"
                         value={data.apellidos}
-                        onChange={changeData}
+                        onChange={actualizarCampos}
                         required // Campo requerido
                     />
                 </div>
@@ -87,7 +99,7 @@ const RegistrarUsuario = () => {
                         name="dni"
                         id="dni"
                         value={data.dni}
-                        onChange={changeData}
+                        onChange={actualizarCampos}
                         required // Campo requerido
                     />
                 </div>
@@ -99,7 +111,7 @@ const RegistrarUsuario = () => {
                         name="correo"
                         id="correo"
                         value={data.correo}
-                        onChange={changeData}
+                        onChange={actualizarCampos}
                         required // Campo requerido
                     />
                 </div>
@@ -113,7 +125,7 @@ const RegistrarUsuario = () => {
                         name="contraseña"
                         id="contraseña"
                         value={data.contraseña}
-                        onChange={changeData}
+                        onChange={actualizarCampos}
                         required // Campo requerido
                     />
                 </div>
@@ -125,7 +137,7 @@ const RegistrarUsuario = () => {
                         name="confirmarContraseña"
                         id="confirmarContraseña"
                         value={data.confirmarContraseña}
-                        onChange={changeData}
+                        onChange={actualizarCampos}
                         required // Campo requerido
                     />
                 </div>
@@ -138,13 +150,13 @@ const RegistrarUsuario = () => {
                     name="telefono"
                     id="telefono"
                     value={data.telefono}
-                    onChange={changeData}
+                    onChange={actualizarCampos}
                     required // Campo requerido
                 />
             </div>
             <div className="flex flex-column mb-4">
                 <label className="form-label form-label-primary" htmlFor="procedencia">Procedencia</label>
-                <select className="form-control" id="procedencia" name="procedencia" value={data.procedencia} onChange={changeData} required>
+                <select className="form-control" id="procedencia" name="procedencia" value={data.procedencia} onChange={actualizarCampos} required>
                     <option value="">Seleccione</option>
                     <option value="Pacasmayo">Pacasmayo</option>
                     <option value="San Pedro de Lloc">San Pedro de Lloc</option>
@@ -158,7 +170,7 @@ const RegistrarUsuario = () => {
                     name="direccion"
                     id="direccion"
                     value={data.direccion}
-                    onChange={changeData}
+                    onChange={actualizarCampos}
                     required // Campo requerido
                 />
             </div>
@@ -174,7 +186,11 @@ const RegistrarUsuario = () => {
             <div className="flex flex-column center-content">
                 <button className="btn btn-tertiary w-full" type="submit">Registrarse</button>
             </div>
-            {error && <p className="center-content py-2 tertiary-color text-bold">{error}</p>} {/* Mostrar mensaje de error */}
+            {
+                toast && (
+                    <Toast titulo={toast.titulo} contenido={toast.contenido}></Toast>
+                )
+            }
         </form>
     )
 }

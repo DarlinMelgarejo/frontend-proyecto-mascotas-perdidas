@@ -5,9 +5,7 @@ const ContactoUsuario = ({url_foto_usuario, nombres, apellidos, telefono, correo
     return (
         <div className="box border w-full">
             <div className="flex flex-row items-center gap-6">
-                <div className="w-15">
-                    <img className="b-radius-25" src={url_foto_usuario} alt={`Foto de ${nombres.split(" ")[0]} ${apellidos.split(" ")[0]}`} />
-                </div>
+                <img className="w-15 h-15 b-radius-15" src={url_foto_usuario} alt={`Foto de ${nombres.split(" ")[0]} ${apellidos.split(" ")[0]}`} />
                 <div className="flex flex-column gap-2">
                     <h4 className="m-0">{`${nombres.split(" ")[0]} ${apellidos.split(" ")[0]}`}</h4>
                     <div className="flex flex-row items-center gap-2">
