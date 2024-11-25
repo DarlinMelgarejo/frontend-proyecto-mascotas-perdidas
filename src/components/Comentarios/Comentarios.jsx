@@ -24,7 +24,7 @@ const Comentarios = ({id_reporte_mascota}) => {
         e.preventDefault()
         try {
             const response = await registrarComentario(nuevoComentario)
-            if(response.status === 200) {
+            if(response.status === 201) {
                 getComentarios()
                 setNuevoComentario((prev) => ({
                     ...prev,
@@ -40,12 +40,20 @@ const Comentarios = ({id_reporte_mascota}) => {
         try {
             const response = await obtenerComentariosDeUnReporte(id_reporte_mascota)
             if(response.status === 200) {
-                setComentarios(response.data)
+                setComentarios(response.data.comentarios)
+            } else if (response.status === 404) {
+                setComentarios([])
             }
         } catch (error) {
             console.log(error)
         }
     }
+
+    
+
+    useEffect(() => {
+        getComentarios()
+    }, [])
 
     useEffect(() => {
         if (usuario) {
@@ -56,14 +64,11 @@ const Comentarios = ({id_reporte_mascota}) => {
         }
     }, [usuario])
     
-    useEffect(() => {
-        getComentarios()
-    }, [comentarios])
 
     return (
         <Box titulo="Comentarios" borde margenTitulo>
             {
-                comentarios && comentarios.length > 0 ? (
+                comentarios.length > 0 ? (
                     comentarios.map((comentario) => (
                         <Comentario
                             key={comentario.id}
@@ -71,6 +76,7 @@ const Comentarios = ({id_reporte_mascota}) => {
                             usuario_id={comentario.usuario_id}
                             contenido={comentario.contenido}
                             creado_en={comentario.creado_en}
+                            getComentarios={getComentarios}
                         />
                     ))
                 ) : (
@@ -78,19 +84,19 @@ const Comentarios = ({id_reporte_mascota}) => {
                 )
             }
             <form onSubmit={comentar}>
-            <div className="flex items-start gap-4">
-                <textarea
-                    className="form-control form-control-dark"
-                    id="contenido"
-                    name="contenido"
-                    placeholder="Escribe tu comentario aquí..."
-                    value={nuevoComentario.contenido}
-                    onChange={handleChange}
-                    rows="4"
-                    cols="50"
-                />
-                <button className="btn btn-secondary"><img src={icono_enviar} alt="Icono de Enviar" /></button>
-            </div>
+                <div className="flex items-start gap-4">
+                    <textarea
+                        className="form-control form-control-dark"
+                        id="contenido"
+                        name="contenido"
+                        placeholder="Escribe tu comentario aquí..."
+                        value={nuevoComentario.contenido}
+                        onChange={handleChange}
+                        rows="4"
+                        cols="50"
+                    />
+                    <button className="btn btn-secondary"><img src={icono_enviar} alt="Icono de Enviar" /></button>
+                </div>
             </form>
         </Box>
     )

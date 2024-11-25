@@ -12,7 +12,7 @@ import Toast from '../Toast';
 
 const EditarUsuario = () => {
     const [toast, setToast] = useState()
-    const {usuario, setUsuario, fetchUsuario} = useUsuario()
+    const {usuario, fetchUsuario} = useUsuario()
     const [datosUsuario, setDatosUsuario] = useState({
         nombres: "",
         apellidos: "",
@@ -51,11 +51,8 @@ const EditarUsuario = () => {
             // Actualizar foto de perfil si se ha seleccionado una nueva
             if (nuevaFoto) {
                 formData.append('foto_usuario', fileInputRef.current.files[0])
-                // const responseFoto = await actualizarFotoUsuario(formData)
-                // if (responseFoto.status === 200) {
-                //     alert('Foto de Perfil actualizada con éxito')
-                // }
             }
+
             formData.append('nombres', datosUsuario.nombres)
             formData.append('apellidos', datosUsuario.apellidos)
             formData.append('correo', datosUsuario.correo)
@@ -87,7 +84,7 @@ const EditarUsuario = () => {
 
     useEffect(() => {
         setDatosUsuario(usuario)
-    }, [])
+    }, [usuario])
 
     return (
         <>
