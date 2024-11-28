@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import L from "leaflet";
-import { actualizarReporte, obtenerReporte, registrarReporteMascota } from "../../services/reportesMascotas";
+import { actualizarReporte, obtenerReporte } from "../../services/reportesMascotas";
 import Toast from '../Toast';
 
 const EditarReporteMascota = ({ id }) => {

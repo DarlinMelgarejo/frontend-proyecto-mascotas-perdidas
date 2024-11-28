@@ -7,16 +7,58 @@ import notificacion from "../assets/images/icono-notificacion-16.png";
 import Box from "./Box";
 import { Link, useNavigate } from "react-router-dom";
 import MisUltimosReportes from "./ReportesMascotas/MisUltimosReportes";
-import { useUsuario } from "../context/UsuarioContext";
+import { useEffect, useRef, useState } from "react";
+import { obtenerTodosLosReportes } from "../services/reportesMascotas";
+import L from "leaflet";
+
 
 
 const Dashboard = ({nombres, apellidos, url_foto}) => {
     const navigate = useNavigate()
+    const mapRef = useRef(null);
+    const [reportesMascotas, setReportesMascotas] = useState([])
 
     const reportarNuevaMascota = () => navigate('/reportar')
     const buscarReportesMascotas = () => navigate('/buscar')
     const verMascotasEnAdopcion = () => navigate('/adoptar')
     const misReportes = () => navigate('/mis-reportes')
+
+    // Obtener los reportes desde el backend
+    const fetchMascotas = async () => {
+        try {
+            const response = await obtenerTodosLosReportes()
+            if (response.status === 200) {
+                setReportesMascotas(response.data.reportes)
+            }
+        } catch (error) {
+            setReportesMascotas([])
+        }
+    }
+
+    useEffect(() => {
+        fetchMascotas()
+    }, [])
+
+    useEffect(() => {
+        // Crear el mapa con Leaflet
+        const mapInstance = L.map(mapRef.current).setView([20.5937, 78.9629], 5); // Establecer vista predeterminada
+    
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+        }).addTo(mapInstance);
+    
+        // Marcar las ubicaciones de las mascotas reportadas en el mapa
+        reportesMascotas.forEach(reporteMascota => {
+          const marker = L.marker([reporteMascota.latitud_ubicacion, reporteMascota.longitud_ubicacion])
+            .addTo(mapInstance)
+            .bindPopup(`Nombre: ${reporteMascota.nombre_mascota} <br>Especie: ${reporteMascota.especie_mascota} <br>Estado: ${reporteMascota.estado_mascota}`)
+            .openPopup();
+        });
+    
+        return () => {
+          mapInstance.remove(); // Limpiar el mapa al desmontar el componente
+        };
+      }, [reportesMascotas]);
 
     return (
         <>
@@ -111,6 +153,11 @@ const Dashboard = ({nombres, apellidos, url_foto}) => {
                             </div>
                         </Box>
                     </div>
+                </Box>
+            </div>
+            <div className="py-4 px-4">
+                <Box titulo="Mapa de Mascotas Perdidas y Encontradas" margenTitulo borde>
+                    <div className="mb-4" ref={mapRef} style={{ height: '500px', width: '100%' }}></div>
                 </Box>
             </div>
         </>
