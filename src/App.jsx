@@ -11,6 +11,7 @@ import PerfilUsuario from './pages/PerfilUsuario';
 import EditarPerfil from './pages/EditarPerfil';
 import MisReportes from "./pages/MisReportes";
 import ReporteMascota from "./pages/ReporteMascota";
+import EditarReporte from "./pages/EditarReporte";
 import Buscar from './pages/Buscar';
 import Reportar from './pages/Reportar';
 import Adoptar from './pages/Adoptar';
@@ -36,6 +37,7 @@ const Container = () => {
                 <Route path="/editar-perfil" element={<EditarPerfil />} />
                 <Route path="/mis-reportes" element={<MisReportes />} />
                 <Route path="/reporte/:id" element={<ReporteMascota />} />
+                <Route path="/editar-reporte/:id" element={<EditarReporte />} />
                 <Route path="/buscar" element={<Buscar />} />
                 <Route path="/adoptar" element={<Adoptar />} />
                 <Route path="/reportar" element={<Reportar />} />

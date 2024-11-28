@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { logearUsuario, obtenerPerfil, actualizarUsuario, actualizarFotoUsuario, cerrarSesion } from '../services/usuarios'; // Aquí importamos las funciones de API
+import { logearUsuario, obtenerPerfil, actualizarUsuario, cerrarSesion } from '../services/usuarios'; // Aquí importamos las funciones de API
 import { useNavigate } from 'react-router-dom';
 
 // Crear el contexto de usuario
@@ -50,16 +50,6 @@ export function UserProvider({ children }) {
         }
     };
 
-    // Función para actualizar la foto del usuario
-    const updateUserPhoto = async (photoData) => {
-        try {
-            const response = await actualizarFotoUsuario(photoData); // Enviamos la nueva foto de perfil
-            setUsuario(response.data.usuario); // Actualizamos el estado con los nuevos datos del usuario
-        } catch (error) {
-            console.error('Error actualizando la foto del usuario:', error);
-        }
-    };
-
     // Función para cerrar sesión
     const logout = async () => {
         try {
@@ -81,7 +71,7 @@ export function UserProvider({ children }) {
     }, [usuario])
 
     return (
-        <UserContext.Provider value={{ usuario, cargando, setUsuario, login, logout, fetchUsuario, updateUser, updateUserPhoto }}>
+        <UserContext.Provider value={{ usuario, cargando, setUsuario, login, logout, fetchUsuario, updateUser }}>
             {children}
         </UserContext.Provider>
     );

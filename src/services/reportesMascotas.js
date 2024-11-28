@@ -23,5 +23,7 @@ export const obtenerMisUltimosResportesMascotas = (n) => api.get(`/mis-reportes/
 // Función para obtener un reporte por ID
 export const obtenerReporte = (id) => api.get(`/${id}`)
 
+export const actualizarReporte = (id, data) => api.patch(`/${id}`, data)
+
 // Función para eliminar un reporte por ID
 export const eliminarReporte = (id) => api.delete(`/${id}`);

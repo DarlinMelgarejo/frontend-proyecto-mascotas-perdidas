@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import L from "leaflet";
 import { registrarReporteMascota } from '../../services/reportesMascotas';
@@ -25,7 +25,6 @@ const RegistrarReporteMascota = () => {
     });
     const [fotoMascota, setFotoMascota] = useState(null);
     const fileInputRef = useRef(null);
-    const [error, setError] = useState('');
     const mapRef = useRef(null);
 
     const handleImageChange = (e) => {
@@ -39,6 +38,74 @@ const RegistrarReporteMascota = () => {
         }
     };
 
+    
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setReporteMascota({ ...reporteMascota, [name]: value });
+    };
+
+    const enviarFormulario = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        
+        try {
+            formData.append('fecha_reporte', reporteMascota.fecha_reporte);
+            formData.append('nombre_mascota', reporteMascota.nombre_mascota);
+            formData.append('especie_mascota', reporteMascota.especie_mascota);
+            formData.append('raza_mascota', reporteMascota.raza_mascota);
+            formData.append('color_mascota', reporteMascota.color_mascota);
+            formData.append('sexo_mascota', reporteMascota.sexo_mascota);
+            formData.append('edad_mascota', reporteMascota.edad_mascota);
+            formData.append('descripcion_mascota', reporteMascota.descripcion_mascota);
+            formData.append('estado_mascota', reporteMascota.estado_mascota);
+            formData.append('procedencia_mascota', reporteMascota.procedencia_mascota);
+            formData.append('ubicacion_mascota', reporteMascota.ubicacion_mascota);
+            formData.append('longitud_ubicacion', reporteMascota.longitud_ubicacion);
+            formData.append('latitud_ubicacion', reporteMascota.latitud_ubicacion);
+            
+            if (fotoMascota) {
+                formData.append('foto_mascota', fileInputRef.current.files[0]);
+            }
+            
+            const response = await registrarReporteMascota(formData); // Asegúrate de usar 'await' aquí
+            
+            if (response.status === 201) {
+                setToast({
+                    titulo: "Registro exitoso",
+                    contenido: "Se registro correctamente el reporte de la mascota."
+                })
+                
+                setReporteMascota({
+                    fecha_reporte: new Date().toISOString().split('T')[0],
+                    nombre_mascota: '',
+                    especie_mascota: 'Perro',
+                    raza_mascota: '',
+                    color_mascota: '',
+                    sexo_mascota: 'Desconocido',
+                    edad_mascota: '',
+                    descripcion_mascota: '',
+                    estado_mascota: 'Perdido',
+                    procedencia_mascota: 'Pacasmayo',
+                    ubicacion_mascota: '',
+                    longitud_ubicacion: 0,
+                    latitud_ubicacion: 0
+                });
+                
+                setFotoMascota(null);
+                
+                setTimeout(() => {
+                    navigate('/buscar');
+                }, 3000)
+            }
+        } catch (error) {
+            setToast({
+                titulo: "Error al registrar",
+                contenido: "Error al registrar el reporte de la mascota. Por favor, inténtalo de nuevo."
+            })
+        }
+    };
+    
     // Inicializa el mapa
     useEffect(() => {
         if (reporteMascota.procedencia_mascota === 'Pacasmayo') {
@@ -80,77 +147,9 @@ const RegistrarReporteMascota = () => {
             mapInstance.remove(); // Limpiar el mapa al desmontar el componente
         };
     }, [reporteMascota.procedencia_mascota]);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setReporteMascota({ ...reporteMascota, [name]: value });
-    };
-
-    const enviarFormulario = async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-
-        try {
-            formData.append('fecha_reporte', reporteMascota.fecha_reporte);
-            formData.append('nombre_mascota', reporteMascota.nombre_mascota);
-            formData.append('especie_mascota', reporteMascota.especie_mascota);
-            formData.append('raza_mascota', reporteMascota.raza_mascota);
-            formData.append('color_mascota', reporteMascota.color_mascota);
-            formData.append('sexo_mascota', reporteMascota.sexo_mascota);
-            formData.append('edad_mascota', reporteMascota.edad_mascota);
-            formData.append('descripcion_mascota', reporteMascota.descripcion_mascota);
-            formData.append('estado_mascota', reporteMascota.estado_mascota);
-            formData.append('procedencia_mascota', reporteMascota.procedencia_mascota);
-            formData.append('ubicacion_mascota', reporteMascota.ubicacion_mascota);
-            formData.append('longitud_ubicacion', reporteMascota.longitud_ubicacion);
-            formData.append('latitud_ubicacion', reporteMascota.latitud_ubicacion);
     
-            if (fotoMascota) {
-                formData.append('foto_mascota', fileInputRef.current.files[0]);
-            }
-
-            const response = await registrarReporteMascota(formData); // Asegúrate de usar 'await' aquí
-
-            if (response.status === 201) {
-                setToast({
-                    titulo: "Registro exitoso",
-                    contenido: "Se registro correctamente el reporte de la mascota."
-                })
-
-                setReporteMascota({
-                    fecha_reporte: new Date().toISOString().split('T')[0],
-                    nombre_mascota: '',
-                    especie_mascota: 'Perro',
-                    raza_mascota: '',
-                    color_mascota: '',
-                    sexo_mascota: 'Desconocido',
-                    edad_mascota: '',
-                    descripcion_mascota: '',
-                    estado_mascota: 'Perdido',
-                    procedencia_mascota: 'Pacasmayo',
-                    ubicacion_mascota: '',
-                    longitud_ubicacion: 0,
-                    latitud_ubicacion: 0
-                });
-
-                setFotoMascota(null);
-
-                setTimeout(() => {
-                    navigate('/buscar');
-                }, 3000)
-            }
-        } catch (error) {
-            setToast({
-                titulo: "Error al registrar",
-                contenido: "Error al registrar el reporte de la mascota. Por favor, inténtalo de nuevo."
-            })
-        }
-    };
-
     return (
         <form className='w-full' encType="multipart/form-data" onSubmit={enviarFormulario}>
-            {error && <p className="error">{error}</p>}
             <div className="flex flex-column mb-4">
                 <label className="form-label form-label-dark" htmlFor="fecha_reporte">Fecha de Pérdida/Encuentro</label>
                 <input

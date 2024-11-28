@@ -39,8 +39,5 @@ export const obtenerUsuarioPorId = (id) => api.get(`/${id}`);
 // Función para actualizar un usuario por ID
 export const actualizarUsuario = (data) => api.patch('/', data);
 
-// Función para actualizar un usuario por ID
-export const actualizarFotoUsuario = (data) => api.patch('/foto', data);
-
 // Función para eliminar un usuario por ID
 export const eliminarUsuario = (id) => api.delete(`/${id}`);
