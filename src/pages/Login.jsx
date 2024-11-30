@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useUsuario } from "../context/UsuarioContext";
 
 const Login = () => {
-    const [data, setData] = useState({ dni: "", contraseña: "" });
+    const [data, setData] = useState({ dni: "", contraseña: "", recordarme: false });
     const {login} = useUsuario() 
 
     const changeData = e => {
@@ -11,6 +11,13 @@ const Login = () => {
             ...data,
             [e.target.name]: e.target.value
         });
+    };
+
+    const changeRecordarme = (event) => {
+        setData({
+            ...data,
+            recordarme: event.target.checked
+        }); // Actualiza el estado con el valor del checkbox
     };
 
     const handleSubmit = async (e) => {
@@ -54,7 +61,9 @@ const Login = () => {
                             <input
                                 type="checkbox" 
                                 name="recordarme" 
-                                id="recordarme" 
+                                id="recordarme"
+                                value={data.recordarme}
+                                onChange={changeRecordarme}
                             />
                             <label className="flex items-center gap-2 w-1-2 secondary-color mb-1" htmlFor="recordarme">Recordarme</label>
                         </div>

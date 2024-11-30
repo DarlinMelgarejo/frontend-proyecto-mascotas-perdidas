@@ -13,13 +13,13 @@ const Footer = () => (
                 <h4>Huellas Perdidas</h4>
                 <p>Ayudando a reunir mascotas con sus dueños desde 2024</p>
                 <div className="main-footer__social">
-                    <a className="main-footer__link" href="">
+                    <a className="main-footer__link" href="/">
                         <img src={facebook} alt="Logo de Facebook" />
                     </a>
-                    <a className="main-footer__link" href="">
+                    <a className="main-footer__link" href="/">
                         <img src={twitter} alt="Logo de Twitter" />
                     </a>
-                    <a className="main-footer__link" href="">
+                    <a className="main-footer__link" href="/">
                         <img src={instagram} alt="Logo de Instagram" />
                     </a>
                 </div>
@@ -27,7 +27,6 @@ const Footer = () => (
             <div className="main-footer__section">
                 <h4>Enlaces Rápidos</h4>
                 <Link className="main-footer__link" to="/buscar">Buscar</Link>
-                <Link className="main-footer__link" to="/reportar">Reportar</Link>
                 <Link className="main-footer__link" to="/adoptar">Adoptar</Link>
                 <Link className="main-footer__link" to="/nosotros">Sobre Nosotros</Link>
             </div>

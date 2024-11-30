@@ -23,7 +23,7 @@ const Inicio = () => {
                     </div>
                 ) : (
                     usuario !== null && usuario !== undefined ?  (
-                        <Dashboard nombres={usuario.nombres} apellidos={usuario.apellidos} url_foto={usuario.url_foto}/>
+                        <Dashboard id={usuario.id} nombres={usuario.nombres} apellidos={usuario.apellidos} url_foto={usuario.url_foto}/>
                     ) : (
                         <>
                             <Banner></Banner>

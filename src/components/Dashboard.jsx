@@ -1,26 +1,24 @@
 import reportar from "../assets/images/icono-agregar-16.png";
 import buscar from "../assets/images/icono-buscar-16.png";
-import adoptar from "../assets/images/icono-adoptar-16.png";
 import info from "../assets/images/icono-info-16.png";
-import corazon from "../assets/images/icono-adoptar-16-rojo.png";
 import notificacion from "../assets/images/icono-notificacion-16.png";
 import Box from "./Box";
 import { Link, useNavigate } from "react-router-dom";
 import MisUltimosReportes from "./ReportesMascotas/MisUltimosReportes";
 import { useEffect, useRef, useState } from "react";
-import { obtenerTodosLosReportes } from "../services/reportesMascotas";
+import { obtenerMisUltimosResportesMascotas, obtenerTodosLosReportes } from "../services/reportesMascotas";
 import L from "leaflet";
 
 
 
-const Dashboard = ({nombres, apellidos, url_foto}) => {
+const Dashboard = ({id, nombres, apellidos, url_foto}) => {
     const navigate = useNavigate()
     const mapRef = useRef(null);
     const [reportesMascotas, setReportesMascotas] = useState([])
+    const [misUltimosReportes, setMisUltimosReportes] = useState([])
 
     const reportarNuevaMascota = () => navigate('/reportar')
     const buscarReportesMascotas = () => navigate('/buscar')
-    const verMascotasEnAdopcion = () => navigate('/adoptar')
     const misReportes = () => navigate('/mis-reportes')
 
     // Obtener los reportes desde el backend
@@ -35,8 +33,24 @@ const Dashboard = ({nombres, apellidos, url_foto}) => {
         }
     }
 
+    const fecthMisReportes = async () => {
+        try {
+            const response = await obtenerMisUltimosResportesMascotas(3)
+            if(response.status === 200) {
+                console.log(response.data.reportes)
+                setMisUltimosReportes(response.data.reportes)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         fetchMascotas()
+    }, [])
+
+    useEffect(() => {
+        fecthMisReportes()
     }, [])
 
     useEffect(() => {
@@ -88,36 +102,28 @@ const Dashboard = ({nombres, apellidos, url_foto}) => {
                         <img src={buscar} alt="Icono de Buscar" />
                         <span>Buscar Animales</span>
                     </button>
-                    <button 
-                        className="btn btn-secondary w-full flex justify-center items-center gap-2" 
-                        onClick={verMascotasEnAdopcion}
-                    >
-                        <img src={adoptar} alt="Icono de Adoptar" />
-                        <span>Ver Adopciones</span>
-                    </button>
                 </Box>
                 <Box titulo="Actividad Reciente" margenTitulo borde>
-                    <div className="flex justify-center items-start gap-2 mb-3">
-                        <img className="pt-1" src={info} alt="Icono de Notificación" />
-                        <div className="flex flex-column">
-                            <p>Reportaste un perro perdido por el Parque Central</p>
-                            <span className="gray-color">2023-05-20</span>
-                        </div>
-                    </div>
-                    <div className="flex justify-center items-start gap-2">
-                        <img className="pt-1" src={corazon} alt="Icono de Notificación" />
-                        <div className="flex flex-column">
-                            <p>Tu solicitud de adopación para Luna fue aprobada</p>
-                            <span className="gray-color">2023-05-18</span>
-                        </div>
-                    </div>
+                    {
+                        misUltimosReportes.length > 0 ? (
+                            misUltimosReportes.map((reporte) => (
+                                <div className="flex justify-center items-start gap-2 mb-3">
+                                    <img className="pt-1" src={info} alt="Icono de Notificación" />
+                                    <div className="flex flex-column">
+                                        <p>{`Reportaste un ${reporte.especie_mascota.toLowerCase()} ${reporte.estado_mascota.toLowerCase()} en ${reporte.procedencia_mascota}.`}</p>
+                                        <span className="gray-color">{new Date(reporte.fecha_reporte).toISOString().split('T')[0]}</span>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="flex justify-center items-start gap-2 mb-3">
+                                <p>Aún no has reportado a ningún animal.</p>
+                            </div>
+                        )
+                    }
                 </Box>
                 <Box titulo="Noticias y Actualizaciones" margenTitulo borde>
                     <div className="flex justify-center items-start gap-2 mb-3">
-                        <img className="pt-1" src={notificacion} alt="Icono de Notificación" />
-                        <p>Acá se mostraran las nuevas actualizaciones o alguna noticia</p>
-                    </div>
-                    <div className="flex justify-center items-start gap-2">
                         <img className="pt-1" src={notificacion} alt="Icono de Notificación" />
                         <p>Acá se mostraran las nuevas actualizaciones o alguna noticia</p>
                     </div>

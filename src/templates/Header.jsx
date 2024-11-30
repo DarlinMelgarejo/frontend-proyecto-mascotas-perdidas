@@ -1,7 +1,6 @@
 import logo from "../assets/images/logo.png"
 import buscar from "../assets/images/icono-buscar-24.png"
 import reportar from "../assets/images/icono-reportar-24.png"
-import adoptar from "../assets/images/icono-adoptar-24.png"
 import info from "../assets/images/icono-info-24.png"
 
 import { Link, useNavigate } from "react-router-dom"
@@ -24,7 +23,6 @@ const Header = () => {
                 </Link>
                 <nav className="main-header__menu">
                     <Link className="white-color" to="/buscar">Buscar</Link>
-                    <Link className="white-color" to="/adoptar">Adoptar</Link>
                     {cargando === true || (usuario !== null && usuario !== undefined) ? (
                         <Link className="white-color" to="/reportar">Reportar</Link>
                     ) : (
@@ -50,10 +48,6 @@ const Header = () => {
                 <Link className="flex flex-column items-center white-color" to="/reportar">
                     <img src={reportar} alt="Icono Reportar" />
                     <span>Reportar</span>
-                </Link>
-                <Link className="flex flex-column items-center white-color" to="/adoptar">
-                    <img src={adoptar} alt="Icono Adoptar" />
-                    <span>Adoptar</span>
                 </Link>
                 <Link className="flex flex-column items-center white-color" to="/nosotros">
                     <img src={info} alt="Icono Nosotros" />

@@ -27,9 +27,6 @@ export const restablecerContraseña = (correo, nuevaContrasena) => api.post('/re
 // Función para obtener todos los usuarios (requeriría autenticación)
 export const obtenerUsuarios = () => api.get('/');
 
-// Función para verificar si el usuario está autenticado
-export const verificarAutenticacion = () => api.get('/verificado');
-
 // Función para obtener el perfil del usuario autenticado
 export const obtenerPerfil = () => api.get('/perfil');
 

@@ -4,10 +4,13 @@ import icono_telefono from "../assets/images/icono-telefono-16-secondary.png"
 import icono_direccion from "../assets/images/icono-ubicacion-16-secondary.png"
 import icono_calendario from "../assets/images/icono-calendario-16.png"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { obtenerMisResportesMascotas } from "../services/reportesMascotas"
 
 const Perfil = ({ nombres, apellidos, url_foto, fecha_registro, correo, telefono, direccion, procedencia }) => {
+    const [misReportesMascotas, setMisReportesMascotas] = useState([])
+
     // Estado para manejar el botón activo
     const [activo, setActivo] = useState(0); // 0 para Información, 1 para Estadísticas, 2 para Actividad Reciente
     const navigate = useNavigate();
@@ -16,8 +19,22 @@ const Perfil = ({ nombres, apellidos, url_foto, fecha_registro, correo, telefono
         setActivo(index); // Actualiza el botón activo
     };
 
+    const fetchMisReportes = async () => {
+        try {
+            const response = await obtenerMisResportesMascotas()
+            if(response.status === 200) {
+                setMisReportesMascotas(response.data.reportes);
+            }
+        } catch (error) {
+            console.error("Error al obtener las mascotas:", error);
+        }
+    };
+
     const irAEditarPerfil = () => navigate('/editar-perfil')
 
+    useEffect(() => {
+        fetchMisReportes()
+    })
     return (
         <div className="py-6 px-4">
             <div className="perfil">
@@ -94,33 +111,23 @@ const Perfil = ({ nombres, apellidos, url_foto, fecha_registro, correo, telefono
                     <div className={activo === 2 ? "perfil__actividades show" : "perfil__actividades"}>
                         <h2 className="black-color mb-10">Actividad Reciente</h2>
                         <div className="actividades">
-                            <div className="actividad">
-                                <div className="actividad__image">
-                                    <img src={icono_calendario} alt="Icono de Calendario" />
-                                </div>
-                                <div className="actividad__content">
-                                    <p className="black-color">Reportó un perro perdido en el Parque Central</p>
-                                    <span>2023-06-01</span>
-                                </div>
-                            </div>
-                            <div className="actividad">
-                                <div className="actividad__image">
-                                    <img src={icono_calendario} alt="Icono de Calendario" />
-                                </div>
-                                <div className="actividad__content">
-                                    <p className="black-color">Reportó un perro perdido en el Parque Central</p>
-                                    <span>2023-06-01</span>
-                                </div>
-                            </div>
-                            <div className="actividad">
-                                <div className="actividad__image">
-                                    <img src={icono_calendario} alt="Icono de Calendario" />
-                                </div>
-                                <div className="actividad__content">
-                                    <p className="black-color">Reportó un perro perdido en el Parque Central</p>
-                                    <span>2023-06-01</span>
-                                </div>
-                            </div>
+                            {
+                                misReportesMascotas.length > 0 ? (
+                                    misReportesMascotas.map((reporte) => (
+                                        <div className="actividad">
+                                            <div className="actividad__image">
+                                                <img src={icono_calendario} alt="Icono de Calendario" />
+                                            </div>
+                                            <div className="actividad__content">
+                                                <p className="black-color">{`Reportó un ${reporte.especie_mascota.toLowerCase()} ${reporte.estado_mascota.toLowerCase()} en ${reporte.procedencia_mascota}.`}</p>
+                                                <span>{new Date(reporte.fecha_reporte).toISOString().split('T')[0]}</span>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>Aún no hay actividad.</p>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

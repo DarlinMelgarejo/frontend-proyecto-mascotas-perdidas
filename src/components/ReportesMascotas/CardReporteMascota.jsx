@@ -1,12 +1,14 @@
 import icono_visualizar from "../../assets/images/icono-visualizar.svg"
 import icono_editar from "../../assets/images/icono-editar.svg"
+import icono_resolver from "../../assets/images/icono-resolver.svg"
 import icono_eliminar from "../../assets/images/icono-eliminar.svg"
 import {eliminarReporte} from "../../services/reportesMascotas"
 import { useNavigate } from "react-router-dom"
 import Modal from "../Modal"
 import { useState } from "react"
 const CardReporteMascota = ({ id_reporte, url_imagen, nombre, especie, raza, color, procedencia, fecha_reporte, opciones }) => {
-    const [modalAbierto, setModalAbierto] = useState(false)
+    const [modalEliminar, setModalEliminar] = useState(false)
+    const [modalEstadoReporte, setModalEstadoReporte] = useState(false)
     
     const navigate = useNavigate()
 
@@ -15,7 +17,7 @@ const CardReporteMascota = ({ id_reporte, url_imagen, nombre, especie, raza, col
     const editar = (id) => navigate(`/editar-reporte/${id}`)
 
     const eliminar = async (id) => {
-        setModalAbierto(false)
+        setModalEliminar(false)
 
         try {
             const response = await eliminarReporte(id)
@@ -26,6 +28,10 @@ const CardReporteMascota = ({ id_reporte, url_imagen, nombre, especie, raza, col
         } catch (error) {
             console.error(error)
         }
+    }
+
+    const actualizarEstadoReporte = async (id) => {
+        setModalEstadoReporte(false)
     }
 
     return (
@@ -39,16 +45,21 @@ const CardReporteMascota = ({ id_reporte, url_imagen, nombre, especie, raza, col
                 <span><b>Procedencia: </b>{procedencia}</span>
                 <span><b>Fecha Reporte: </b>{fecha_reporte}</span>
             </div>
-            <Modal abierto={modalAbierto} cerrar={() => {setModalAbierto(false)}} funcion={() => eliminar(id_reporte)} boton="Eliminar">
+            <Modal abierto={modalEliminar} cerrar={() => {setModalEliminar(false)}} funcion={() => eliminar(id_reporte)} boton="Eliminar">
                 <h6>¿Estás seguro?</h6>
                 <p className="mb-4 text-justify">Esta acción no se puede deshacer. Se eliminará permanentemente el comentario en este reporte.</p>
+            </Modal>
+            <Modal abierto={modalEstadoReporte} cerrar={() => {setModalEstadoReporte(false)}} funcion={() => actualizarEstadoReporte(id_reporte)} boton="Resuelto">
+                <h6>¿Estás seguro?</h6>
+                <p className="mb-4 text-justify">Esta acción no se puede deshacer. Solo se debe de marcar esta opción si el reporte fue resuelto.</p>
             </Modal>
             {
                 opciones ? (
                     <div className="flex flex-row justify-between gap-4">
-                        <button className="btn btn-white w-p-40 h-p-40" onClick={() => revisar(id_reporte)}><img src={icono_visualizar} alt="Icono de Visualizar"/></button>
-                        <button className="btn btn-white w-p-40 h-p-40" onClick={() => editar(id_reporte)}><img src={icono_editar} alt="Icono de Editar" /></button>
-                        <button className="btn btn-white w-p-40 h-p-40" onClick={() => setModalAbierto(true)}><img src={icono_eliminar} alt="Icono de Eliminar"/></button>
+                        <button className="btn btn-white" title="Ver reporte" onClick={() => revisar(id_reporte)}><img className="secondary-color" src={icono_visualizar} alt="Icono de Visualizar" width="20px" height="20px"/></button>
+                        <button className="btn btn-white" title="Editar reporte" onClick={() => editar(id_reporte)}><img src={icono_editar} alt="Icono de Editar" width="18px" height="18px"/></button>
+                        <button className="btn btn-white" title="Resolver reporte" onClick={() => setModalEstadoReporte(true)}><img src={icono_resolver} alt="Icono de resolver" width="22px" height="22px"/></button>
+                        <button className="btn btn-white" title="Eliminar reporte" onClick={() => setModalEliminar(true)}><img src={icono_eliminar} alt="Icono de Eliminar" width="18px" height="18px"/></button>
                     </div>
                 ) : (
                     <button className="btn btn-dark" onClick={() => revisar(id_reporte)}>Ver Detalles</button>

@@ -24,10 +24,6 @@ const Comentario = ({ id, contenido, usuario_id, creado_en, getComentarios }) =>
         }
     }
 
-    const reportar = () => {
-        alert("Se reporte el comentario")
-    }
-
 
     const eliminar = async (id) => {
         setModalAbierto(false)
@@ -62,10 +58,8 @@ const Comentario = ({ id, contenido, usuario_id, creado_en, getComentarios }) =>
                                 <p className="mt-2">{contenido}</p>
                             </div>
                             <div className="comentario__report">
-                                {   
-                                    usuario.id !== usuarioComentario.id ? (
-                                        <button className="btn btn-warning" onClick={reportar}>Reportar</button>
-                                    ) : (
+                                {
+                                    usuario.id === usuarioComentario.id && (
                                         <button className="btn btn-alert" onClick={() => setModalAbierto(true)}>Eliminar</button>
                                     )
                                 }
