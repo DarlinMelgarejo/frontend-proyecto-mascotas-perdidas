@@ -27,7 +27,7 @@ const Footer = () => (
             <div className="main-footer__section">
                 <h4>Enlaces Rápidos</h4>
                 <Link className="main-footer__link" to="/buscar">Buscar</Link>
-                <Link className="main-footer__link" to="/adoptar">Adoptar</Link>
+                <Link className="main-footer__link" to="/reportar">Reportar</Link>
                 <Link className="main-footer__link" to="/nosotros">Sobre Nosotros</Link>
             </div>
             <div className="main-footer__section">

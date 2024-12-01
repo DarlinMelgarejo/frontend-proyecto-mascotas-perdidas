@@ -5,8 +5,13 @@ import Box from "../Box"
 import { obtenerComentariosDeUnReporte, registrarComentario } from "../../services/comentarios"
 import { useUsuario } from "../../context/UsuarioContext"
 import Comentario from "./Comentario"
+import Toast from "../Toast"
 
 const Comentarios = ({id_reporte_mascota}) => {
+    const [toast, setToast] = useState({
+        titulo: "",
+        contenido: ""
+    })
     const {usuario} = useUsuario()
     const [comentarios, setComentarios] = useState([])
     const [nuevoComentario, setNuevoComentario] = useState({
@@ -36,7 +41,21 @@ const Comentarios = ({id_reporte_mascota}) => {
         }
     } 
 
-    const getComentarios = async () => {
+    const getComentarios = async (mensaje) => {
+        if (mensaje) {
+            setToast({
+                titulo: "Exitó",
+                contenido: mensaje
+            })
+
+            setTimeout(() => {
+                setToast({
+                    titulo: "",
+                    contenido: ""
+                })
+            }, 3000)
+        }
+
         try {
             const response = await obtenerComentariosDeUnReporte(id_reporte_mascota)
             if(response.status === 200) {
@@ -48,8 +67,6 @@ const Comentarios = ({id_reporte_mascota}) => {
             console.log(error)
         }
     }
-
-    
 
     useEffect(() => {
         getComentarios()
@@ -67,6 +84,7 @@ const Comentarios = ({id_reporte_mascota}) => {
 
     return (
         <Box titulo="Comentarios" borde margenTitulo>
+            <Toast titulo={toast.titulo} contenido={toast.contenido}></Toast>
             {
                 comentarios.length > 0 ? (
                     comentarios.map((comentario) => (

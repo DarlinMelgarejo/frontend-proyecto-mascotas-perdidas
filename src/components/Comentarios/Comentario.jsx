@@ -16,7 +16,6 @@ const Comentario = ({ id, contenido, usuario_id, creado_en, getComentarios }) =>
         try {
             const response = await obtenerUsuarioPorId(usuario_id)
             if(response.status === 200) {
-                // console.log(response.data.usuario)
                 setUsuarioComentario(response.data.usuario)
             }
         } catch (error) {
@@ -31,7 +30,7 @@ const Comentario = ({ id, contenido, usuario_id, creado_en, getComentarios }) =>
         try {
             const response =  await eliminarComentario(id)
             if (response.status === 200) {
-                getComentarios()
+                getComentarios(response.data.mensaje)
             }
         } catch (error) {
             console.error(error)
