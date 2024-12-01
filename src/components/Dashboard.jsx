@@ -107,7 +107,7 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
                     {
                         misUltimosReportes.length > 0 ? (
                             misUltimosReportes.map((reporte) => (
-                                <div className="flex justify-center items-start gap-2 mb-3" key={reporte.id}>
+                                <div className="flex justify-start items-start gap-2 mb-3" key={reporte.id}>
                                     <img className="pt-1" src={info} alt="Icono de Notificación" />
                                     <div className="flex flex-column">
                                         <p>{`Reportaste un ${reporte.especie_mascota.toLowerCase()} ${reporte.estado_mascota.toLowerCase()} en ${reporte.procedencia_mascota}.`}</p>
@@ -123,7 +123,7 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
                     }
                 </Box>
                 <Box titulo="Noticias y Actualizaciones" margenTitulo borde>
-                    <div className="flex justify-center items-start gap-2 mb-3">
+                    <div className="flex justify-start items-start gap-2 mb-3">
                         <img className="pt-1" src={notificacion} alt="Icono de Notificación" />
                         <p>Acá se mostraran las nuevas actualizaciones o alguna noticia</p>
                     </div>

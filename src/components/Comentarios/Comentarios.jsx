@@ -43,6 +43,10 @@ const Comentarios = ({id_reporte_mascota}) => {
 
     const getComentarios = async (mensaje) => {
         if (mensaje) {
+            if (comentarios.length === 1) {
+                setComentarios([])
+            }
+
             setToast({
                 titulo: "Exitó",
                 contenido: mensaje
@@ -60,8 +64,6 @@ const Comentarios = ({id_reporte_mascota}) => {
             const response = await obtenerComentariosDeUnReporte(id_reporte_mascota)
             if(response.status === 200) {
                 setComentarios(response.data.comentarios)
-            } else if (response.status === 404) {
-                setComentarios([])
             }
         } catch (error) {
             console.log(error)
@@ -98,7 +100,7 @@ const Comentarios = ({id_reporte_mascota}) => {
                         />
                     ))
                 ) : (
-                    <div className="black-color text-bold py-4">No hay comentarios</div>
+                    <div className="black-color text-bold pb-8">No hay comentarios</div>
                 )
             }
             <form onSubmit={comentar}>
