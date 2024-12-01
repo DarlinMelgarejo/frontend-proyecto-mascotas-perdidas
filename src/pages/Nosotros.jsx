@@ -1,6 +1,3 @@
-import Footer from "../templates/Footer"
-import Header from "../templates/Header"
-
 import Box from "../components/Box"
 import FAQItem from "../components/FAQItem"
 
@@ -26,7 +23,7 @@ const Nosotros = () => {
                     <Box borde>
                         <div className="flex flex-column justify-center items-center">
                             <h4 className="tertiary-color m-0 fs-7 mb-4">3,000+</h4>
-                            <span className="fs-4 gray-color text-bold">Animales Encontrados</span>
+                            <span className="fs-4 gray-color text-bold">Reportes Resueltos</span>
                         </div>
                     </Box>
                     <Box borde>

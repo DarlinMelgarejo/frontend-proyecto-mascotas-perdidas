@@ -25,5 +25,7 @@ export const obtenerReporte = (id) => api.get(`/${id}`)
 
 export const actualizarReporte = (id, data) => api.patch(`/${id}`, data)
 
+export const actualizarEstadoReporte = (id) => api.patch(`/resuelto/${id}`)
+
 // Función para eliminar un reporte por ID
 export const eliminarReporte = (id) => api.delete(`/${id}`);

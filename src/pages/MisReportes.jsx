@@ -18,23 +18,22 @@ const MisReportes = () => {
 
     const misReportesMascotasFiltradas = filtro ? misReportesMascotas.filter(m => m.estado_mascota === filtro) : misReportesMascotas;
 
-
-    // Queda pendiente optimizar el useEffect ya que se ejecuta indefinidamente
-    useEffect(() => {
-        const fetchMascotas = async () => {
-            try {
-                const response = await obtenerMisResportesMascotas()
-                if(response.status === 200) {
-                    setMisReportesMascotas(response.data.reportes);
-                    setFiltro("")
-                }
-            } catch (error) {
-                console.error("Error al obtener las mascotas:", error);
+    const fetchMascotas = async () => {
+        try {
+            const response = await obtenerMisResportesMascotas()
+            if(response.status === 200) {
+                console.log(response.data.reportes)
+                setMisReportesMascotas(response.data.reportes);
+                setFiltro("")
             }
-        };
+        } catch (error) {
+            console.error("Error al obtener las mascotas:", error);
+        }
+    };
 
+    useEffect(() => {
         fetchMascotas();
-    }, []) //misReportesMascotasFiltradas
+    }, [])
 
 
     return (
@@ -66,6 +65,8 @@ const MisReportes = () => {
                             color={mascota.color_mascota}
                             procedencia={mascota.procedencia_mascota}
                             fecha_reporte={new Date(mascota.fecha_reporte).toISOString().split('T')[0]}
+                            estado_reporte={mascota.estado_reporte}
+                            fetchMascotas={fetchMascotas}
                             opciones
                         />
                     ))

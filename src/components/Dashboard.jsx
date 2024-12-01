@@ -1,19 +1,20 @@
-import reportar from "../assets/images/icono-agregar-16.png";
-import buscar from "../assets/images/icono-buscar-16.png";
-import info from "../assets/images/icono-info-16.png";
-import notificacion from "../assets/images/icono-notificacion-16.png";
-import Box from "./Box";
-import { Link, useNavigate } from "react-router-dom";
-import MisUltimosReportes from "./ReportesMascotas/MisUltimosReportes";
-import { useEffect, useRef, useState } from "react";
-import { obtenerMisUltimosResportesMascotas, obtenerTodosLosReportes } from "../services/reportesMascotas";
-import L from "leaflet";
+import reportar from "../assets/images/icono-agregar-16.png"
+import buscar from "../assets/images/icono-buscar-16.png"
+import info from "../assets/images/icono-info-16.png"
+import corazon from "../assets/images/icono-adoptar-16-rojo.png"
+import notificacion from "../assets/images/icono-notificacion-16.png"
+import Box from "./Box"
+import { Link, useNavigate } from "react-router-dom"
+import MisUltimosReportes from "./ReportesMascotas/MisUltimosReportes"
+import { useEffect, useRef, useState } from "react"
+import { obtenerMisUltimosResportesMascotas, obtenerTodosLosReportes } from "../services/reportesMascotas"
+import L from "leaflet"
 
 
 
 const Dashboard = ({id, nombres, apellidos, url_foto}) => {
     const navigate = useNavigate()
-    const mapRef = useRef(null);
+    const mapRef = useRef(null)
     const [reportesMascotas, setReportesMascotas] = useState([])
     const [misUltimosReportes, setMisUltimosReportes] = useState([])
 
@@ -26,6 +27,7 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
         try {
             const response = await obtenerTodosLosReportes()
             if (response.status === 200) {
+                console.log(response.data.reportes)
                 setReportesMascotas(response.data.reportes)
             }
         } catch (error) {
@@ -35,9 +37,8 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
 
     const fecthMisReportes = async () => {
         try {
-            const response = await obtenerMisUltimosResportesMascotas(3)
+            const response = await obtenerMisUltimosResportesMascotas(4)
             if(response.status === 200) {
-                console.log(response.data.reportes)
                 setMisUltimosReportes(response.data.reportes)
             }
         } catch (error) {
@@ -55,24 +56,24 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
 
     useEffect(() => {
         // Crear el mapa con Leaflet
-        const mapInstance = L.map(mapRef.current).setView([20.5937, 78.9629], 5); // Establecer vista predeterminada
+        const mapInstance = L.map(mapRef.current).setView([20.5937, 78.9629], 5) // Establecer vista predeterminada
     
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
-        }).addTo(mapInstance);
+        }).addTo(mapInstance)
     
         // Marcar las ubicaciones de las mascotas reportadas en el mapa
         reportesMascotas.forEach(reporteMascota => {
           const marker = L.marker([reporteMascota.latitud_ubicacion, reporteMascota.longitud_ubicacion])
             .addTo(mapInstance)
-            .bindPopup(`Nombre: ${reporteMascota.nombre_mascota} <br>Especie: ${reporteMascota.especie_mascota} <br>Estado: ${reporteMascota.estado_mascota}`)
-            .openPopup();
-        });
+            .bindPopup(`${reporteMascota.nombre_mascota}: ${reporteMascota.especie_mascota} ${reporteMascota.estado_mascota.toLowerCase()}`)
+            .openPopup()
+        })
     
         return () => {
-          mapInstance.remove(); // Limpiar el mapa al desmontar el componente
-        };
-      }, [reportesMascotas]);
+          mapInstance.remove() // Limpiar el mapa al desmontar el componente
+        }
+      }, [reportesMascotas])
 
     return (
         <>
@@ -108,9 +109,21 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
                         misUltimosReportes.length > 0 ? (
                             misUltimosReportes.map((reporte) => (
                                 <div className="flex justify-start items-start gap-2 mb-3" key={reporte.id}>
-                                    <img className="pt-1" src={info} alt="Icono de Notificación" />
+                                    <img className="pt-1" src={reporte.estado_reporte === "Resuelto" ? corazon : info} alt="Icono de Notificación" />
                                     <div className="flex flex-column">
-                                        <p>{`Reportaste un ${reporte.especie_mascota.toLowerCase()} ${reporte.estado_mascota.toLowerCase()} en ${reporte.procedencia_mascota}.`}</p>
+                                        <p>
+                                            {
+                                                reporte.estado_reporte === "Resuelto" ? (
+                                                    reporte.estado_mascota === "Perdido" ? (
+                                                        `Encontraste a tu mascota ${reporte.nombre_mascota}.`
+                                                    ) : (
+                                                        `Ayudaste a  ${reporte.nombre_mascota} a encontrar su hogar (.`
+                                                    )
+                                                )  : (
+                                                    `Reportaste un ${reporte.especie_mascota.toLowerCase()} ${reporte.estado_mascota.toLowerCase()} en ${reporte.procedencia_mascota}.`
+                                                )
+                                            }
+                                        </p>
                                         <span className="gray-color">{new Date(reporte.fecha_reporte).toISOString().split('T')[0]}</span>
                                     </div>
                                 </div>
@@ -139,7 +152,7 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
             </div>
             <div className="py-4 px-4">
                 <Box titulo="Estadísticas del Sitio" margenTitulo borde>
-                    <div className="grid grid-cols-1 grid-cols-m-3 gap-8 py-2 mb-8">
+                    <div className="grid grid-cols-1 grid-cols-s-3 gap-8 py-2 mb-8">
                         <Box>
                             <div className="flex flex-column justify-center items-center">
                                 <h4 className="tertiary-color m-0 fs-8">1234</h4>
@@ -149,7 +162,7 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
                         <Box>
                             <div className="flex flex-column justify-center items-center">
                                 <h4 className="tertiary-color m-0 fs-8">567</h4>
-                                <span className="gray-color">Animales Adoptados</span>
+                                <span className="gray-color">Reportes Resueltos</span>
                             </div>
                         </Box>
                         <Box>

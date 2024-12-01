@@ -34,7 +34,7 @@ const Perfil = ({ nombres, apellidos, url_foto, fecha_registro, correo, telefono
 
     useEffect(() => {
         fetchMisReportes()
-    })
+    }, [])
     return (
         <div className="py-6 px-4">
             <div className="perfil">

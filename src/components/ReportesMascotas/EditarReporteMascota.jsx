@@ -6,7 +6,10 @@ import Toast from '../Toast';
 
 const EditarReporteMascota = ({ id }) => {
     const reporteID = id
-    const [toast, setToast] = useState()
+    const [toast, setToast] = useState({
+        titulo: "",
+        contenido: ""
+    })
 
     const navigate = useNavigate();
     const [reporteMascota, setReporteMascota] = useState({
@@ -173,6 +176,7 @@ const EditarReporteMascota = ({ id }) => {
             { 
                 reporteMascota ? (
                     <form className="w-full" encType="multipart/form-data" onSubmit={enviarFormulario}>
+                        <Toast titulo={toast.titulo} contenido={toast.contenido}></Toast>
                         <div className="flex flex-column flex-row-m gap-4 mb-4">
                             <div className="flex flex-column w-1-2-m">
                                 <label className="form-label form-label-dark" htmlFor="fecha_reporte">Fecha de Pérdida/Encuentro</label>
@@ -342,11 +346,6 @@ const EditarReporteMascota = ({ id }) => {
                             </div>
                         </div>
                         <button className='btn btn-secondary w-full' type="submit">Guardar Cambios</button>
-                        {
-                            toast && (
-                                <Toast titulo={toast.titulo} contenido={toast.contenido}></Toast>
-                            )
-                        }
                     </form>
 
                 ) : (

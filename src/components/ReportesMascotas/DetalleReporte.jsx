@@ -1,7 +1,7 @@
 import icono_calendario from "../../assets/images/icono-calendario-16.png";
 import icono_ubicacion from "../../assets/images/icono-ubicacion-16-secondary.png";
 import Box from "../Box";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import L from 'leaflet';
 import { obtenerReporte } from "../../services/reportesMascotas";
 import ContactoUsuario from "../Usuarios/ContactoUsuario";
@@ -14,7 +14,8 @@ const DetalleReporte = ({ id }) => {
     const [contacto, setContacto] = useState(null)
     const mapaRef = useRef(null);
 
-    const getReporte = async () => {
+    // Usamos useCallback para que la función no cambie entre renders
+    const getReporte = useCallback(async () => {
         try {
             const response = await obtenerReporte(reporteID);
             if (response.status === 200) {
@@ -23,9 +24,9 @@ const DetalleReporte = ({ id }) => {
         } catch (error) {
             console.log(error);
         }
-    };
-    
-    const getContacto = async () => {
+    }, [reporteID]); // Dependencia de reporteID, ya que es el único valor que cambia
+
+    const getContacto = useCallback(async () => {
         try {
             const response = await obtenerUsuarioPorId(reporte.usuario_id);
             if (response.status === 200) {
@@ -34,12 +35,16 @@ const DetalleReporte = ({ id }) => {
         } catch (error) {
             console.log(error);
         }
-    };
+    }, [reporte]); // Depende del reporte, ya que getContacto usa `reporte.usuario_id`
 
     useEffect(() => {
         getReporte();
-    }, []);
+    }, [getReporte]); // Aquí agregamos `getReporte` como dependencia
 
+    useEffect(() => {
+        if (!reporte) return; // Espera a que el reporte esté disponible
+        getContacto();
+    }, [reporte, getContacto]); // `getContacto` y `reporte` son dependencias aquí
     useEffect(() => {
         if (!reporte) return; // Espera a que el reporte esté disponible
 
@@ -65,10 +70,6 @@ const DetalleReporte = ({ id }) => {
         };
     }, [reporte]); // Solo se ejecuta cuando `reporte` cambia
 
-    useEffect(() => {
-        getContacto()
-    }, [reporte])
-
     return (
         <div className="l-container black-color">
             <div className="flex flex-column gap 4">
@@ -76,7 +77,8 @@ const DetalleReporte = ({ id }) => {
                     reporte ? (
                         <>
                             <Box borde margenAbajo>
-                                <h2 className="secondary-color">{reporte.nombre_mascota}</h2>
+                                <h2 className="secondary-color">{`Reporte: ${reporte.estado_reporte}`}</h2>
+                                <h3 className="secondary-color">{reporte.nombre_mascota}</h3>
                                 {reporte.estado_mascota === "Perdido" ? (
                                     <p className="bg-red white-color px-4 py-1 mb-8 b-radius-4">{reporte.estado_mascota}</p>
                                 ) : (
