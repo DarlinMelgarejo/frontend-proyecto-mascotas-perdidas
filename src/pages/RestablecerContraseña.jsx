@@ -1,6 +1,7 @@
 import icono_alerta from "../assets/images/icono-alerta-16-rojo.png" 
 
 import Box from "../components/Box"
+import Toast from "../components/Toast"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { restablecerContraseña, solicitarCodigoVerificacion, validarCodigoVerificacion } from "../services/usuarios"
@@ -12,6 +13,10 @@ const PASOS = {
   }
 
 const RestablecerContraseña = () => {
+    const [toast, setToast] = useState({
+        titulo: "",
+        contenido: ""
+    })
     const [paso, setPaso] = useState(PASOS.CORREO)
     const [correo, setCorreo] = useState('')
     const [codigo, setCodigo] = useState('')
@@ -28,11 +33,14 @@ const RestablecerContraseña = () => {
             const response = await solicitarCodigoVerificacion(correo);
             if (response.status === 200) {
                 setEnviado(false)
-                alert(response.data.mensaje)
+                setToast({
+                    titulo: "Código enviado",
+                    contenido: response.data.mensaje
+                })
                 setPaso(PASOS.CODIGO)
             }
         } catch (err) {
-            alert(err)
+            console.error(err)
         }
     }
 
@@ -44,11 +52,14 @@ const RestablecerContraseña = () => {
             const response = await validarCodigoVerificacion(correo, codigo);
             if (response.status === 200) {
                 setEnviado(false)
-                alert(response.data.mensaje)
+                setToast({
+                    titulo: "Validar código",
+                    contenido: response.data.mensaje
+                })
                 setPaso(PASOS.NUEVA_CONTRASEÑA)
             }
         } catch (err) {
-            alert(err)
+            console.error(err)
         }
     }
 
@@ -56,26 +67,34 @@ const RestablecerContraseña = () => {
         e.preventDefault()
 
         if(nuevaCotraseña !== confirmarContraseña) {
-            alert("Las contraseñas no coinciden")
+            setToast({
+                titulo: "Error",
+                contenido: "Las contraseñas no coinciden"
+            })
             return
         }
-
         setEnviado(true)
 
         try {
             const response = await restablecerContraseña(correo, nuevaCotraseña);
             if (response.status === 200) {
                 setEnviado(false)
-                alert(response.data.mensaje)
-                navigate('/login')
+                setToast({
+                    titulo: "Contraseña cambiada",
+                    contenido: response.data.mensaje
+                })
+                setTimeout(() => {
+                    navigate('/login')
+                }, 3000)
             }
         } catch (err) {
-            alert(err)
+            console.error(err)
         }
     }
 
     return (
         <div className="restablecer-contraseña">
+            <Toast titulo={toast.titulo} contenido={toast.contenido}></Toast>
             <div className="restablecer-contraseña__content">
                 {paso === PASOS.CORREO && <>
                     <Box titulo="Restablecer Contraseña" borde>

@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 
 const Toast = ({ titulo, contenido }) => {
-    const [visible, setVisible] = useState(false); // Inicialmente no visible
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
         if (titulo && contenido) {
             setVisible(true); // Mostrar el Toast cuando haya nuevo título y contenido
-            const temporizador = setTimeout(() => {
+            const timer = setTimeout(() => {
                 setVisible(false); // Ocultar el Toast después de 3 segundos
             }, 3000);
 
-            return () => clearTimeout(temporizador); // Limpiar el temporizador al desmontarse o al actualizar
+            // Limpiar el timer si el toast es ocultado antes de 3 segundos
+            return () => clearTimeout(timer);
         }
-    }, [titulo, contenido]); // Se ejecuta cuando cambian el título o el contenido
+    }, [titulo, contenido]); // El useEffect se ejecuta cuando el titulo o contenido cambian
 
     if (!visible) return null; // Si no está visible, no renderizar el Toast
 
