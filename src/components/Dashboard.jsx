@@ -9,6 +9,7 @@ import MisUltimosReportes from "./ReportesMascotas/MisUltimosReportes"
 import { useEffect, useRef, useState } from "react"
 import { obtenerMisUltimosResportesMascotas, obtenerTodosLosReportes } from "../services/reportesMascotas"
 import L from "leaflet"
+import { obtenerTodas } from "../services/estadisticas"
 
 
 
@@ -17,6 +18,11 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
     const mapRef = useRef(null)
     const [reportesMascotas, setReportesMascotas] = useState([])
     const [misUltimosReportes, setMisUltimosReportes] = useState([])
+    const [estadisticas, setEstadisticas] = useState({
+        cantidad_reportes: 0,
+        cantidad_reportes_resueltos: 0,
+        cantidad_usuarios_activos: 0
+    })
 
     const reportarNuevaMascota = () => navigate('/reportar')
     const buscarReportesMascotas = () => navigate('/buscar')
@@ -73,7 +79,23 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
         return () => {
           mapInstance.remove() // Limpiar el mapa al desmontar el componente
         }
-      }, [reportesMascotas])
+    }, [reportesMascotas])
+
+    const fetchEstadisticas = async () => {
+        try {
+            const response = await obtenerTodas()
+
+            if (response.status === 200) {
+                setEstadisticas(response.data)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    useEffect(() => {
+        fetchEstadisticas()
+    }, [])
 
     return (
         <>
@@ -155,19 +177,19 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
                     <div className="grid grid-cols-1 grid-cols-s-3 gap-8 py-2 mb-8">
                         <Box>
                             <div className="flex flex-column justify-center items-center">
-                                <h4 className="tertiary-color m-0 fs-8">1234</h4>
+                                <h4 className="tertiary-color m-0 fs-8">{estadisticas.cantidad_reportes}</h4>
                                 <span className="gray-color">Animales Reportados</span>
                             </div>
                         </Box>
                         <Box>
                             <div className="flex flex-column justify-center items-center">
-                                <h4 className="tertiary-color m-0 fs-8">567</h4>
+                                <h4 className="tertiary-color m-0 fs-8">{estadisticas.cantidad_reportes_resueltos}</h4>
                                 <span className="gray-color">Reportes Resueltos</span>
                             </div>
                         </Box>
                         <Box>
                             <div className="flex flex-column justify-center items-center">
-                                <h4 className="tertiary-color m-0 fs-8">890</h4>
+                                <h4 className="tertiary-color m-0 fs-8">{estadisticas.cantidad_usuarios_activos}</h4>
                                 <span className="gray-color">Usuarios Activos</span>
                             </div>
                         </Box>

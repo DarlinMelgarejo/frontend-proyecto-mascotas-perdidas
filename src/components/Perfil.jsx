@@ -7,9 +7,15 @@ import icono_calendario from "../assets/images/icono-calendario-16.png"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { obtenerMisResportesMascotas } from "../services/reportesMascotas"
+import { obtenerTodasDeUnUsuario} from "../services/estadisticas"
 
 const Perfil = ({ nombres, apellidos, url_foto, fecha_registro, correo, telefono, direccion, procedencia }) => {
     const [misReportesMascotas, setMisReportesMascotas] = useState([])
+    const [estadisticas, setEstadisticas] = useState({
+        cantidad_reportes: 0,
+        cantidad_animales_encontrados: 0,
+        cantidad_comentarios: 0
+    })
 
     // Estado para manejar el botón activo
     const [activo, setActivo] = useState(0); // 0 para Información, 1 para Estadísticas, 2 para Actividad Reciente
@@ -34,6 +40,22 @@ const Perfil = ({ nombres, apellidos, url_foto, fecha_registro, correo, telefono
 
     useEffect(() => {
         fetchMisReportes()
+    }, [])
+
+    const fetchEstadisticas = async () => {
+        try {
+            const response = await obtenerTodasDeUnUsuario()
+
+            if (response.status === 200) {
+                setEstadisticas(response.data)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    useEffect(() => {
+        fetchEstadisticas()
     }, [])
     return (
         <div className="py-6 px-4">
@@ -94,15 +116,15 @@ const Perfil = ({ nombres, apellidos, url_foto, fecha_registro, correo, telefono
                         <h2 className="black-color mb-10">Estadísticas</h2>
                         <div className="grid grid-cols-1 grid-cols-m-3 gap-8">
                             <div className="flex flex-column justify-center items-center">
-                                <h4 className="secondary-color m-0 fs-6">15</h4>
+                                <h4 className="secondary-color m-0 fs-6">{estadisticas.cantidad_reportes}</h4>
                                 <span className="gray-color">Publicaciones</span>
                             </div>
                             <div className="flex flex-column justify-center items-center">
-                                <h4 className="secondary-color m-0 fs-6">7</h4>
+                                <h4 className="secondary-color m-0 fs-6">{estadisticas.cantidad_animales_encontrados}</h4>
                                 <span className="gray-color">Animales Encontrados</span>
                             </div>
                             <div className="flex flex-column justify-center items-center">
-                                <h4 className="secondary-color m-0 fs-6">42</h4>
+                                <h4 className="secondary-color m-0 fs-6">{estadisticas.cantidad_comentarios}</h4>
                                 <span className="gray-color">Comentarios</span>
                             </div>
                         </div>

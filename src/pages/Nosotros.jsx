@@ -1,11 +1,33 @@
+import { useEffect, useState } from "react"
 import Box from "../components/Box"
 import FAQItem from "../components/FAQItem"
+import { obtenerTodas } from "../services/estadisticas"
 
 const Nosotros = () => {
+    const [estadisticas, setEstadisticas] = useState({
+        cantidad_reportes: 0,
+        cantidad_reportes_resueltos: 0,
+        cantidad_usuarios_activos: 0
+    })
+
+    const fetchEstadisticas = async () => {
+        try {
+            const response = await obtenerTodas()
+
+            if (response.status === 200) {
+                setEstadisticas(response.data)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    useEffect(() => {
+        fetchEstadisticas()
+    }, [])
 
     return (
         <>
-
             <div className="l-container">
                 <h2 className="secondary-color center-block">Sobre Huellas Perdidas</h2>
                 <p className="black-color text-center">Huellas Perdidas es una plataforma dedicada a facilitar el reporte y búsqueda de animales perdidos o abandonados. Nuestro objetivo es proporcionar una herramienta eficiente para ayudar a reunir mascotas con sus dueños y asistir en la localización de animales que necesitan ayuda.</p>
@@ -16,19 +38,19 @@ const Nosotros = () => {
                 <div className="grid grid-cols-1 grid-cols-m-3 gap-8 py-2 mb-8">
                     <Box borde>
                         <div className="flex flex-column justify-center items-center">
-                            <h4 className="tertiary-color m-0 fs-7 mb-4">5,000+</h4>
+                            <h4 className="tertiary-color m-0 fs-7 mb-4">{estadisticas.cantidad_reportes}</h4>
                             <span className="fs-4 gray-color text-bold">Animales Reportados</span>
                         </div>
                     </Box>
                     <Box borde>
                         <div className="flex flex-column justify-center items-center">
-                            <h4 className="tertiary-color m-0 fs-7 mb-4">3,000+</h4>
+                            <h4 className="tertiary-color m-0 fs-7 mb-4">{estadisticas.cantidad_reportes_resueltos}</h4>
                             <span className="fs-4 gray-color text-bold">Reportes Resueltos</span>
                         </div>
                     </Box>
                     <Box borde>
                         <div className="flex flex-column justify-center items-center">
-                            <h4 className="tertiary-color m-0 fs-7 mb-4">10,000+</h4>
+                            <h4 className="tertiary-color m-0 fs-7 mb-4">{estadisticas.cantidad_usuarios_activos}</h4>
                             <span className="fs-4 gray-color text-bold">Usuarios Activos</span>
                         </div>
                     </Box>
