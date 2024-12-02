@@ -16,7 +16,7 @@ import Buscar from './pages/Buscar';
 import Reportar from './pages/Reportar';
 import Nosotros from './pages/Nosotros';
 
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { UserProvider } from "./context/UsuarioContext";
 
 const Container = () => {
@@ -40,6 +40,7 @@ const Container = () => {
                 <Route path="/buscar" element={<Buscar />} />
                 <Route path="/reportar" element={<Reportar />} />
                 <Route path="/nosotros" element={<Nosotros />} />
+                <Route path="*" element={<Navigate to="/" />} />
             </Routes>
             {!noHeaderFooter && <Footer/>}
         </>
