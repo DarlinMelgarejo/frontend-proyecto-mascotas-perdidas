@@ -14,7 +14,6 @@ import ReporteMascota from "./pages/ReporteMascota";
 import EditarReporte from "./pages/EditarReporte";
 import Buscar from './pages/Buscar';
 import Reportar from './pages/Reportar';
-import Adoptar from './pages/Adoptar';
 import Nosotros from './pages/Nosotros';
 
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
@@ -39,7 +38,6 @@ const Container = () => {
                 <Route path="/reporte/:id" element={<ReporteMascota />} />
                 <Route path="/editar-reporte/:id" element={<EditarReporte />} />
                 <Route path="/buscar" element={<Buscar />} />
-                <Route path="/adoptar" element={<Adoptar />} />
                 <Route path="/reportar" element={<Reportar />} />
                 <Route path="/nosotros" element={<Nosotros />} />
             </Routes>

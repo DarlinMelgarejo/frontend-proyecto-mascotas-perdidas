@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom"
 import Modal from "../Modal"
 import Toast from "../Toast"
 import { useState } from "react"
+import { useUsuario } from "../../context/UsuarioContext"
 const CardReporteMascota = ({ id_reporte, url_imagen, nombre, especie, raza, color, procedencia, fecha_reporte, estado_reporte, fetchMascotas, opciones }) => {
+    const {usuario} = useUsuario()
     const [toast, setToast] = useState({
         titulo: "",
         contenido: ""
@@ -17,7 +19,13 @@ const CardReporteMascota = ({ id_reporte, url_imagen, nombre, especie, raza, col
     
     const navigate = useNavigate()
 
-    const revisar = (id) => navigate(`/reporte/${id}`)
+    const revisar = (id) => {
+        if (usuario) {
+            navigate(`/reporte/${id}`)
+        } else {
+            navigate("/login")
+        }
+    }
     
     const editar = (id) => navigate(`/editar-reporte/${id}`)
 

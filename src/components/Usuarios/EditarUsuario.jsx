@@ -198,7 +198,7 @@ const EditarUsuario = () => {
                     </Box>
                 </div>
             ) : (
-                navigate("/")
+                navigate("/login")
             )
             }
         </>

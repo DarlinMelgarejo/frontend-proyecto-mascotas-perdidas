@@ -1,10 +1,21 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import DetalleReporte from "../components/ReportesMascotas/DetalleReporte"
+import { useUsuario } from "../context/UsuarioContext"
 
 const ReporteMascota = () => {
+    const {usuario} = useUsuario()
+    const navigate = useNavigate()
     const {id} = useParams()
     return (
-        <DetalleReporte id={id}></DetalleReporte>
+        <>
+            {
+                usuario ? (
+                    <DetalleReporte id={id}></DetalleReporte>
+                ) : (
+                    navigate("/login")
+                )
+            }
+        </>
     )
 }
 

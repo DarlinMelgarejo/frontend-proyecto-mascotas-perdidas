@@ -1,10 +1,11 @@
+import { useNavigate } from "react-router-dom"
 import Perfil from "../components/Perfil"
 
 import { useUsuario } from "../context/UsuarioContext"
 
 const PerfilUsuario = () => {
     const {usuario} = useUsuario()
-
+    const navigate = useNavigate()
     return (
         <>
             { 
@@ -20,7 +21,7 @@ const PerfilUsuario = () => {
                         procedencia={usuario.procedencia}
                     />
                 ) : (
-                    <div className="l-container black-color">error</div>
+                    navigate("/login")
                 )
             }
         </>
