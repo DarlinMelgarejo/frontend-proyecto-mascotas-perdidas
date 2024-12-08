@@ -55,7 +55,7 @@ const DetalleReporte = ({ id }) => {
         const mapInstance = L.map(mapaRef.current).setView([lat, lng], 15);
 
         // Capa de mapa
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
         }).addTo(mapInstance);
 

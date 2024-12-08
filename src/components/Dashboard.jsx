@@ -64,7 +64,7 @@ const Dashboard = ({id, nombres, apellidos, url_foto}) => {
         // Crear el mapa con Leaflet
         const mapInstance = L.map(mapRef.current).setView([20.5937, 78.9629], 5) // Establecer vista predeterminada
     
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
         }).addTo(mapInstance)
     
